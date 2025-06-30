@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Audit Results | Aeosignal.Space</title>
+<meta name="description" content="View your AI Visibility Score and learn what it means for your site's AI discoverability." />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+body { margin: 0; font-family: 'Inter', sans-serif; background: #0d011b; color: #ffffff; }
+header {
+  position: fixed; top: 0; left: 0; right: 0; height: 60px;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 20px; background: rgba(0,0,0,0.3); z-index: 1000;
+}
+header img { width: 130px; height: auto; }
+.menu-icon { font-size: 1.8rem; cursor: pointer; }
+#menu { display: none; flex-direction: column; background: rgba(0,0,0,0.9); position: absolute; top: 60px; right: 20px; border-radius: 8px; padding: 10px; }
+#menu a { color: #fff; text-decoration: none; margin: 8px 0; }
+#menu a:hover { color: #00ffff; }
+
+.hero {
+  background: url('/images/audit-results-hero.webp') center center / cover no-repeat;
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; padding: 80px 20px 20px;
+}
+.hero h1 { font-size: 2.2rem; color: #ff00ff; margin-bottom: 10px; }
+.hero p { font-size: 1.1rem; color: #cccccc; max-width: 600px; margin-bottom: 20px; }
+
+.score-circle {
+  width: 150px; height: 150px; border-radius: 50%;
+  background: linear-gradient(135deg, #00ffff, #ff00ff);
+  display: flex; justify-content: center; align-items: center;
+  font-size: 2rem; font-weight: 800; color: #0d011b; margin: 30px 0;
+}
+
+.section {
+  max-width: 700px; margin: 40px auto; text-align: center; padding: 0 20px;
+}
+.section h2 { color: #ff00ff; font-size: 1.8rem; margin-bottom: 15px; }
+.section p { font-size: 1.1rem; color: #cccccc; }
+
+.cta-button {
+  background: #00ffff; color: #0d011b; padding: 12px 24px; border-radius: 6px;
+  text-decoration: none; font-weight: 700; display: inline-block; margin-top: 20px;
+}
+.cta-button:hover { background: #00cccc; }
+
+footer { text-align: center; padding: 20px; font-size: 0.9rem; color: #777; }
+footer a { color: #00ffff; text-decoration: none; margin: 0 6px; }
+footer a:hover { color: #00cccc; }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/"><img src="/images/logo-neo-sci-fi-transparent.webp" alt="Aeosignal.Space Logo"></a>
+  <div class="menu-icon" onclick="toggleMenu()">☰</div>
+  <div id="menu">
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/what-is-geo">What is GEO?</a>
+    <a href="/resources">Resources</a>
+    <a href="/contact">Contact</a>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Your AI Visibility Score is Ready</h1>
+  <p>Here is your site's AI Visibility Score, showing your current readiness for GPT, Gemini, and future AI engines.</p>
+  <div class="score-circle">68/100</div>
+</section>
+
+<section class="section">
+  <h2>What Your Score Means</h2>
+  <p>Your current AI Visibility Score indicates that while your website has some visibility in AI-driven engines, there are improvements to be made in structured data, technical SEO, and content optimization for LLM ingestion.</p>
+</section>
+
+<section class="section">
+  <h2>Ready to Improve Your Score?</h2>
+  <p>Request a Detailed GEO Audit to receive a comprehensive analysis of your site's AI readiness, including actionable steps to enhance your visibility in GPT and future AI discovery engines.</p>
+  <a href="/services/detailed-audit" class="cta-button">🚀 Request Detailed GEO Audit</a>
+</section>
+
+<footer>
+  © 2025 Aeosignal.Space | Generative Engine Optimization<br>
+  <a href="/privacy-policy">Privacy Policy</a> |
+  <a href="/terms-of-service">Terms of Service</a> |
+  <a href="/contact">Contact</a>
+</footer>
+
+<script>
+function toggleMenu() {
+    const menu = document.getElementById('menu');
+    menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+    document.addEventListener('click', function handler(e) {
+        if (!menu.contains(e.target) && !e.target.classList.contains('menu-icon')) {
+            menu.style.display = 'none';
+            document.removeEventListener('click', handler);
+        }
+    });
+}
+</script>
+
+</body>
+</html>

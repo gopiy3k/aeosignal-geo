@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GEO Glossary | Aeosignal.Space</title>
+<meta name="description" content="Understand essential GEO, GPT, and AI indexing terms to future-proof your website's AI discoverability." />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+body { margin: 0; font-family: 'Inter', sans-serif; background: #0d011b; color: #ffffff; }
+header {
+  position: fixed; top: 0; left: 0; right: 0; height: 60px;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 20px; background: rgba(0,0,0,0.3); z-index: 1000;
+}
+header img { width: 130px; height: auto; }
+.menu-icon { font-size: 1.8rem; cursor: pointer; }
+#menu { display: none; flex-direction: column; background: rgba(0,0,0,0.9); position: absolute; top: 60px; right: 20px; border-radius: 8px; padding: 10px; }
+#menu a { color: #fff; text-decoration: none; margin: 8px 0; }
+#menu a:hover { color: #00ffff; }
+
+.hero {
+  background: url('/images/glossary-hero.webp') center center / cover no-repeat;
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; padding: 80px 20px 20px;
+}
+.hero h1 { font-size: 2.2rem; color: #ff00ff; margin-bottom: 15px; }
+.hero p { font-size: 1.1rem; color: #cccccc; max-width: 600px; margin-bottom: 25px; }
+.cta-button {
+  background: #00ffff; color: #0d011b; padding: 12px 24px; border-radius: 6px;
+  text-decoration: none; font-weight: 700; display: inline-block;
+}
+.cta-button:hover { background: #00cccc; }
+
+.section {
+  padding: 60px 20px; max-width: 800px; margin: auto;
+}
+.section h2 { color: #ff00ff; font-size: 1.5rem; margin-top: 40px; }
+.section p { color: #cccccc; font-size: 1rem; line-height: 1.6; }
+
+.cta-section {
+  text-align: center; padding: 40px 20px;
+}
+.cta-section p { font-size: 1.2rem; margin-bottom: 20px; }
+footer { text-align: center; padding: 30px 20px; font-size: 0.9rem; color: #777; }
+footer a { color: #00ffff; text-decoration: none; margin: 0 6px; }
+footer a:hover { color: #00cccc; }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/"><img src="/images/logo-neo-sci-fi-transparent.webp" alt="Aeosignal.Space Logo"></a>
+  <div class="menu-icon" onclick="toggleMenu()">☰</div>
+  <div id="menu">
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/what-is-geo">What is GEO?</a>
+    <a href="/resources">Resources</a>
+    <a href="/contact">Contact</a>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>GEO Glossary</h1>
+  <p>Essential terms to understand Generative Engine Optimization, GPT discoverability, and AI indexing.</p>
+  <a href="/free_gpt_audit_landing.html" class="cta-button">🚀 Get Your Free GEO Audit</a>
+</section>
+
+<section class="section">
+  <h2>Generative Engine Optimization (GEO)</h2>
+  <p>GEO is the process of making your website and content discoverable and understandable by AI models like GPT, Perplexity, and future LLMs. It involves structured data, semantic clarity, and AI-friendly content practices.</p>
+
+  <h2>Large Language Models (LLMs)</h2>
+  <p>LLMs like GPT are AI systems trained on vast amounts of data to generate human-like text, answer queries, and summarize information. GEO ensures your content is ingestible and aligned for these models.</p>
+
+  <h2>Schema.org</h2>
+  <p>Schema.org markup helps search engines and AI understand the context of your content through structured data, making your website more discoverable by both traditional search and AI engines.</p>
+
+  <h2>AI Indexing</h2>
+  <p>The process by which AI crawlers scan, parse, and store your content for retrieval in AI-generated answers and chat-based results.</p>
+
+  <h2>GPT Discoverability</h2>
+  <p>The likelihood that your content appears in GPT-generated responses. It depends on how well your content is structured, clear, authoritative, and ingested by LLM training and retrieval pipelines.</p>
+
+  <h2>Crawl Budget</h2>
+  <p>The number of pages a crawler will scan on your site within a timeframe. Optimizing site speed, structure, and eliminating duplicate content helps maximize crawl efficiency for AI bots.</p>
+
+  <h2>Structured Data</h2>
+  <p>Code added to your website (typically JSON-LD) to help search engines and AI understand your content, services, and business context.</p>
+
+  <h2>Semantic SEO</h2>
+  <p>Optimizing content for meaning and context rather than just keywords, aligning your site for how AI and modern search engines interpret and retrieve information.</p>
+</section>
+
+<section class="cta-section">
+  <p>Ready to implement what you've learned and future-proof your website for AI?</p>
+  <a href="/free_gpt_audit_landing.html" class="cta-button">📈 Request Your Free GEO Audit</a>
+</section>
+
+<footer>
+  © 2025 Aeosignal.Space | Generative Engine Optimization<br>
+  <a href="/privacy-policy">Privacy Policy</a> |
+  <a href="/terms-of-service">Terms of Service</a> |
+  <a href="/contact">Contact</a>
+</footer>
+
+<script>
+function toggleMenu() {
+    const menu = document.getElementById('menu');
+    menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+    document.addEventListener('click', function handler(e) {
+        if (!menu.contains(e.target) && !e.target.classList.contains('menu-icon')) {
+            menu.style.display = 'none';
+            document.removeEventListener('click', handler);
+        }
+    });
+}
+</script>
+
+</body>
+</html>

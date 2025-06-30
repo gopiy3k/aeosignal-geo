@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GEO Case Studies | Aeosignal.Space</title>
+<meta name="description" content="See how Aeosignal.Space helps websites gain visibility in ChatGPT, Perplexity, and AI search engines through Generative Engine Optimization." />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+body { margin: 0; font-family: 'Inter', sans-serif; background: #0d011b; color: #ffffff; }
+header {
+  position: fixed; top: 0; left: 0; right: 0; height: 60px;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 20px; background: rgba(0,0,0,0.3); z-index: 1000;
+}
+header img { width: 130px; height: auto; }
+.menu-icon { font-size: 1.8rem; cursor: pointer; }
+#menu { display: none; flex-direction: column; background: rgba(0,0,0,0.9); position: absolute; top: 60px; right: 20px; border-radius: 8px; padding: 10px; }
+#menu a { color: #fff; text-decoration: none; margin: 8px 0; }
+#menu a:hover { color: #00ffff; }
+
+.hero {
+  background: url('/images/case-studies-hero.webp') center center / cover no-repeat;
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; padding: 80px 20px 20px;
+}
+.hero h1 { font-size: 2.2rem; color: #ff00ff; margin-bottom: 15px; }
+.hero p { font-size: 1.1rem; color: #cccccc; max-width: 600px; margin-bottom: 25px; }
+.cta-button {
+  background: #00ffff; color: #0d011b; padding: 12px 24px; border-radius: 6px;
+  text-decoration: none; font-weight: 700; display: inline-block;
+}
+.cta-button:hover { background: #00cccc; }
+
+.case-studies-grid {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  max-width: 1200px; margin: 40px auto; padding: 20px;
+}
+.case-study-card {
+  background: rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden;
+  width: 300px; margin: 15px; text-align: left; display: flex; flex-direction: column;
+}
+.case-study-card img { width: 100%; height: auto; }
+.case-study-card-content { padding: 15px; }
+.case-study-card-content h3 { color: #ff00ff; font-size: 1.2rem; margin: 10px 0; }
+.case-study-card-content p { color: #cccccc; font-size: 0.95rem; }
+.case-study-card-content a {
+  display: inline-block; margin-top: 10px; color: #00ffff; text-decoration: none; font-weight: 600;
+}
+.case-study-card-content a:hover { color: #00cccc; }
+
+footer { text-align: center; padding: 30px 20px; font-size: 0.9rem; color: #777; }
+footer a { color: #00ffff; text-decoration: none; margin: 0 6px; }
+footer a:hover { color: #00cccc; }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/"><img src="/images/logo-neo-sci-fi-transparent.webp" alt="Aeosignal.Space Logo"></a>
+  <div class="menu-icon" onclick="toggleMenu()">☰</div>
+  <div id="menu">
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/what-is-geo">What is GEO?</a>
+    <a href="/resources">Resources</a>
+    <a href="/contact">Contact</a>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>GEO Case Studies</h1>
+  <p>See how websites have achieved AI visibility and GPT discoverability with Aeosignal.Space's GEO services.</p>
+  <a href="/free_gpt_audit_landing.html" class="cta-button">🔍 Get Your Free GEO Audit</a>
+</section>
+
+<section class="case-studies-grid">
+  <div class="case-study-card">
+    <img src="/images/case-study1.webp" alt="Tech SaaS GEO Visibility">
+    <div class="case-study-card-content">
+      <h3>Tech SaaS Boosts AI Visibility</h3>
+      <p>Learn how a SaaS brand achieved GPT indexing and improved AI discoverability through structured GEO implementation.</p>
+      <a href="#">Read Case Study →</a>
+    </div>
+  </div>
+  <div class="case-study-card">
+    <img src="/images/case-study2.webp" alt="E-commerce GEO Optimization">
+    <div class="case-study-card-content">
+      <h3>E-commerce GEO Optimization</h3>
+      <p>How an e-commerce brand leveraged GEO to future-proof its catalog for AI engines and generative search.</p>
+      <a href="#">Read Case Study →</a>
+    </div>
+  </div>
+  <div class="case-study-card">
+    <img src="/images/case-study3.webp" alt="Content Site AI Discovery">
+    <div class="case-study-card-content">
+      <h3>Content Site Gains AI Discovery</h3>
+      <p>See how structured content and schema optimization helped a content site appear in AI-generated search results.</p>
+      <a href="#">Read Case Study →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 Aeosignal.Space | Generative Engine Optimization<br>
+  <a href="/privacy-policy">Privacy Policy</a> |
+  <a href="/terms-of-service">Terms of Service</a> |
+  <a href="/contact">Contact</a>
+</footer>
+
+<script>
+function toggleMenu() {
+    const menu = document.getElementById('menu');
+    menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+    document.addEventListener('click', function handler(e) {
+        if (!menu.contains(e.target) && !e.target.classList.contains('menu-icon')) {
+            menu.style.display = 'none';
+            document.removeEventListener('click', handler);
+        }
+    });
+}
+</script>
+
+</body>
+</html>

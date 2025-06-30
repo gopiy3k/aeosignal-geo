@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Free GEO Audit | Aeosignal.Space</title>
+<meta name="description" content="Get your free GPT accessibility and GEO audit to see if your website is discoverable by AI engines like ChatGPT and Gemini." />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@supabase/supabase-js"></script>
+<style>
+body { margin: 0; font-family: 'Inter', sans-serif; background: #0d011b; color: #ffffff; }
+header {
+  position: fixed; top: 0; left: 0; right: 0; height: 60px;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 20px; background: rgba(0,0,0,0.3); z-index: 1000;
+}
+header img { width: 130px; height: auto; }
+.menu-icon { font-size: 1.8rem; cursor: pointer; }
+#menu { display: none; flex-direction: column; background: rgba(0,0,0,0.9); position: absolute; top: 60px; right: 20px; border-radius: 8px; padding: 10px; }
+#menu a { color: #fff; text-decoration: none; margin: 8px 0; }
+#menu a:hover { color: #00ffff; }
+
+.hero {
+  background: url('/images/free-audit-hero.webp') center center / cover no-repeat;
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; padding: 80px 20px 20px;
+}
+.hero h1 { font-size: 2.2rem; color: #ff00ff; margin-bottom: 10px; }
+.hero p { font-size: 1.1rem; color: #cccccc; max-width: 600px; margin-bottom: 20px; }
+.cta-button {
+  background: #00ffff; color: #0d011b; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 700; margin-top: 10px;
+}
+.cta-button:hover { background: #00cccc; }
+
+.section {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  padding: 60px 20px; gap: 30px; max-width: 1200px; margin: auto;
+}
+.section img { max-width: 400px; width: 90%; border-radius: 10px; }
+.section-content { max-width: 500px; text-align: left; }
+.section h2 { color: #ff00ff; font-size: 1.8rem; margin-bottom: 15px; }
+.section p { font-size: 1.1rem; color: #cccccc; }
+
+form {
+  background: rgba(0,0,0,0.6); padding: 20px; border-radius: 8px;
+  max-width: 400px; margin: 40px auto; display: flex; flex-direction: column; gap: 10px;
+}
+input { padding: 10px; border-radius: 5px; border: none; font-size: 1rem; background: rgba(255,255,255,0.1); color: #fff; }
+input::placeholder { color: #aaaaaa; }
+button {
+  background: #00ffff; color: #0d011b; padding: 12px; font-weight: 700; border: none; border-radius: 5px; cursor: pointer;
+}
+button:hover { background: #00cccc; }
+#status { text-align: center; margin-top: 10px; }
+
+footer {
+  text-align: center; padding: 20px; font-size: 0.9rem; color: #777;
+}
+footer a { color: #00ffff; text-decoration: none; margin: 0 6px; }
+footer a:hover { color: #00cccc; }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/"><img src="/images/logo-neo-sci-fi-transparent.webp" alt="Aeosignal.Space Logo"></a>
+  <div class="menu-icon" onclick="toggleMenu()">☰</div>
+  <div id="menu">
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/what-is-geo">What is GEO?</a>
+    <a href="/resources">Resources</a>
+    <a href="/contact">Contact</a>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Get Your Free GEO Audit</h1>
+  <p>See if your website is discoverable by GPT, Gemini, and future AI engines with a free, actionable audit.</p>
+  <a href="#audit-form" class="cta-button">🔍 Request Free Audit</a>
+</section>
+
+<section class="section">
+  <img src="/images/geo-audit-benefits.webp" alt="Why Get a GEO Audit">
+  <div class="section-content">
+    <h2>✨ Why Get a GEO Audit?</h2>
+    <p>AI-driven search is changing how people find information. GEO audits ensure your website is ready for GPT-powered AI crawlers, LLM-generated search results, and future AI interfaces, positioning your brand for AI discovery.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-content">
+    <h2>🚀 What You'll Get</h2>
+    <p>✅ AI Visibility Score<br>✅ Crawl & structured data readiness check<br>✅ Key recommendations for improving AI discoverability on your site.</p>
+  </div>
+  <img src="/images/geo-audit-deliverables.webp" alt="GEO Audit Deliverables">
+</section>
+
+<section class="section">
+  <img src="/images/geo-audit-process.webp" alt="How GEO Audit Works">
+  <div class="section-content">
+    <h2>🛰️ How It Works</h2>
+    <p>1️⃣ Submit your site.<br>2️⃣ We analyze its AI readiness.<br>3️⃣ Receive a clear, actionable report by email.</p>
+  </div>
+</section>
+
+<section id="audit-form">
+  <h2 style="text-align:center;">📈 Request Your Free GEO Audit</h2>
+  <form id="free-audit-form">
+    <input type="text" id="name" placeholder="Your Name" required>
+    <input type="email" id="email" placeholder="Your Email" required>
+    <input type="text" id="website" placeholder="Your Website URL" required>
+    <button type="submit">🔍 Get My Free Audit</button>
+    <div id="status"></div>
+  </form>
+</section>
+
+<footer>
+  © 2025 Aeosignal.Space | Generative Engine Optimization<br>
+  <a href="/privacy-policy">Privacy Policy</a> |
+  <a href="/terms-of-service">Terms of Service</a> |
+  <a href="/contact">Contact</a>
+</footer>
+
+<script>
+function toggleMenu() {
+    const menu = document.getElementById('menu');
+    menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+    document.addEventListener('click', function handler(e) {
+        if (!menu.contains(e.target) && !e.target.classList.contains('menu-icon')) {
+            menu.style.display = 'none';
+            document.removeEventListener('click', handler);
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const supabase = window.supabase.createClient(
+        'https://tbkqaqtetocdegskxyfz.supabase.co',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRia3FhcXRldG9jZGVnc2t4eWZ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA5MzUxMjMsImV4cCI6MjA2NjUxMTEyM30.jkuIEJ21n4iFuEaKxOQoss14wxZSwpituSfGtAc_vZE'
+    );
+
+    const form = document.getElementById('free-audit-form');
+    const status = document.getElementById('status');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        status.textContent = "Submitting...";
+        status.style.color = "#cccccc";
+
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const website = document.getElementById('website').value.trim();
+
+        const { error } = await supabase.from('leads').insert([
+            { name, email, website, source: 'free_geo_audit' }
+        ]);
+
+        if (error) {
+            console.error(error);
+            status.textContent = "❌ Submission failed. Please try again.";
+            status.style.color = "#ff4d4d";
+        } else {
+            status.textContent = "✅ Thank you! Your audit request has been submitted.";
+            status.style.color = "#00ffcc";
+            form.reset();
+        }
+    });
+});
+</script>
+
+</body>
+</html>

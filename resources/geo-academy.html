@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GEO Academy | Aeosignal.Space</title>
+<meta name="description" content="Learn Generative Engine Optimization and make your website discoverable by GPT, Perplexity, and AI with Aeosignal.Space." />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+body { margin: 0; font-family: 'Inter', sans-serif; background: #0d011b; color: #ffffff; }
+header {
+  position: fixed; top: 0; left: 0; right: 0; height: 60px;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 20px; background: rgba(0,0,0,0.3); z-index: 1000;
+}
+header img { width: 130px; height: auto; }
+.menu-icon { font-size: 1.8rem; cursor: pointer; }
+#menu { display: none; flex-direction: column; background: rgba(0,0,0,0.9); position: absolute; top: 60px; right: 20px; border-radius: 8px; padding: 10px; }
+#menu a { color: #fff; text-decoration: none; margin: 8px 0; }
+#menu a:hover { color: #00ffff; }
+
+.hero {
+  background: url('/images/geo-academy-hero.webp') center center / cover no-repeat;
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; padding: 80px 20px 20px;
+}
+.hero h1 { font-size: 2.2rem; color: #ff00ff; margin-bottom: 15px; }
+.hero p { font-size: 1.1rem; color: #cccccc; max-width: 600px; margin-bottom: 25px; }
+.cta-button {
+  background: #00ffff; color: #0d011b; padding: 12px 24px; border-radius: 6px;
+  text-decoration: none; font-weight: 700; display: inline-block;
+}
+.cta-button:hover { background: #00cccc; }
+
+.section {
+  padding: 60px 20px; max-width: 1000px; margin: auto;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+.section img { width: 100%; max-width: 500px; border-radius: 8px; margin-bottom: 20px; }
+.section h2 { color: #ff00ff; font-size: 1.8rem; margin-bottom: 20px; }
+.section p { color: #cccccc; font-size: 1rem; line-height: 1.6; max-width: 700px; }
+
+footer { text-align: center; padding: 30px 20px; font-size: 0.9rem; color: #777; }
+footer a { color: #00ffff; text-decoration: none; margin: 0 6px; }
+footer a:hover { color: #00cccc; }
+
+@media (min-width: 768px) {
+  .section { flex-direction: row; text-align: left; gap: 40px; align-items: center; }
+  .section:nth-child(even) { flex-direction: row-reverse; }
+  .section img { margin-bottom: 0; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/"><img src="/images/logo-neo-sci-fi-transparent.webp" alt="Aeosignal.Space Logo"></a>
+  <div class="menu-icon" onclick="toggleMenu()">☰</div>
+  <div id="menu">
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/what-is-geo">What is GEO?</a>
+    <a href="/resources">Resources</a>
+    <a href="/contact">Contact</a>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Welcome to GEO Academy</h1>
+  <p>Learn how to future-proof your website for AI discovery and GPT visibility with Generative Engine Optimization.</p>
+  <a href="/free_gpt_audit_landing.html" class="cta-button">🚀 Get Your Free GEO Audit</a>
+</section>
+
+<section class="section">
+  <img src="/images/academy-section1.webp" alt="Why GEO Matters">
+  <div>
+    <h2>✨ Why GEO Matters Now</h2>
+    <p>AI-driven search is reshaping discovery. Traditional SEO isn't enough. GEO ensures your site is ready for GPT-powered crawlers, LLM search results, and the future of AI discovery so your content is found when AI answers user queries.</p>
+  </div>
+</section>
+
+<section class="section">
+  <img src="/images/academy-section2.webp" alt="What You Will Learn">
+  <div>
+    <h2>🚀 What You Will Learn</h2>
+    <p>✅ AI-Ready Technical SEO: Optimizing site structure and speed.<br>
+    ✅ Schema & Structured Data: Speaking AI's language.<br>
+    ✅ Content for LLM Ingestion: Authoritative, clear content.<br>
+    ✅ Transparent Progress Tracking: Crawl activity and readiness metrics.</p>
+  </div>
+</section>
+
+<section class="section">
+  <img src="/images/academy-section3.webp" alt="How It Works">
+  <div>
+    <h2>🛰️ How It Works</h2>
+    <p>GEO Academy offers actionable, clear lessons to help you apply Generative Engine Optimization step-by-step. From AI readiness audits to schema implementation, learn how to position your website for AI-driven discovery and GPT indexing.</p>
+    <a href="/free_gpt_audit_landing.html" class="cta-button">📈 Request Your Free GEO Audit</a>
+  </div>
+</section>
+
+<section class="section">
+  <div>
+    <h2>🌌 Why Aeosignal.Space?</h2>
+    <p>We specialize in GEO. We follow LLM ingestion cycles, align your site for GPT and future AI models, and believe in transparency, not empty promises. We position your brand for long-term AI discovery, ensuring clarity for both humans and AI.</p>
+  </div>
+</section>
+
+<footer>
+  © 2025 Aeosignal.Space | Generative Engine Optimization<br>
+  <a href="/privacy-policy">Privacy Policy</a> |
+  <a href="/terms-of-service">Terms of Service</a> |
+  <a href="/contact">Contact</a>
+</footer>
+
+<script>
+function toggleMenu() {
+    const menu = document.getElementById('menu');
+    menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+    document.addEventListener('click', function handler(e) {
+        if (!menu.contains(e.target) && !e.target.classList.contains('menu-icon')) {
+            menu.style.display = 'none';
+            document.removeEventListener('click', handler);
+        }
+    });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Why Choose Us | Aeosignal.Space</title>
+<meta name="description" content="Why choose Aeosignal.Space for GEO? Future-proof your website for AI discovery and GPT-powered visibility with trusted experts." />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+body { margin: 0; font-family: 'Inter', sans-serif; background: #0d011b; color: #ffffff; }
+header {
+  position: fixed; top: 0; left: 0; right: 0; height: 60px;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 20px; background: rgba(0,0,0,0.3); z-index: 1000;
+}
+header img { width: 130px; height: auto; }
+.menu-icon { font-size: 1.8rem; cursor: pointer; }
+#menu { display: none; flex-direction: column; background: rgba(0,0,0,0.9); position: absolute; top: 60px; right: 20px; border-radius: 8px; padding: 10px; }
+#menu a { color: #fff; text-decoration: none; margin: 8px 0; }
+#menu a:hover { color: #00ffff; }
+
+.hero {
+  background: url('/images/why-us-hero.webp') center center / cover no-repeat;
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; padding: 80px 20px 20px;
+}
+.hero h1 { font-size: 2.2rem; color: #ff00ff; margin-bottom: 15px; }
+.hero p { font-size: 1.1rem; color: #cccccc; max-width: 600px; margin-bottom: 25px; }
+.cta-button {
+  background: #00ffff; color: #0d011b; padding: 12px 24px; border-radius: 6px;
+  text-decoration: none; font-weight: 700; display: inline-block;
+}
+.cta-button:hover { background: #00cccc; }
+
+.section {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  max-width: 1100px; margin: 60px auto; padding: 20px;
+}
+.section img {
+  width: 450px; max-width: 90%; border-radius: 8px; margin: 10px;
+}
+.section-content {
+  max-width: 500px; padding: 20px;
+}
+.section-content h2 { color: #ff00ff; font-size: 1.8rem; margin-bottom: 15px; }
+.section-content p { font-size: 1.1rem; color: #cccccc; }
+
+footer { text-align: center; padding: 30px 20px; font-size: 0.9rem; color: #777; }
+footer a { color: #00ffff; text-decoration: none; margin: 0 6px; }
+footer a:hover { color: #00cccc; }
+@media (max-width: 768px) {
+  .section { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/"><img src="/images/logo-neo-sci-fi-transparent.webp" alt="Aeosignal.Space Logo"></a>
+  <div class="menu-icon" onclick="toggleMenu()">☰</div>
+  <div id="menu">
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/what-is-geo">What is GEO?</a>
+    <a href="/resources">Resources</a>
+    <a href="/contact">Contact</a>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Why Choose Aeosignal.Space?</h1>
+  <p>Your trusted GEO partner to future-proof your website for GPT, Gemini, and AI discovery engines.</p>
+  <a href="/free_gpt_audit_landing.html" class="cta-button">🚀 Get Your Free GEO Audit</a>
+</section>
+
+<section class="section">
+  <img src="/images/why-us-section1.webp" alt="Our Mission">
+  <div class="section-content">
+    <h2>🌟 Our Mission</h2>
+    <p>We help brands become discoverable by AI, ensuring your future visibility isn't left to chance. GEO is about preparing your site to communicate effectively with AI systems.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-content">
+    <h2>🛠️ Our Approach</h2>
+    <p>✅ Transparent processes<br>
+    ✅ No overnight promises, only real progress<br>
+    ✅ Technical GEO and structured data implementation<br>
+    ✅ Continuous AI crawl readiness monitoring</p>
+  </div>
+  <img src="/images/why-us-section2.webp" alt="Our Approach">
+</section>
+
+<section class="section">
+  <div class="section-content">
+    <h2>🤝 Why It Matters</h2>
+    <p>As AI becomes the new search layer, your visibility in GPT, Gemini, and future LLM-powered systems will define your brand's discoverability. We position you to lead in this new era.</p>
+    <a href="/free_gpt_audit_landing.html" class="cta-button">📈 Get Your Free GEO Audit Today</a>
+  </div>
+</section>
+
+<footer>
+  © 2025 Aeosignal.Space | Generative Engine Optimization<br>
+  <a href="/privacy-policy">Privacy Policy</a> |
+  <a href="/terms-of-service">Terms of Service</a> |
+  <a href="/contact">Contact</a>
+</footer>
+
+<script>
+function toggleMenu() {
+    const menu = document.getElementById('menu');
+    menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+    document.addEventListener('click', function handler(e) {
+        if (!menu.contains(e.target) && !e.target.classList.contains('menu-icon')) {
+            menu.style.display = 'none';
+            document.removeEventListener('click', handler);
+        }
+    });
+}
+</script>
+
+</body>
+</html>
