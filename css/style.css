@@ -299,17 +299,6 @@ footer a:hover { color: var(--accent-hover); }
     text-align: left;
     border-bottom: 1px solid rgba(0,0,0,0.1);
   }
- {
-    .nav-links .dropdown-toggle {
-        width: 100%;
-        padding: 15px 20px;     /* Match .nav-links a */
-        text-align: left;
-        border: none;
-        background: none;
-        font: inherit;          /* Inherit font from nav for consistency */
-        color: inherit;         /* Inherit color */
-    }
-}
 
   body.dark .nav-links a, body.dark .nav-links .dropdown-toggle {
     border-bottom: 1px solid rgba(255,255,255,0.1);
