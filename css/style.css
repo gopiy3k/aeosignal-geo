@@ -519,7 +519,7 @@ button[type="submit"]:hover {
 /* Mobile adjustments for hero (re-confirming) */
 @media (max-width: 768px) {
   .hero {
-    min-height: 400px; /* Adjust for mobile */
+    min-height: 100vh; /* Adjust for mobile */
     padding-top: 80px; /* Adjust for mobile header */
   }
   .hero h1 { font-size: 1.8rem; }
