@@ -299,11 +299,7 @@ footer a:hover { color: var(--accent-hover); }
     text-align: left;
     border-bottom: 1px solid rgba(0,0,0,0.1);
   }
-{
-    .nav-links .dropdown-toggle {
-        padding-left: 15px; /* match other links, if not already */
-        margin-left: 0;     /* remove accidental indent */
-    }
+
   body.dark .nav-links a, body.dark .nav-links .dropdown-toggle {
     border-bottom: 1px solid rgba(255,255,255,0.1);
   }
