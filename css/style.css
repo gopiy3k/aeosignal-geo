@@ -292,16 +292,26 @@ footer a:hover { color: var(--accent-hover); }
     display: none;
   }
 
-  /* Mobile Nav Links Styling (flush left) */
-  .nav-links a, .nav-links .dropdown-toggle {
-    padding: 15px 20px;
-    width: 100%;
-    text-align: left;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-  }
+  /* Mobile Nav Links Styling (flush left) @media (max-width: 768px) {
+    .nav-links .dropdown-toggle {
+        all: unset;
+        display: block;
+        width: 100%;
+        padding: 15px 20px;
+        text-align: left;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        cursor: pointer;
+        font-family: inherit;
+        font-size: inherit;
+        color: inherit;
+    }
 
-  body.dark .nav-links a, body.dark .nav-links .dropdown-toggle {
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    body.dark .nav-links .dropdown-toggle {
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+}
+
+
   }
 
   /* Mobile Dark Mode Toggle button positioning */
