@@ -356,8 +356,10 @@ footer a:hover { color: var(--accent-hover); }
   header {
     justify-content: space-between;
   }
-
-  .hamburger-menu, .hamburger-close {
+ .hero {
+        padding-top: 20px; /* lift content slightly upward */
+    }
+   .hamburger-menu, .hamburger-close {
     display: none !important;
   }
 
