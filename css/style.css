@@ -299,15 +299,7 @@ footer a:hover { color: var(--accent-hover); }
     text-align: left;
     border-bottom: 1px solid rgba(0,0,0,0.1);
   }
-{
-    .nav-links .dropdown-toggle {
-        padding-left: 15px; /* consistent with other links */
-        margin-left: 0;     /* remove indent */
-        display: block;     /* default display */
-        width: 100%;        /* full width */
-        text-align: left;   /* keep alignment */
-    }
-}
+
   body.dark .nav-links a, body.dark .nav-links .dropdown-toggle {
     border-bottom: 1px solid rgba(255,255,255,0.1);
   }
@@ -331,7 +323,7 @@ footer a:hover { color: var(--accent-hover); }
   }
 
   .dropdown-content a {
-    padding: 10px 20px;
+    padding: 10px 0px;
   }
 
   .dropdown.open .dropdown-content {
