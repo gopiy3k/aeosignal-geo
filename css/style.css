@@ -292,21 +292,20 @@ footer a:hover { color: var(--accent-hover); }
     display: none;
   }
 
-  /* Mobile Nav Links Styling (flush left) @media (max-width: 768px) {
-    .nav-links .dropdown-toggle {
-        all: unset;
-        display: block;
-        width: 100%;
-        padding: 15px 20px;
-        text-align: left;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-        cursor: pointer;
-        font-family: inherit;
-        font-size: inherit;
-        color: inherit;
+ @media (max-width: 768px) {
+    .dropdown-content {
+        padding: 0; /* remove container indent */
     }
 
-    body.dark .nav-links .dropdown-toggle {
+    .dropdown-content a {
+        display: block;
+        width: 100%;
+        padding: 15px 20px; /* match top-level items */
+        text-align: left;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    body.dark .dropdown-content a {
         border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 }
