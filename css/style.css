@@ -262,16 +262,6 @@ footer a:hover { color: var(--accent-hover); }
   .hero h1 { font-size: 1.8rem; }
   .hero p { font-size: 1rem; }
 
-{
-    .hero {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-    .hero p {
-        max-width: 90%; /* allows text to fill comfortably */
-    }
-}
   /* Hide desktop nav and show hamburger controls */
   .nav-links {
     display: none;
@@ -529,7 +519,7 @@ button[type="submit"]:hover {
 /* Mobile adjustments for hero (re-confirming) */
 @media (max-width: 768px) {
   .hero {
-    min-height: 400px; /* Adjust for mobile */
+    min-height: 100vh; /* Adjust for mobile */
     padding-top: 80px; /* Adjust for mobile header */
   }
   .hero h1 { font-size: 1.8rem; }
