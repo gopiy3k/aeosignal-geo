@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.getElementById('navLinks');
     const toggleBtnHeader = document.getElementById('toggleModeBtnHeader'); // Button in header-right-controls
     const toggleBtnNav = document.getElementById('toggleModeBtnNav');     // Button inside nav-links
-    
+
     // Helper to check if it's a mobile view
     const isMobileView = () => window.innerWidth <= 768;
 
@@ -81,6 +81,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 el.alt = isDark ? imgData.altDark : imgData.altLight;
             }
         });
+
+        // --- NEW/UPDATED LOGIC FOR BACKGROUND IMAGES ---
+        // Update hero section background image for 'what-is-geo' page
+        const geoHeroSection = document.getElementById('geo-hero-section');
+        if (geoHeroSection) {
+            geoHeroSection.style.backgroundImage = `url('${isDark ? '/images/geo-hero-dark.webp' : '/images/geo-hero-light.webp'}')`;
+        }
+
+        // Update background image for the 'geo-section-visual' div
+        const geoSectionVisual = document.getElementById('geo-section-visual');
+        if (geoSectionVisual) {
+            geoSectionVisual.style.backgroundImage = `url('${isDark ? '/images/what-is-geo-dark.webp' : '/images/what-is-geo-light.webp'}')`;
+        }
+
+        // Also ensure the generic hero background updates if it uses a dynamic image
+        // This targets any .hero that is NOT the audit page hero or the geo page hero.
+        const genericHero = document.querySelector('.hero:not(#audit):not(#geo-hero-section)');
+        if (genericHero) {
+            genericHero.style.backgroundImage = `url('${isDark ? '/images/hero-dark.webp' : '/images/hero-light.webp'}')`;
+        }
+
+        // Audit page hero background (if applicable)
+        const auditHero = document.getElementById('audit');
+        if (auditHero) {
+            auditHero.style.backgroundImage = `url('${isDark ? '/images/hero-audit-dark.webp' : '/images/hero-audit-light.webp'}')`;
+        }
+        // --- END NEW/UPDATED LOGIC ---
     }
 
     // Initialize Dark Mode Preference on Page Load
