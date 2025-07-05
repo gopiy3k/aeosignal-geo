@@ -15,17 +15,6 @@
   <script src="https://kit.fontawesome.com/19bfeb220d.js" crossorigin="anonymous"></script>
 </head>
 <script>
-// Correct hero background swap on dark/light toggle + page load
-function updateHeroBackground() {
-  const hero = document.getElementById('geo-hero-section');
-  if (!hero) return;
-
-  const lightBg = hero.getAttribute('data-light-bg');
-  const darkBg = hero.getAttribute('data-dark-bg');
-  const isDark = document.body.classList.contains('dark');
-
-  hero.style.backgroundImage = isDark ? `url('${darkBg}')` : `url('${lightBg}')`;
-}
 
 // Ensure it runs on initial load
 document.addEventListener('DOMContentLoaded', updateHeroBackground);

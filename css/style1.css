@@ -20,6 +20,7 @@
   --text-on-dark: #ffffff; /* Text color for hero content when background is dark (e.g., image) */
 }
 
+
 body.dark {
   --bg: #0d011b;
   --text: #ffffff;
@@ -31,6 +32,7 @@ body.dark {
   --header-bg: #0d011b;
   --header-shadow: rgba(255,255,255,0.05);
   --border-color: #333;
+  --card-bg: #1a023b;
   --dropdown-hover-bg-dark: #1a002b;
   --footer-bg-dark: #0a0018;
   --footer-text-dark: #777;
@@ -41,6 +43,14 @@ body.dark {
   --text-on-dark: #ffffff; /* Text color for hero content when background is dark (e.g., image) */
 }
 
+/* Subpage Hero Styling - Adjustments for h1 and p colors */
+.hero-subpage h1 {
+  color: var(--hero-heading); /* Inherits from theme variables */
+}
+
+.hero-subpage p {
+  color: var(--hero-paragraph); /* Inherits from theme variables */
+}
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
@@ -165,6 +175,57 @@ body.dark .hero {
   background: url('/images/hero-dark.webp') center/cover no-repeat;
 }
 
+/* --- START PATCH for /css/style.css --- */
+
+/* Hero Section on Subpages (e.g., Services Page) */
+.hero-subpage {
+    /* Ensure text is readable on potentially dark background images */
+    /* Set a default text color for the entire hero-subpage section,
+       which h1 and p will inherit unless specified otherwise. */
+    color: var(--text-on-dark); /* This is typically 'white' or a very light color from your variables */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Add subtle shadow for readability on busy backgrounds */
+}
+
+.hero-subpage .section-content {
+    text-align: center; /* Center the text content within the hero */
+    max-width: 900px; /* Control max width for better readability */
+    margin: 0 auto; /* Center the content block */
+    padding: 20px; /* Add some internal padding */
+}
+
+.hero-subpage h1 {
+    font-family: 'Orbitron', sans-serif; /* Heading font family */
+    font-weight: 700; /* Bold weight for headings */
+    font-size: 2.8em; /* Adjusted size for subpage hero heading */
+    line-height: 1.2;
+    margin-bottom: 0.5em;
+    /* Color for h1: Matches your main hero h1, which uses --primary-light */
+    color: var(--primary-light);
+}
+
+.hero-subpage p {
+    font-family: 'Inter', sans-serif; /* Paragraph font family */
+    font-weight: 400; /* Regular weight for paragraphs */
+    font-size: 1.2em; /* Slightly adjusted size for subpage hero paragraphs */
+    line-height: 1.6;
+    max-width: 700px; /* Keep paragraph lines readable */
+    margin: 0 auto 1.5em auto; /* Center paragraph and add spacing */
+    /* Color for p: Matches your main hero p, which uses --text-on-dark */
+    color: var(--text-on-dark);
+}
+
+/* Media queries for responsiveness: Adjust font sizes for smaller screens */
+@media (max-width: 768px) {
+    .hero-subpage h1 {
+        font-size: 2em;
+    }
+    .hero-subpage p {
+        font-size: 1em;
+    }
+}
+
+/* --- END PATCH for /css/style.css --- */
+
 /* Specific background images for the audit page's hero. */
 section#audit.hero {
   background: url('/images/hero-audit-light.webp') center/cover no-repeat;
@@ -236,6 +297,21 @@ body.dark section#geo-hero-section.hero {
   transition: color 0.3s ease;
 }
 
+/* By default, hide dark mode images and show light mode images */
+.dark-mode-img {
+    display: none;
+}
+.light-mode-img {
+    display: block; /* Ensure it's block for proper layout */
+}
+
+/* When body has 'dark' class, hide light mode images and show dark mode images */
+body.dark .dark-mode-img {
+    display: block;
+}
+body.dark .light-mode-img {
+    display: none;
+}
 /* FOOTER */
 footer {
   background: var(--footer-bg-light);
@@ -247,6 +323,181 @@ footer {
 body.dark footer { background: var(--footer-bg-dark); color: var(--footer-text-dark); }
 footer a { color: var(--accent); text-decoration: none; margin: 0 8px; transition: color 0.3s ease; }
 footer a:hover { color: var(--accent-hover); }
+
+/* --- NEW STYLES FOR SECTIONS AND IMAGE ALIGNMENT --- */
+
+/* Common styling for content within sections */
+.section-content {
+    width: 100%;
+    max-width: 800px; /* Limit content width for readability */
+    margin: 0 auto;
+    text-align: left; /* Default text alignment for content */
+}
+.section-content h2 {
+    font-size: 2rem;
+    color: var(--section-heading);
+    margin-bottom: 20px;
+    text-align: center; /* Center section headings */
+}
+.section-content h2 .fas {
+    margin-right: 10px;
+    color: var(--accent);
+}
+.section-content h3 {
+    font-size: 1.5rem;
+    color: var(--section-heading);
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+.section-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--paragraph);
+    margin-bottom: 15px;
+}
+
+/* General list styling */
+.section-content ul {
+    list-style: none; /* Remove default bullet */
+    padding: 0;
+    margin: 20px 0;
+}
+
+.section-content ul li {
+    margin-bottom: 12px;
+    padding-left: 30px; /* Space for custom bullet */
+    position: relative;
+    line-height: 1.6;
+    color: var(--paragraph);
+    font-size: 1.1rem;
+}
+
+.section-content ul li:before {
+    content: "✓"; /* Custom checkmark bullet */
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+    top: 0; /* Align with text top */
+}
+
+/* Specific styling for the "SEO vs GEO Box" */
+.seo-geo-box {
+    background: var(--card-bg, #f5f5f5); /* Use card background for boxes/FAQs */
+    border-left: 5px solid var(--accent);
+    padding: 25px;
+    margin: 40px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    color: var(--text); /* Ensure text color in card */
+}
+
+.seo-geo-box h3 {
+    text-align: center;
+    color: var(--section-heading);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.6rem;
+}
+
+.seo-geo-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.seo-geo-box ul li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    color: var(--paragraph);
+    font-size: 1.1rem;
+}
+
+.seo-geo-box ul li:before {
+    content: "•"; /* Dot bullet */
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+    font-size: 1.5em;
+    line-height: 0.8; /* Adjust vertical alignment */
+    top: 5px;
+}
+
+/* Numbered list for "How it Works" */
+.numbered-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    counter-reset: item; /* Initialize counter */
+}
+
+.numbered-list li {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--paragraph);
+    counter-increment: item; /* Increment counter for each list item */
+}
+
+.numbered-list li:before {
+    content: counter(item); /* Use CSS counter */
+    background: var(--accent);
+    color: var(--cta-text);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 0.9em;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* FAQ Section Styling */
+.section-faq {
+    background: var(--card-bg, #f5f5f5); /* Use card background for the whole FAQ section */
+    padding: 60px 20px;
+    margin-top: 40px;
+}
+
+.faq-item {
+    background: var(--bg); /* Use main background for individual FAQ items */
+    border: 1px solid var(--border-color, rgba(0,0,0,0.1));
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    color: var(--text);
+}
+body.dark .faq-item {
+    border: 1px solid var(--border-color, rgba(255,255,255,0.1));
+    box-shadow: 0 2px 4px rgba(255,255,255,0.05);
+}
+
+/* New: Left-side visual panel for desktop */
+.geo-section-visual {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: none; /* Hidden by default on mobile */
+    min-height: 300px; /* Default height, can be adjusted by content on desktop */
+}
+
+/* CTA container for multiple buttons */
+.cta-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: center;
+    gap: 20px; /* Space between buttons */
+    margin-top: 30px;
+}
 
 /* MEDIA QUERIES */
 
@@ -329,22 +580,62 @@ footer a:hover { color: var(--accent-hover); }
 
   /* Mobile specific ordering for ALL sections: Image, then Text, then CTA */
   .section {
-    flex-direction: column;
-  }
-  .section img {
-    order: 1;
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    object-fit: contain;
-    margin: 0 auto;
+    flex-direction: column; /* Stacks vertically */
+    text-align: center; /* Center text on mobile */
   }
   .section-content {
-    order: 2;
-    width: 100%;
+      text-align: left; /* Keep content text left-aligned for readability */
   }
-  .section .cta-button {
-    order: 3;
+  .section-content h2 {
+      text-align: center; /* Ensure headings are centered */
+  }
+  .section-content ul, .numbered-list {
+      text-align: left; /* Keep list items left-aligned */
+  }
+
+  /* Mobile specific text sizes */
+  .section-content h2 { font-size: 1.7rem; }
+  .section-content p, .section-content ul li, .seo-geo-box ul li, .numbered-list li {
+      font-size: 1rem;
+  }
+  .faq-item h3 { font-size: 1.2rem; }
+  .faq-item p { font-size: 0.95rem; }
+
+  /* Mobile CTA Button Enhancements */
+  .cta-button {
+      padding: 15px 28px; /* Increased padding */
+      font-size: 1.1rem; /* Slightly larger font size */
+  }
+  .cta-container {
+      flex-direction: column; /* Stacks buttons vertically */
+      gap: 15px; /* Increased gap between stacked buttons */
+      margin-top: 25px;
+  }
+  .cta-container .cta-button {
+      width: 100%; /* Ensure full width for individual buttons */
+      max-width: 300px; /* Optional: Limit max width for extremely wide screens on mobile */
+      text-align: center;
+  }
+
+  /* Show image in its own block on mobile for the reverse section */
+  .geo-section-visual {
+      display: block; /* Make it visible on mobile */
+      width: 100%; /* Take full width on mobile */
+      height: 200px; /* Give it a specific height for the background image */
+      margin-bottom: 30px; /* Space below the image */
+      background-size: contain; /* Adjust to 'contain' or 'cover' as desired for mobile */
+      background-position: center; /* Centers the image */
+      background-repeat: no-repeat; /* Ensure it doesn't repeat */
+  }
+  /* Ensure images in reversed sections appear first on mobile */
+  .section.reverse {
+      flex-direction: column; /* Revert to column for mobile */
+  }
+  .section.reverse .geo-section-visual {
+      order: 1; /* Image first */
+  }
+  .section.reverse .section-content {
+      order: 2; /* Content second */
   }
 }
 
@@ -409,6 +700,27 @@ footer a:hover { color: var(--accent-hover); }
   .section .cta-button {
     order: unset;
   }
+
+  /* Desktop specific sections and image alignments */
+  /* Common styling for content within sections */
+  .section-content {
+      width: 50%; /* Content takes half width */
+      order: unset; /* Reset order for desktop */
+      margin: 0; /* Remove auto margin */
+  }
+  .section.reverse .section-content { /* For reverse, content is on right */
+      order: 2;
+  }
+
+  .geo-section-visual {
+      display: block; /* Show on desktop */
+      width: 50%; /* Visual takes half width */
+      min-height: 300px; /* Ensure desktop visual has height */
+      order: 1; /* Visual on left for reverse section on desktop */
+      background-size: cover; /* Image scales to cover container */
+      background-position: center; /* Centers the image */
+      background-repeat: no-repeat; /* Ensures no tiling */
+  }
 }
 
 /* Subpage Hero Styling */
@@ -445,6 +757,36 @@ footer a:hover { color: var(--accent-hover); }
   padding: 20px; border-radius: 8px;
   display: flex; flex-direction: column; gap: 12px;
   max-width: 320px; width: 100%;
+}
+
+    /* ... existing desktop styles ... */
+
+    .section-left-aligned {
+        /* Override centering for this specific section on desktop */
+        justify-content: flex-start; /* Aligns content to the left */
+        padding-left: 5%; /* Optional: Add some padding for a visual "indent" */
+        padding-right: 5%; /* Optional: Keep some padding on the right as well */
+    }
+
+    .section-left-aligned .section-content {
+        /* Adjust width for the content if necessary to prevent it from being too wide */
+        width: 95%; /* You might want it wider if there's no image */
+        max-width: 1200px; /* Or a specific max-width for readability */
+        margin: 0; /* Ensure no auto margins are centering it */
+    }
+
+.hero-subpage {
+    background-size: cover; /* Ensures the image covers the entire section */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents image repetition */
+    min-height: 400px; /* Or whatever height you prefer for your hero section */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Adjust based on where you want text */
+    color: var(--text-on-dark); /* Ensure text is readable on the image */
+    padding: 80px 20px; /* Example padding */
+}
+    /* ... other desktop styles ... */
 }
 
 body.dark .hero-subpage form {

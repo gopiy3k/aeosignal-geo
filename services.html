@@ -1,247 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "serviceType": "Generative Engine Optimization (GEO)",
-  "provider": {
-    "@type": "Organization",
-    "name": "Aeosignal.Space",
-    "url": "https://aeosignal.space"
-  },
-  "description": "GEO services to prepare your website for AI visibility and discovery across GPT, Gemini, and Perplexity.",
-  "areaServed": {
-    "@type": "Place",
-    "name": "Global"
-  }
-}
-</script>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>GEO Services | Aeosignal.Space</title>
-<meta name="description" content="Explore GEO services: Free GPT Accessibility Audit, Detailed GEO Audit, and GEO Implementation to make your website visible in ChatGPT and AI engines." />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: #0d011b;
-    color: #ffffff;
-}
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.0);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    z-index: 9999;
-    height: 60px;
-}
-header img {
-    height: 40px;
-}
-.menu-toggle {
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-.menu-toggle div {
-    width: 25px;
-    height: 3px;
-    background: #ffffff;
-}
-.mobile-menu {
-    display: none;
-    position: absolute;
-    top: 60px;
-    right: 20px;
-    background: rgba(0, 0, 0, 0.95);
-    border-radius: 8px;
-    flex-direction: column;
-    z-index: 1000;
-}
-.mobile-menu a {
-    color: #00ffff;
-    text-decoration: none;
-    padding: 12px 20px;
-}
-.mobile-menu a:hover { background: #111; }
-.hero {
-    background: url('/images/services-hero.webp') center/cover no-repeat;
-    min-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    text-align: center;
-}
-.hero h1 {
-    font-size: 2.5rem;
-    color: #ff00ff;
-    margin-bottom: 20px;
-}
-.hero p {
-    font-size: 1.2rem;
-    max-width: 700px;
-    color: #cccccc;
-    margin-bottom: 20px;
-}
-.cta-button {
-    background: #00ffff;
-    color: #0d011b;
-    padding: 12px 20px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 700;
-    display: inline-block;
-    transition: background 0.3s;
-}
-.cta-button:hover { background: #00cccc; }
-.section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 50px 20px;
-    text-align: center;
-}
-.section-content {
-    max-width: 700px;
-}
-.section img {
-    width: 85%;
-    max-width: 350px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-}
-.section h2 {
-    font-size: 2rem;
-    color: #ff00ff;
-    margin-bottom: 20px;
-}
-.section p {
-    font-size: 1.1rem;
-    color: #cccccc;
-}
-.cta-section {
-    text-align: center;
-    padding: 40px 20px;
-}
-.cta-section .cta-button {
-    padding: 14px 28px;
-    font-size: 1.1rem;
-}
-footer {
-    background: #0a0018;
-    text-align: center;
-    padding: 30px 20px;
-    color: #777;
-    font-size: 0.9rem;
-}
-footer a {
-    color: #00ffff;
-    text-decoration: none;
-    margin: 0 8px;
-}
-footer a:hover { color: #00cccc; }
-@media (min-width: 768px) {
-    header { height: 60px; padding: 10px 40px; }
-    header img { height: 50px; }
-    .section {
-        flex-direction: row;
-        justify-content: center;
-        text-align: left;
-        padding: 80px 40px;
-        gap: 40px;
-    }
-    .section.reverse { flex-direction: row-reverse; }
-    .section img {
-        width: 40%;
-        max-width: 300px;
-        margin: 0;
-    }
-    .section-content { width: 40%; }
-}
-</style>
-</head>
-<body>
-
-<header>
-    <a href="/"><img src="/images/logo-neo-sci-fi-transparent.webp" alt="Aeosignal.Space Logo"></a>
-    <div class="menu-toggle" onclick="toggleMenu()">
-        <div></div><div></div><div></div>
-    </div>
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="/">Home</a>
-        <a href="/what-is-geo">What is GEO?</a>
-        <a href="/services">Services</a>
-        <a href="/contact">Contact</a>
-    </div>
-</header>
-
-<section class="hero">
-    <h1>GEO Services to Make Your Site AI-Visible</h1>
-    <p>Transform your website into an AI-discoverable asset with our Generative Engine Optimization (GEO) services, designed to prepare your site for ChatGPT, Gemini, Perplexity, and the next generation of AI search.</p>
-    <a href="https://aeosignal.space/free_gpt_audit_landing.html" class="cta-button">🚀 Get Your Free GEO Audit</a>
-</section>
-
-<section class="section">
-    <img src="/images/free-audit.webp" alt="Free GPT Audit">
+---
+layout: base.njk
+title: GEO Services - AEOSIGNAL.SPACE
+description: Transform your website into an AI-discoverable asset with AEOSIGNAL.SPACE’s Generative Engine Optimization (GEO) services.
+eleventyNavigation:
+  key: Services
+  order: 2
+---
+<section class="hero-subpage" id="geo-hero-section"
+         data-light-bg="/images/hero-services-light.webp"
+         data-dark-bg="/images/hero-services-dark.webp">
     <div class="section-content">
-        <h2>🔍 Free GPT Accessibility Audit</h2>
-        <p>Find out if your site is currently discoverable by GPT, Gemini, and Perplexity. Our free audit checks structured data, crawlability, and your current AI readiness to give you a clear visibility baseline.</p>
+
+        <h1>GEO Services to Make Your Site AI-Visible</h1>
+        <p>Transform your website into an AI-discoverable asset with AEOSIGNAL.SPACE’s Generative Engine Optimization (GEO) services, built to prepare your site for ChatGPT, Gemini, Perplexity, and the next generation of AI search.</p>
+        <p>In the era of AI-powered discovery, your visibility is your growth engine. We help you stay ahead by ensuring your site’s content, structure, and signals are aligned for seamless AI interpretation and ranking.</p>
     </div>
 </section>
 
-<section class="section reverse">
-    <img src="/images/detailed-audit.webp" alt="Detailed GEO Audit">
+<section class="section section-left-aligned">
     <div class="section-content">
-        <h2>🛠️ Detailed GEO Audit</h2>
-        <p>Our comprehensive GEO Audit dives deeper into your site’s structure, schema implementation, content clarity, and technical health, giving you a precise, actionable roadmap to align your site for AI discovery.</p>
+        <h2><i class="fas fa-search"></i> Free GPT Accessibility Audit</h2>
+        <h3>Is Your Website Discoverable by GPT, Gemini, and Perplexity?</h3>
+        <p>Before you optimize, know where you stand.</p>
+        <p>Our Free GPT Accessibility Audit checks:</p>
+        <ul>
+            <li>Structured Data & Schema Health: Is your data clear for LLM interpretation?</li>
+            <li>Crawlability & Technical Readiness: Are AI crawlers finding your key pages easily?</li>
+            <li>Content Clarity: Is your site’s information aligned with AI comprehension patterns?</li>
+        </ul>
+        <p>You’ll get a clear, actionable visibility baseline with practical steps to improve immediately.</p>
+        <div class="cta-container">
+            <a href="/free_gpt_audit_landing.html" class="cta-button"><i class="fas fa-arrow-right"></i> Get Your Free GEO Audit</a>
+        </div>
     </div>
 </section>
 
-<section class="section">
-    <img src="/images/geo-implementation.webp" alt="GEO Implementation">
+<section class="section section-left-aligned">
     <div class="section-content">
-        <h2>🚀 GEO Implementation & Optimization</h2>
-        <p>We handle structured data alignment, semantic HTML refinement, and ongoing crawl monitoring to ensure your site is continuously prepared for AI and LLM discovery, helping you stay ahead as AI search evolves.</p>
+        <h2><i class="fas fa-cogs"></i> Detailed GEO Audit</h2>
+        <h3>Your Precise Roadmap for AI Discoverability</h3>
+        <p>Ready to go deeper?</p>
+        <p>Our Detailed GEO Audit provides a comprehensive analysis of your:</p>
+        <ul>
+            <li>Site Structure & Semantic HTML: Are your pages cleanly organized for AI parsing?</li>
+            <li>Schema & Structured Data Coverage: Do you use the right types to clarify your content?</li>
+            <li>Content Signals: Is your copy aligned with how AI interprets topical authority?</li>
+            <li>Technical Health: Speed, mobile readiness, crawl depth, and error surfaces.</li>
+            <li>AI Readiness Score: Your overall visibility score with prioritized opportunities.</li>
+        </ul>
+        <p>You’ll receive a clear, data-driven roadmap to align your site with AI-powered discovery, helping you stay ahead as search evolves.</p>
+        <div class="cta-container">
+            <a href="/book_detailed_audit.html" class="cta-button"><i class="fas fa-book"></i> Book Your Detailed GEO Audit</a>
+        </div>
     </div>
 </section>
 
-<section class="cta-section">
-    <h2>Ready to Future-Proof Your Website?</h2>
-    <p>Book your free GEO audit now and position your brand for AI-driven discovery.</p>
-    <a href="https://aeosignal.space/free_gpt_audit_landing.html" class="cta-button">🔍 Get Your Free GEO Audit</a>
+<section class="section section-left-aligned">
+    <div class="section-content">
+        <h2><i class="fas fa-rocket"></i> GEO Implementation & Optimization</h2>
+        <h3>Turn Insights into AI Visibility</h3>
+        <p>Insights are only valuable if executed.</p>
+        <p>With GEO Implementation & Optimization, we handle:</p>
+        <ul>
+            <li>Structured Data Alignment: Correct schema types, error fixes, and enrichment.</li>
+            <li>Semantic HTML Refinement: Cleaner structure for AI parsing and higher discoverability.</li>
+            <li>Content & Metadata Tuning: Aligning your headings, meta, and copy for LLM clarity.</li>
+            <li>Hyperlocal & Topical Content Creation: If targeting local discovery, we align your signals with AI-driven local and topical search.</li>
+            <li>Ongoing Crawl Monitoring: We track how GPT, Gemini, and Perplexity see your site, adapting to updates.</li>
+        </ul>
+        <p>Focus on your business while we ensure your site is continuously AI-ready.</p>
+        <div class="cta-container">
+            <a href="/start_geo_implementation.html" class="cta-button"><i class="fas fa-play"></i> Start GEO Implementation</a>
+        </div>
+    </div>
 </section>
 
-<footer>
-    © 2025 Aeosignal.Space | Generative Engine Optimization<br>
-    <a href="/privacy-policy">Privacy Policy</a> |
-    <a href="/terms-of-service">Terms of Service</a> |
-    <a href="/contact">Contact</a>
-</footer>
-
-<script>
-function toggleMenu() {
-    const menu = document.getElementById('mobileMenu');
-    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-}
-document.addEventListener('click', function(event) {
-    const menu = document.getElementById('mobileMenu');
-    const toggle = document.querySelector('.menu-toggle');
-    if (menu && toggle && !menu.contains(event.target) && !toggle.contains(event.target)) {
-        menu.style.display = 'none';
-    }
-});
-</script>
-
-</body>
-</html>
+<section class="section section-left-aligned">
+    <div class="section-content">
+        <h2>Why Choose AEOSIGNAL.SPACE for GEO?</h2>
+        <ul>
+            <li>Future-Proofing: We position your brand for AI discovery, not just traditional SEO.</li>
+            <li>Hands-On Execution: We don’t just audit; we implement with precision.</li>
+            <li>Transparent Reporting: See exactly what’s done and how it impacts discoverability.</li>
+            <li>Fast, Focused, and Effective: Designed for startups, SMBs, and agencies who want to win AI visibility early.</li>
+        </ul>
+    </div>
+</section>

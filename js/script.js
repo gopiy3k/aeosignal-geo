@@ -83,11 +83,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // --- NEW/UPDATED LOGIC FOR BACKGROUND IMAGES ---
-        // Update hero section background image for 'what-is-geo' page
-        const geoHeroSection = document.getElementById('geo-hero-section');
-        if (geoHeroSection) {
-            geoHeroSection.style.backgroundImage = `url('${isDark ? '/images/geo-hero-dark.webp' : '/images/geo-hero-light.webp'}')`;
-        }
+
+   // --- NEW: Handle all elements with data-light-bg/data-dark-bg attributes ---
+document.querySelectorAll('[data-light-bg][data-dark-bg]').forEach(element => {
+    const lightBg = element.getAttribute('data-light-bg');
+    const darkBg = element.getAttribute('data-dark-bg');
+    if (lightBg && darkBg) {
+        element.style.backgroundImage = `url('${isDark ? darkBg : lightBg}')`;
+    }
+});
+// 
 
         // Update background image for the 'geo-section-visual' div
         const geoSectionVisual = document.getElementById('geo-section-visual');

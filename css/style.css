@@ -14,11 +14,12 @@
   --footer-bg-light: #f8f8f8;
   --footer-text-light: #555;
 
-  /* Hero Specific Variables (Light Mode) */
-  --hero-heading: #007bff; /* Blue for hero h1 in light mode */
-  --hero-paragraph: #333333; /* Dark grey for hero paragraph in light mode */
+  /* Hero Specific Variables (These variables are now overridden by specific hero styles) */
+  --hero-heading: #007bff; /* Vibrant Blue */
+  --hero-paragraph: #333333; /* Dark grey */
   --text-on-dark: #ffffff; /* Text color for hero content when background is dark (e.g., image) */
 }
+
 
 body.dark {
   --bg: #0d011b;
@@ -36,9 +37,9 @@ body.dark {
   --footer-bg-dark: #0a0018;
   --footer-text-dark: #777;
 
-  /* Hero Specific Variables (Dark Mode) */
-  --hero-heading: #FF69B4; /* Hot Pink for hero h1 in dark mode */
-  --hero-paragraph: #cccccc; /* Light grey for hero paragraph in dark mode */
+  /* Hero Specific Variables (These variables are now overridden by specific hero styles) */
+  --hero-heading: #FF69B4; /* Hot Pink */
+  --hero-paragraph: #cccccc; /* Light grey */
   --text-on-dark: #ffffff; /* Text color for hero content when background is dark (e.g., image) */
 }
 
@@ -146,7 +147,7 @@ body.dark .dropdown-content a:hover { background: var(--dropdown-hover-bg-dark);
   right: 20px;
 }
 
-/* HERO SECTION - Consolidated and Cleaned Up */
+/* HERO SECTION - Consolidated for Homepage and Subpages */
 .hero {
   min-height: 100vh; /* Use min-height for flexibility */
   padding: 100px 20px 40px; /* Adjusted padding to ensure content is below header */
@@ -175,18 +176,48 @@ body.dark section#audit.hero {
   background: url('/images/hero-audit-dark.webp') center/cover no-repeat;
 }
 
-/* Adjustments for hero h1/p to ensure they look good on audit page and homepage */
-.hero h1 {
-  font-size: 2.4rem;
-  color: var(--hero-heading); /* Uses the theme-dependent variable for h1 color */
-  margin-bottom: 16px;
+/* Specific background images for the GEO page's hero */
+section#geo-hero-section.hero {
+  background: url('/images/geo-hero-light.webp') center/cover no-repeat;
 }
 
-.hero p {
-  font-size: 1.1rem;
-  max-width: 600px;
-  color: var(--hero-paragraph); /* Uses the theme-dependent variable for paragraph color */
-  margin: 20px 0;
+body.dark section#geo-hero-section.hero {
+  background: url('/images/geo-hero-dark.webp') center/cover no-repeat;
+}
+
+/* Hero H1 and P for Homepage and all Subpages (Consistent Style) */
+.hero h1,
+.hero-subpage h1 { /* Applies to both main hero and subpage heroes */
+  font-family: 'Orbitron', sans-serif; /* Your desired font family */
+  font-weight: 700; /* Bold weight */
+  font-size: 2.8em; /* Desired size (services page size) */
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+  color: var(--section-heading); /* CORRECTED: Now uses --section-heading */
+}
+
+.hero p,
+.hero-subpage p { /* Applies to both main hero and subpage heroes */
+  font-family: 'Inter', sans-serif; /* Your desired font family */
+  font-weight: 400; /* Regular weight */
+  font-size: 1.2em; /* Desired size (services page size) */
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto 1.5em auto;
+  color: var(--paragraph); /* CORRECTED: Now uses --paragraph */
+}
+
+/* General .hero-subpage container styling (excluding h1/p which are now grouped above) */
+.hero-subpage {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 400px; /* Or whatever height you prefer for your hero section */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Adjust based on where you want text */
+  color: var(--text-on-dark); /* Ensures text is readable on the image (general inheritance) */
+  padding: 80px 20px; /* Example padding */
 }
 
 /* CTA BUTTON */
@@ -197,14 +228,6 @@ body.dark section#audit.hero {
   transition: background 0.3s; display: inline-block;
 }
 .cta-button:hover { background: var(--accent-hover); }
-/* Specific background images for the GEO page's hero */
-section#geo-hero-section.hero {
-  background: url('/images/geo-hero-light.webp') center/cover no-repeat;
-}
-
-body.dark section#geo-hero-section.hero {
-  background: url('/images/geo-hero-dark.webp') center/cover no-repeat;
-}
 
 /* GENERIC SECTION STYLING */
 .section {
@@ -263,8 +286,6 @@ footer {
 body.dark footer { background: var(--footer-bg-dark); color: var(--footer-text-dark); }
 footer a { color: var(--accent); text-decoration: none; margin: 0 8px; transition: color 0.3s ease; }
 footer a:hover { color: var(--accent-hover); }
-
-/* --- NEW STYLES FOR SECTIONS AND IMAGE ALIGNMENT --- */
 
 /* Common styling for content within sections */
 .section-content {
@@ -447,9 +468,16 @@ body.dark .faq-item {
     /* Mobile font sizes for hero */
     padding-top: 80px; /* Adjusted for smaller header on mobile */
   }
-  .hero h1 { font-size: 1.8rem; }
-  .hero p { font-size: 1rem; }
-
+  
+  /* Mobile font sizes for all hero H1s and Ps */
+  .hero h1,
+  .hero-subpage h1 {
+    font-size: 2em; /* Mobile font size for all hero H1s */
+  }
+  .hero p,
+  .hero-subpage p {
+    font-size: 1em; /* Mobile font size for all hero Ps */
+  }
 
   /* Hide desktop nav and show hamburger controls */
   .nav-links {
@@ -577,6 +605,11 @@ body.dark .faq-item {
   .section.reverse .section-content {
       order: 2; /* Content second */
   }
+
+  .hero-subpage {
+    min-height: 250px; /* Even shorter on mobile */
+    padding-top: 80px; /* Adjust for mobile header */
+  }
 }
 
 /* DESKTOP Specific Styles (min-width: 769px) */
@@ -661,34 +694,20 @@ body.dark .faq-item {
       background-position: center; /* Centers the image */
       background-repeat: no-repeat; /* Ensures no tiling */
   }
-}
 
-/* Subpage Hero Styling */
-.hero-subpage {
-  background: var(--bg); /* This hero does not have a background image */
-  min-height: 300px; /* Shorter than main hero, adjust as needed */
-  padding: 100px 20px 40px; /* Adjusted padding to ensure content is below header */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  overflow: hidden; /* Just in case */
-}
+  .section-left-aligned {
+      /* Override centering for this specific section on desktop */
+      justify-content: flex-start; /* Aligns content to the left */
+      padding-left: 5%; /* Optional: Add some padding for a visual "indent" */
+      padding-right: 5%; /* Optional: Keep some padding on the right as well */
+  }
 
-.hero-subpage h1 {
-  font-size: 2.2rem;
-  color: var(--section-heading);
-  margin-bottom: 10px;
-  max-width: 800px; /* Optional: Constrain width */
-}
-
-.hero-subpage p {
-  font-size: 1.1rem;
-  color: var(--paragraph);
-  max-width: 700px;
-  margin: 20px 0;
+  .section-left-aligned .section-content {
+      /* Adjust width for the content if necessary to prevent it from being too wide */
+      width: 95%; /* You might want it wider if there's no image */
+      max-width: 1200px; /* Or a specific max-width for readability */
+      margin: 0; /* Ensure no auto margins are centering it */
+  }
 }
 
 /* Form styling */
@@ -697,25 +716,6 @@ body.dark .faq-item {
   padding: 20px; border-radius: 8px;
   display: flex; flex-direction: column; gap: 12px;
   max-width: 320px; width: 100%;
-}
-
-    /* ... existing desktop styles ... */
-
-    .section-left-aligned {
-        /* Override centering for this specific section on desktop */
-        justify-content: flex-start; /* Aligns content to the left */
-        padding-left: 5%; /* Optional: Add some padding for a visual "indent" */
-        padding-right: 5%; /* Optional: Keep some padding on the right as well */
-    }
-
-    .section-left-aligned .section-content {
-        /* Adjust width for the content if necessary to prevent it from being too wide */
-        width: 95%; /* You might want it wider if there's no image */
-        max-width: 1200px; /* Or a specific max-width for readability */
-        margin: 0; /* Ensure no auto margins are centering it */
-    }
-
-    /* ... other desktop styles ... */
 }
 
 body.dark .hero-subpage form {
@@ -781,21 +781,4 @@ button[type="submit"]:hover {
   margin-top: 12px;
   font-weight: 500;
   text-align: center;
-}
-
-/* Mobile adjustments for hero (re-confirming) */
-@media (max-width: 768px) {
-  .hero {
-    min-height: 400px; /* Adjust for mobile */
-    padding-top: 80px; /* Adjust for mobile header */
-  }
-  .hero h1 { font-size: 1.8rem; }
-  .hero p { font-size: 1rem; }
-
-  .hero-subpage {
-    min-height: 250px; /* Even shorter on mobile */
-    padding-top: 80px; /* Adjust for mobile header */
-  }
-  .hero-subpage h1 { font-size: 1.8rem; }
-  .hero-subpage p { font-size: 0.95rem; }
 }
