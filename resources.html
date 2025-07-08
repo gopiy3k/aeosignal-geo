@@ -1,125 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>GEO Resources | Aeosignal.Space</title>
-<meta name="description" content="Explore resources on Generative Engine Optimization (GEO), case studies, blog posts, and learn how to prepare your site for GPT, Gemini, and AI discovery." />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-body { margin: 0; font-family: 'Inter', sans-serif; background: #0d011b; color: #ffffff; }
-header { position: fixed; top: 0; left: 0; right: 0; background: rgba(0,0,0,0); display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; z-index: 9999; height: 60px; }
-header img { height: 40px; }
-.menu-toggle { cursor: pointer; display: flex; flex-direction: column; gap: 4px; }
-.menu-toggle div { width: 25px; height: 3px; background: #ffffff; }
-.mobile-menu { display: none; position: absolute; top: 60px; right: 20px; background: rgba(0,0,0,0.95); border-radius: 8px; flex-direction: column; z-index: 1000; }
-.mobile-menu a { color: #00ffff; text-decoration: none; padding: 12px 20px; }
-.mobile-menu a:hover { background: #111; }
-.hero { background: url('/images/resources-hero.webp') center/cover no-repeat; min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
-.hero h1 { font-size: 2.5rem; color: #ff00ff; margin-bottom: 20px; }
-.hero p { font-size: 1.2rem; max-width: 700px; color: #cccccc; margin-bottom: 20px; }
-.cta-button { background: #00ffff; color: #0d011b; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: 700; display: inline-block; transition: background 0.3s; }
-.cta-button:hover { background: #00cccc; }
-.section { display: flex; flex-direction: column; align-items: center; padding: 50px 20px; text-align: center; }
-.section-content { max-width: 700px; }
-.section img { width: 85%; max-width: 350px; border-radius: 12px; margin-bottom: 20px; }
-.section h2 { font-size: 2rem; color: #ff00ff; margin-bottom: 20px; }
-.section p { font-size: 1.1rem; color: #cccccc; }
-.cta-section { text-align: center; padding: 40px 20px; }
-.cta-section .cta-button { padding: 14px 28px; font-size: 1.1rem; }
-footer { background: #0a0018; text-align: center; padding: 30px 20px; color: #777; font-size: 0.9rem; }
-footer a { color: #00ffff; text-decoration: none; margin: 0 8px; }
-footer a:hover { color: #00cccc; }
-@media (min-width: 768px) {
-    header { height: 60px; padding: 10px 40px; }
-    header img { height: 50px; }
-    .section { flex-direction: row; justify-content: center; text-align: left; padding: 80px 40px; gap: 40px; }
-    .section.reverse { flex-direction: row-reverse; }
-    .section img { width: 40%; max-width: 300px; margin: 0; }
-    .section-content { width: 40%; }
-}
-</style>
-</head>
-<body>
+---
+layout: base.njk
+title: Resources | Aeosignal.Space
+description: Explore expert insights, case studies, and education to dominate AI-powered search and expand your digital footprint globally with Aeosignal.Space resources.
+ogImage: /images/hero-resources-light.webp
+ogUrl: https://aeosignal.space/resources
+ogType: article
+---
 
-<header>
-    <a href="/"><img src="/images/logo-neo-sci-fi-transparent.webp" alt="Aeosignal.Space Logo"></a>
-    <div class="menu-toggle" onclick="toggleMenu()">
-        <div></div><div></div><div></div>
-    </div>
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="/">Home</a>
-        <a href="/services">Services</a>
-        <a href="/contact">Contact</a>
-    </div>
-</header>
-
-<section class="hero">
-    <h1>Explore GEO Resources</h1>
-    <p>Learn how Generative Engine Optimization can transform your website’s visibility in ChatGPT, Gemini, and AI discovery engines.</p>
-    <a href="/resources/blog" class="cta-button">📖 Read Our Insights</a>
+<section class="hero-subpage" id="resources-hero">
+  <div class="section-content">
+    <h1>Resources: Your Hub for AI Search & Strategic Growth</h1>
+    <p>Stay ahead of the curve.</p>
+    <p>Explore expert insights, proven frameworks, and practical education to dominate AI-powered search and expand your digital footprint globally.</p>
+  </div>
 </section>
 
-<section class="section">
-    <img src="/images/blog-preview.webp" alt="Latest Blog Posts">
-    <div class="section-content">
-        <h2>📰 Latest Blog Posts</h2>
-        <p>Stay updated with the latest strategies and insights on GEO, GPT visibility, and preparing your website for AI search discovery.</p>
-        <a href="/resources/blog" class="cta-button">Read Blog</a>
-    </div>
+<section class="section section-left-aligned">
+  <div class="section-content">
+
+    <section class="resource-feature-block text-left-image-right">
+      <div class="resource-content">
+        <h3>✍️ The Blog: Insights That Keep You Ahead</h3>
+        <p>Curious how GPT, Gemini, and Perplexity are reshaping search? Wondering how crypto brands and D2C companies can leverage AI visibility to scale? Our blog is your go-to resource.</p>
+        <p>We publish sharp, actionable content:</p>
+        <ul>
+          <li>Decoding AI algorithm updates</li>
+          <li>Structured data best practices for LLM discoverability</li>
+          <li>Advanced niche marketing strategies</li>
+          <li>Real-world GEO frameworks for growth</li>
+        </ul>
+        <p>Stay informed, inspired, and ready to implement.</p>
+        <div class="cta-container">
+          <a href="/blog" class="cta-button">📖 Read the Blog →</a>
+        </div>
+      </div>
+      <div class="resource-image">
+        <img src="/images/blog-feature.webp" alt="Blog insights illustration" loading="lazy">
+      </div>
+    </section>
+
+    <section class="resource-feature-block image-left-text-right">
+      <div class="resource-image">
+        <img src="/images/case-studies-feature.webp" alt="Case studies illustration" loading="lazy">
+      </div>
+      <div class="resource-content">
+        <h3>📈 Case Studies: See What’s Possible</h3>
+        <p>What does AI search dominance look like in practice?</p>
+        <p>Dive into detailed case studies showcasing:</p>
+        <ul>
+          <li>How crypto projects boosted token discoverability</li>
+          <li>How AI platforms reached targeted user bases</li>
+          <li>How D2C brands expanded in key regions with GEO strategies</li>
+        </ul>
+        <p>We break down challenges, our precise solutions, and the measurable results—so you can envision what’s possible for your business.</p>
+        <div class="cta-container">
+          <a href="/case-studies" class="cta-button">🔍 Explore Case Studies →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="resource-feature-block text-left-image-right">
+      <div class="resource-content">
+        <h3>🎓 GEO Academy: Master AI & GEO Optimization</h3>
+        <p>Want to train your team or deepen your strategic edge? GEO Academy is your on-demand learning hub.</p>
+        <p>From fundamentals to advanced tutorials, learn:</p>
+        <ul>
+          <li>Structuring your site for GPT & Gemini</li>
+          <li>Regional targeting strategies for scalable GEO growth</li>
+          <li>How LLMs interpret, prioritize, and present your brand</li>
+        </ul>
+        <p>Built for marketers, founders, and growth teams eager to master AI discoverability and future-proof their online presence.</p>
+        <div class="cta-container">
+          <a href="/academy" class="cta-button">🎓 Visit GEO Academy →</a>
+        </div>
+      </div>
+      <div class="resource-image">
+        <img src="/images/geo-academy-feature.webp" alt="GEO Academy illustration" loading="lazy">
+      </div>
+    </section>
+
+    <section class="resource-feature-block image-left-text-right">
+      <div class="resource-image">
+        <img src="/images/detailed-audit-light.webp" alt="Glossary illustration" loading="lazy">
+      </div>
+      <div class="resource-content">
+        <h3>📚 Glossary: Demystifying AI & GEO Jargon</h3>
+        <p>Feel overwhelmed by terms like “Semantic SEO”, “Tokenomics,” or “Knowledge Graph”? We’ve made it simple.</p>
+        <p>Our clear, concise glossary helps you:</p>
+        <ul>
+          <li>Quickly understand essential AI, crypto, and digital marketing terms</li>
+          <li>Stay aligned with the fast-evolving language of digital strategy</li>
+          <li>Build your confidence when discussing advanced GEO and AI topics</li>
+        </ul>
+        <p>Stay sharp, learn fast.</p>
+        <div class="cta-container">
+          <a href="/glossary" class="cta-button">📘 View Glossary →</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
 </section>
-
-<section class="section reverse">
-    <img src="/images/case-studies.webp" alt="Case Studies">
-    <div class="section-content">
-        <h2>📈 Case Studies</h2>
-        <p>See how businesses have successfully positioned themselves for AI discovery with Generative Engine Optimization.</p>
-        <a href="/resources/case-studies" class="cta-button">View Case Studies</a>
-    </div>
-</section>
-
-<section class="section">
-    <img src="/images/geo-academy.webp" alt="GEO Academy">
-    <div class="section-content">
-        <h2>🎓 GEO Academy (Coming Soon)</h2>
-        <p>Learn the frameworks, technical implementation, and future strategies to master GEO and AI discoverability.</p>
-    </div>
-</section>
-
-<section class="section reverse">
-    <img src="/images/glossary.webp" alt="Glossary">
-    <div class="section-content">
-        <h2>📘 Glossary (Coming Soon)</h2>
-        <p>Explore key terms and concepts around Generative Engine Optimization, LLMs, and AI-driven search visibility.</p>
-    </div>
-</section>
-
-<section class="cta-section">
-    <h2>Is Your Website Ready for GPT and AI Discovery?</h2>
-    <p>Get your free GEO audit and find out how visible your site is to ChatGPT, Gemini, and other AI engines.</p>
-    <a href="https://aeosignal.space/free_gpt_audit_landing.html" class="cta-button">🔍 Request Your Free Audit</a>
-</section>
-
-<footer>
-    © 2025 Aeosignal.Space | Generative Engine Optimization<br>
-    <a href="/privacy-policy">Privacy Policy</a> |
-    <a href="/terms-of-service">Terms of Service</a> |
-    <a href="/contact">Contact</a>
-</footer>
-
-<script>
-function toggleMenu() {
-    const menu = document.getElementById('mobileMenu');
-    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-}
-document.addEventListener('click', function(event) {
-    const menu = document.getElementById('mobileMenu');
-    const toggle = document.querySelector('.menu-toggle');
-    if (menu && toggle && !menu.contains(event.target) && !toggle.contains(event.target)) {
-        menu.style.display = 'none';
-    }
-});
-</script>
-
-</body>
-</html>
