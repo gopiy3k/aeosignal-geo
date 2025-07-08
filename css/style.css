@@ -276,6 +276,94 @@ body.dark .dark-mode-img {
 body.dark .light-mode-img {
     display: none;
 }
+
+/* Styles for the grid container holding audit item cards */
+.audit-items-grid {
+    display: grid;
+    gap: 20px; /* Space between the cards */
+    grid-template-columns: 1fr; /* Default: one column on mobile */
+    margin-top: 30px; /* Space from the introductory text */
+}
+
+/* For larger screens (tablets and desktops), display cards in columns */
+@media (min-width: 769px) {
+    .audit-items-grid {
+        /* auto-fit will create as many columns as fit, each at least 300px wide */
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
+/* Styles for individual audit item cards */
+.audit-item-card {
+    background-color: var(--card-bg); /* Use CSS variable for background */
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color-card); /* Use CSS variable for border */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition on hover */
+}
+
+/* Hover effect for cards */
+.audit-item-card:hover {
+    transform: translateY(-5px); /* Slightly lift the card */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Enhance shadow */
+}
+
+/* Dark mode specific hover effect */
+body.dark .audit-item-card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Styling for headings within the cards */
+.audit-item-card h3 {
+    color: var(--accent); /* Make heading stand out with accent color */
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.4rem; /* Slightly larger heading for prominence */
+}
+
+/* Styling for icons within card headings */
+.audit-item-card h3 i.fas {
+    margin-right: 10px;
+    color: var(--accent); /* Ensure icon color matches heading accent */
+}
+
+/* Styling for paragraphs within cards */
+.audit-item-card p {
+    font-size: 0.95rem; /* Slightly smaller text for better card fit */
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+/* Styling for lists within cards */
+.audit-item-card ul {
+    padding-left: 20px; /* Indent lists */
+    list-style: none; /* Remove default bullets */
+    margin-bottom: 0; /* Remove extra space at the bottom of the list */
+}
+
+.audit-item-card ul li {
+    position: relative;
+    padding-left: 25px; /* Space for custom bullet */
+    margin-bottom: 8px; /* Space between list items */
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.audit-item-card ul li:last-child {
+    margin-bottom: 0; /* No margin after the last list item */
+}
+
+/* Custom bullet for list items within cards (using a dot for this section) */
+.audit-item-card ul li:before {
+    content: '•'; /* A simple dot as a bullet point */
+    color: var(--accent); /* Color the dot with accent color */
+    position: absolute;
+    left: 0;
+    top: 0.1em; /* Adjust vertical alignment of the dot */
+    font-weight: bold;
+    font-size: 1.2em;
+}
 /* FOOTER */
 footer {
   background: var(--footer-bg-light);
