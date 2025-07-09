@@ -594,12 +594,19 @@ body.dark .faq-item {
     display: flex;
   }
 
-  /* Show hamburger/close icons on mobile */
-  .hamburger-menu {
-    display: block;
-  }
+   /* Hamburger close icon (keep it fixed to viewport, high z-index) */
   .hamburger-close {
-    display: none;
+    position: fixed; /* Override absolute from global rule */
+    top: 15px;
+    right: 20px;
+    display: none; /* Managed by JS, but useful fallback */
+    z-index: 1060; /* Higher than menu */
+  }
+
+  /* Hamburger open icon */
+  .hamburger-menu {
+    display: block; /* Ensure it's visible on mobile */
+    z-index: 1060; /* Higher than menu */
   }
 
   /* Mobile Nav Links Styling (flush left) */
