@@ -14,17 +14,39 @@
   --footer-bg-light: #f8f8f8;
   --footer-text-light: #555;
 
+
+/* style.css */
+
+/* Ensure HTML and BODY take full viewport width and prevent unintended fixed widths */
+html, body {
+  width: 100%;
+  max-width: 100vw; /* This is crucial: Prevents content from exceeding viewport width */
+  overflow-x: hidden; /* Helps prevent horizontal scrollbars */
+  margin: 0; /* Ensure no default browser margins affect layout */
+}
+
+/* HEADER - Explicitly set width to 100% and use box-sizing */
+header {
+  position: fixed; top: 0; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 20px; /* Your existing padding */
+  background: var(--header-bg);
+  z-index: 1000;
+  box-shadow: 0 2px 5px var(--header-shadow);
+  transition: background-color 0.3s ease;
+
+  /* --- ADD OR ENSURE THESE TWO LINES ARE PRESENT --- */
+  width: 100%; /* Force header to take full available width of the viewport */
+  box-sizing: border-box; /* Crucial: Includes padding in the 100% width calculation */
+}
+
+/* ... rest of your existing style.css content ... */
   /* Hero Specific Variables (These variables are now overridden by specific hero styles) */
   --hero-heading: #007bff; /* Vibrant Blue */
   --hero-paragraph: #333333; /* Dark grey */
   --text-on-dark: #ffffff; /* Text color for hero content when background is dark (e.g., image) */
-
-  /* Variables for the new resource blocks */
-  --resource-block-bg: #f9f9f9; /* Light grey for light mode */
-  --resource-block-shadow: rgba(0,0,0,0.08);
-  --border-color-card: rgba(0,0,0,0.1); /* Assuming a light border for cards */
-  --card-bg: #ffffff; /* Assuming white card background by default */
 }
+
 
 body.dark {
   --bg: #0d011b;
@@ -46,29 +68,18 @@ body.dark {
   --hero-heading: #FF69B4; /* Hot Pink */
   --hero-paragraph: #cccccc; /* Light grey */
   --text-on-dark: #ffffff; /* Text color for hero content when background is dark (e.g., image) */
-
-  /* Dark mode for new resource blocks */
-  --resource-block-bg: #1e0730; /* Darker purple for dark mode */
-  --resource-block-shadow: rgba(0,0,0,0.4);
-  --border-color-card: rgba(255,255,255,0.1); /* Dark mode border for cards */
 }
 
-/* Ensure HTML and BODY take full viewport width and prevent unintended fixed widths */
-html, body {
-  margin: 0; /* Ensure no default browser margins affect layout */
+body {
+  margin: 0;
   font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
-  overflow-x: hidden; /* Helps prevent horizontal scrollbars */
+  overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
-
-  /* AGGRESSIVE OVERRIDES - THESE ARE CRUCIAL */
-  width: 100vw !important; /* Force to viewport width, overriding anything else */
-  min-width: 100vw !important; /* Ensure it never shrinks below viewport width */
-  max-width: 100vw !important; /* Also cap at 100vw */
 }
 
-/* HEADER - Explicitly set width to 100% and use box-sizing */
+/* HEADER */
 header {
   position: fixed; top: 0; left: 0; right: 0;
   display: flex; justify-content: space-between; align-items: center;
@@ -77,10 +88,6 @@ header {
   z-index: 1000;
   box-shadow: 0 2px 5px var(--header-shadow);
   transition: background-color 0.3s ease;
-
-  /* --- AGGRESSIVE OVERRIDE FOR HEADER --- */
-  width: 100vw !important; /* Force header to take full available width of the viewport */
-  box-sizing: border-box; /* Crucial: Includes padding in the 100% width calculation */
 }
 header img { max-height: 65px; width: auto; max-width: 180px; transition: opacity 0.3s ease; }
 
@@ -156,10 +163,10 @@ body.dark .dropdown-content a:hover { background: var(--dropdown-hover-bg-dark);
 .hamburger-close {
   display: none;
   font-size: 1.8rem;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
+ width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
   cursor: pointer;
   color: var(--accent);
   z-index: 1001;
@@ -581,7 +588,7 @@ body.dark .faq-item {
     /* Mobile font sizes for hero */
     padding-top: 80px; /* Adjusted for smaller header on mobile */
   }
-
+  
   /* Mobile font sizes for all hero H1s and Ps */
   .hero h1,
   .hero-subpage h1 {
@@ -709,10 +716,11 @@ body.dark .faq-item {
 }
 
 /* Ensure the specific resource block containers also behave well on mobile */
+/* These rules are already in your provided CSS but are crucial for the fix */
 .resource-feature-block {
-    flex-direction: column; /* Stack columns vertically on small screens */
-    gap: 20px; /* Smaller gap when stacked */
-    padding: 20px 15px; /* Adjust padding: 20px top/bottom, 15px left/right */
+    flex-direction: column; /* Stacks content vertically */
+    gap: 20px; /* Reduced gap when stacked */
+    padding: 20px 15px; /* Adjusted padding: 20px top/bottom, 15px left/right */
     width: auto; /* Allow it to adapt naturally to its parent's width */
     max-width: 100%; /* Ensure it never overflows its parent */
     margin-left: 0; /* Remove any horizontal margins */
@@ -943,6 +951,16 @@ button[type="submit"]:hover {
   text-align: center;
 }
 /* --- New Feature Block Styling for Resources Page --- */
+
+/* Variables for the new resource blocks */
+:root {
+    --resource-block-bg: #f9f9f9; /* Light grey for light mode */
+    --resource-block-shadow: rgba(0,0,0,0.08);
+}
+body.dark {
+    --resource-block-bg: #1e0730; /* Darker purple for dark mode */
+    --resource-block-shadow: rgba(0,0,0,0.4);
+}
 
 .resource-feature-block {
     display: flex; /* Use flexbox for two columns */
