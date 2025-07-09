@@ -658,21 +658,69 @@ body.dark .faq-item {
   .faq-item h3 { font-size: 1.2rem; }
   .faq-item p { font-size: 0.95rem; }
 
-  /* Mobile CTA Button Enhancements */
-  .cta-button {
-      padding: 15px 28px; /* Increased padding */
-      font-size: 1.1rem; /* Slightly larger font size */
-  }
-  .cta-container {
-      flex-direction: column; /* Stacks buttons vertically */
-      gap: 15px; /* Increased gap between stacked buttons */
-      margin-top: 25px;
-  }
-  .cta-container .cta-button {
-      width: 100%; /* Ensure full width for individual buttons */
-      max-width: 300px; /* Optional: Limit max width for extremely wide screens on mobile */
-      text-align: center;
-  }
+ /* Mobile CTA Button Enhancements (Refined for better mobile responsiveness) */
+.cta-button {
+    /* General mobile styling for all CTA buttons */
+    padding: 12px 20px; /* Reduced horizontal padding for better fit on small screens */
+    font-size: 1rem; /* Standard mobile font size */
+    display: block; /* Make the button a block element so it takes full width */
+    width: 100%; /* Ensure it always tries to take 100% of its direct parent's available space */
+    max-width: 320px; /* A reasonable maximum width for a single button on mobile. Adjust if needed. */
+    margin-left: auto; /* Center the block button horizontally */
+    margin-right: auto; /* Center the block button horizontally */
+    box-sizing: border-box; /* Ensures padding/border are included in the 100% width calculation */
+}
+
+.cta-container {
+    display: flex; /* Keep flex for potential multiple buttons */
+    flex-direction: column; /* Stack buttons vertically if there are multiple */
+    gap: 15px; /* Space between stacked buttons */
+    margin-top: 25px;
+    justify-content: center; /* Center the stacked buttons within the container */
+    align-items: center; /* Center each individual button (which is already 100% width) */
+    width: 100%; /* Ensure the container itself takes full width */
+    max-width: 320px; /* Match max-width of button for consistency if single button */
+    margin-left: auto; /* Center the container itself */
+    margin-right: auto;
+}
+
+/* Ensure the specific resource block containers also behave well on mobile */
+/* These rules are already in your provided CSS but are crucial for the fix */
+.resource-feature-block {
+    flex-direction: column; /* Stacks content vertically */
+    gap: 20px; /* Reduced gap when stacked */
+    padding: 20px 15px; /* Adjusted padding: 20px top/bottom, 15px left/right */
+    width: auto; /* Allow it to adapt naturally to its parent's width */
+    max-width: 100%; /* Ensure it never overflows its parent */
+    margin-left: 0; /* Remove any horizontal margins */
+    margin-right: 0;
+}
+/* Inside your @media (max-width: 768px) block */
+
+/* Ensure all resource feature blocks stack with image first, then content */
+.resource-feature-block .resource-image {
+    order: 1; /* Make the image container appear first */
+}
+
+.resource-feature-block .resource-content {
+    order: 2; /* Make the content container appear second */
+}
+
+/* You might also want to ensure the .cta-container is ordered last within the content if it's not already */
+.resource-feature-block .resource-content .cta-container {
+    order: 3; /* This ensures the CTA button always comes after the text content */
+}
+
+.resource-feature-block .resource-content {
+    width: 100%; /* Take full width of the padded parent block */
+    padding-left: 0; /* Remove any inherited/default horizontal padding */
+    padding-right: 0; /* Remove any inherited/default horizontal padding */
+}
+
+/* Center the CTA container's content on mobile within the resource block */
+.resource-feature-block .cta-container {
+    text-align: center;
+}
 
   /* Show image in its own block on mobile for the reverse section */
   .geo-section-visual {

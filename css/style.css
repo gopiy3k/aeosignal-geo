@@ -70,6 +70,66 @@ header img { max-height: 65px; width: auto; max-width: 180px; transition: opacit
   align-items: center;
   gap: 15px;
 }
+/* --- HEADER --- */
+header {
+  position: fixed; /* Keep header fixed at the top */
+  top: 0; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 20px;
+  background: var(--header-bg);
+  z-index: 1000; /* Ensure header is always on top */
+  box-shadow: 0 2px 5px var(--header-shadow);
+  transition: background-color 0.3s ease;
+  height: 80px; /* Give the header a fixed height to prevent content from going under it */
+  box-sizing: border-box; /* Ensures padding is included in height */
+}
+
+/* --- MOBILE SPECIFIC STYLES (@media max-width: 768px) --- */
+@media (max-width: 768px) {
+  /* ... (your existing mobile styles) ... */
+
+  /* NAVIGATION LINKS (Mobile Menu) */
+  .nav-links {
+    display: none; /* Hidden by default (for mobile) */
+    flex-direction: column;
+    position: fixed; /* Use fixed position relative to the viewport */
+    top: 0; /* Align to the top of the viewport */
+    right: 0;
+    width: 70%; /* Or a specific pixel width like 280px */
+    height: 100vh; /* Make it full viewport height */
+    background: var(--header-bg); /* Use header background for consistency */
+    padding-top: 80px; /* IMPORTANT: Push content below the fixed header */
+    box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%); /* Start off-screen */
+    overflow-y: auto; /* Allow scrolling if menu content is long */
+    z-index: 1050; /* IMPORTANT: Ensure menu is above the header */
+    -webkit-overflow-scrolling: touch; /* Improves scrolling performance on iOS, can help Android */
+  }
+
+  .nav-links.open {
+    transform: translateX(0); /* Slide in */
+    display: flex; /* Make it visible */
+  }
+
+  /* Hamburger Menu icons */
+  .hamburger-menu,
+  .hamburger-close {
+    display: block; /* Ensure hamburger icon is always visible on mobile */
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--accent);
+    z-index: 1060; /* IMPORTANT: Ensure hamburger/close icons are above the menu */
+  }
+
+  .hamburger-close {
+    position: fixed; /* Make the close icon fixed relative to viewport */
+    top: 15px; /* Adjust as needed to align with header */
+    right: 20px; /* Adjust as needed */
+  }
+
+  /* ... (rest of your mobile specific styles) ... */
+}
 
 /* NAVIGATION LINKS */
 .nav-links {
