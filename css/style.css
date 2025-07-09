@@ -695,6 +695,21 @@ body.dark .faq-item {
     margin-left: 0; /* Remove any horizontal margins */
     margin-right: 0;
 }
+/* Inside your @media (max-width: 768px) block */
+
+/* Ensure all resource feature blocks stack with image first, then content */
+.resource-feature-block .resource-image {
+    order: 1; /* Make the image container appear first */
+}
+
+.resource-feature-block .resource-content {
+    order: 2; /* Make the content container appear second */
+}
+
+/* You might also want to ensure the .cta-container is ordered last within the content if it's not already */
+.resource-feature-block .resource-content .cta-container {
+    order: 3; /* This ensures the CTA button always comes after the text content */
+}
 
 .resource-feature-block .resource-content {
     width: 100%; /* Take full width of the padded parent block */
