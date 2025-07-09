@@ -208,3 +208,36 @@ document.querySelectorAll('[data-light-bg][data-dark-bg]').forEach(element => {
     // Run initialization
     initializeMode();
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const body = document.body;
+    const themeAwareImages = document.querySelectorAll('.theme-aware-image');
+
+    // Function to update image sources based on current theme
+    function updateThemeImages() {
+        const isDarkMode = body.classList.contains('dark');
+        themeAwareImages.forEach(img => {
+            if (isDarkMode) {
+                img.src = img.dataset.srcDark;
+            } else {
+                img.src = img.dataset.srcLight;
+            }
+        });
+    }
+
+    // Initial update when the page loads
+    updateThemeImages();
+
+    // Observe changes to the body's class list
+    // This is useful if your theme toggle adds/removes the 'dark' class
+    const observer = new MutationObserver((mutationsList) => {
+        for (const mutation of mutationsList) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                updateThemeImages();
+            }
+        }
+    });
+
+    // Start observing the body for attribute changes
+    observer.observe(body, { attributes: true });
+});
