@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
         navLinks.classList.add('open');
         if (hamburgerMenu) hamburgerMenu.style.display = 'none';
         if (hamburgerClose) hamburgerClose.style.display = 'block';
-        document.body.style.overflow = 'hidden';
+         // CRITICAL CHANGE: Apply overflow hidden to HTML, not BODY
+        document.documentElement.style.overflow = 'hidden'; // Prevents scrolling on the root
         if (hamburgerMenu) hamburgerMenu.setAttribute('aria-expanded', 'true');
         if (hamburgerClose) hamburgerClose.setAttribute('aria-expanded', 'true');
     }
@@ -24,8 +25,9 @@ document.addEventListener('DOMContentLoaded', function() {
         navLinks.classList.remove('open');
         if (hamburgerMenu) hamburgerMenu.style.display = 'block';
         if (hamburgerClose) hamburgerClose.style.display = 'none';
-        document.body.style.overflow = '';
-        document.querySelectorAll('.dropdown.open').forEach(d => {
+ // CRITICAL CHANGE: Remove overflow hidden from HTML
+        document.documentElement.style.overflow = ''; // Allow scrolling on the root
+               document.querySelectorAll('.dropdown.open').forEach(d => {
             d.classList.remove('open');
             const dropdownToggle = d.querySelector('.dropdown-toggle');
             if (dropdownToggle) dropdownToggle.setAttribute('aria-expanded', 'false');
