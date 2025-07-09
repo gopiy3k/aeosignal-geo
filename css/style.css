@@ -49,8 +49,6 @@ body {
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
-  width: 100%;
-  min-width: 320px;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -576,37 +574,28 @@ body.dark .faq-item {
     flex-direction: column;
     position: fixed;
     top: 0;
-    width: 70vw;
+    right: 0;
+    width: 70%;
     height: 100vh;
-   left: 100vw; 
     background: var(--header-bg);
     padding-top: 80px;
     box-shadow: -2px 0 5px rgba(0,0,0,0.2);
     transition: transform 0.3s ease-in-out;
+    transform: translateX(100%);
     overflow-y: auto;
-   z-index: 1050;
-    -webkit-overflow-scrolling: touch;
   }
 
   .nav-links.open {
     transform: translateX(0);
-  left: 30vw; /* When open, slide it in to occupy the right 70% (100vw - 70vw = 30vw from left)
     display: flex;
   }
 
-   /* Hamburger close icon (keep it fixed to viewport, high z-index) */
-  .hamburger-close {
-    position: fixed; /* Override absolute from global rule */
-    top: 15px;
-    right: 20px;
-    display: none; /* Managed by JS, but useful fallback */
-    z-index: 1060; /* Higher than menu */
-  }
-
-  /* Hamburger open icon */
+  /* Show hamburger/close icons on mobile */
   .hamburger-menu {
-    display: block; /* Ensure it's visible on mobile */
-    z-index: 1060; /* Higher than menu */
+    display: block;
+  }
+  .hamburger-close {
+    display: none;
   }
 
   /* Mobile Nav Links Styling (flush left) */
@@ -669,69 +658,21 @@ body.dark .faq-item {
   .faq-item h3 { font-size: 1.2rem; }
   .faq-item p { font-size: 0.95rem; }
 
- /* Mobile CTA Button Enhancements (Refined for better mobile responsiveness) */
-.cta-button {
-    /* General mobile styling for all CTA buttons */
-    padding: 12px 20px; /* Reduced horizontal padding for better fit on small screens */
-    font-size: 1rem; /* Standard mobile font size */
-    display: block; /* Make the button a block element so it takes full width */
-    width: 100%; /* Ensure it always tries to take 100% of its direct parent's available space */
-    max-width: 320px; /* A reasonable maximum width for a single button on mobile. Adjust if needed. */
-    margin-left: auto; /* Center the block button horizontally */
-    margin-right: auto; /* Center the block button horizontally */
-    box-sizing: border-box; /* Ensures padding/border are included in the 100% width calculation */
-}
-
-.cta-container {
-    display: flex; /* Keep flex for potential multiple buttons */
-    flex-direction: column; /* Stack buttons vertically if there are multiple */
-    gap: 15px; /* Space between stacked buttons */
-    margin-top: 25px;
-    justify-content: center; /* Center the stacked buttons within the container */
-    align-items: center; /* Center each individual button (which is already 100% width) */
-    width: 100%; /* Ensure the container itself takes full width */
-    max-width: 320px; /* Match max-width of button for consistency if single button */
-    margin-left: auto; /* Center the container itself */
-    margin-right: auto;
-}
-
-/* Ensure the specific resource block containers also behave well on mobile */
-/* These rules are already in your provided CSS but are crucial for the fix */
-.resource-feature-block {
-    flex-direction: column; /* Stacks content vertically */
-    gap: 20px; /* Reduced gap when stacked */
-    padding: 20px 15px; /* Adjusted padding: 20px top/bottom, 15px left/right */
-    width: auto; /* Allow it to adapt naturally to its parent's width */
-    max-width: 100%; /* Ensure it never overflows its parent */
-    margin-left: 0; /* Remove any horizontal margins */
-    margin-right: 0;
-}
-/* Inside your @media (max-width: 768px) block */
-
-/* Ensure all resource feature blocks stack with image first, then content */
-.resource-feature-block .resource-image {
-    order: 1; /* Make the image container appear first */
-}
-
-.resource-feature-block .resource-content {
-    order: 2; /* Make the content container appear second */
-}
-
-/* You might also want to ensure the .cta-container is ordered last within the content if it's not already */
-.resource-feature-block .resource-content .cta-container {
-    order: 3; /* This ensures the CTA button always comes after the text content */
-}
-
-.resource-feature-block .resource-content {
-    width: 100%; /* Take full width of the padded parent block */
-    padding-left: 0; /* Remove any inherited/default horizontal padding */
-    padding-right: 0; /* Remove any inherited/default horizontal padding */
-}
-
-/* Center the CTA container's content on mobile within the resource block */
-.resource-feature-block .cta-container {
-    text-align: center;
-}
+  /* Mobile CTA Button Enhancements */
+  .cta-button {
+      padding: 15px 28px; /* Increased padding */
+      font-size: 1.1rem; /* Slightly larger font size */
+  }
+  .cta-container {
+      flex-direction: column; /* Stacks buttons vertically */
+      gap: 15px; /* Increased gap between stacked buttons */
+      margin-top: 25px;
+  }
+  .cta-container .cta-button {
+      width: 100%; /* Ensure full width for individual buttons */
+      max-width: 300px; /* Optional: Limit max width for extremely wide screens on mobile */
+      text-align: center;
+  }
 
   /* Show image in its own block on mobile for the reverse section */
   .geo-section-visual {
@@ -929,112 +870,4 @@ button[type="submit"]:hover {
   margin-top: 12px;
   font-weight: 500;
   text-align: center;
-}
-/* --- New Feature Block Styling for Resources Page --- */
-
-/* Variables for the new resource blocks */
-:root {
-    --resource-block-bg: #f9f9f9; /* Light grey for light mode */
-    --resource-block-shadow: rgba(0,0,0,0.08);
-}
-body.dark {
-    --resource-block-bg: #1e0730; /* Darker purple for dark mode */
-    --resource-block-shadow: rgba(0,0,0,0.4);
-}
-
-.resource-feature-block {
-    display: flex; /* Use flexbox for two columns */
-    align-items: stretch; /* CRUCIAL: Makes flex items stretch to match the height of the tallest sibling */
-    gap: 40px; /* Space between text and image columns */
-    margin-bottom: 60px; /* Space between each feature block */
-    padding: 30px; /* Padding inside the block */
-    border-radius: 12px;
-    background-color: var(--resource-block-bg); /* Block background color */
-    box-shadow: 0 5px 15px var(--resource-block-shadow); /* Block shadow */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.resource-feature-block .resource-content,
-.resource-feature-block .resource-image {
-    flex: 1; /* Both columns take equal width */
-    min-width: 0; /* Prevents content from causing overflow */
-    /* No explicit height here, they will stretch naturally as flex items */
-}
-
-.resource-feature-block .resource-image {
-    display: flex; /* Make the image container itself a flex container */
-    align-items: center; /* Center the image vertically if it doesn't quite fill */
-    justify-content: center; /* Center the image horizontally if it doesn't quite fill */
-}
-
-.resource-feature-block .resource-image img {
-    width: 100%; /* Image fills its container horizontally */
-    height: 100%; /* Image fills its container vertically */
-    object-fit: cover; /* CRUCIAL: Image covers its container, cropping if necessary, maintaining aspect ratio */
-    display: block; /* Removes extra space below image */
-    border-radius: 8px; /* Rounded corners for images */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow on images */
-}
-
-/* Specific ordering for alternating layout (Image Left, Text Right) */
-.resource-feature-block.image-left-text-right {
-    flex-direction: row-reverse; /* Swaps the visual order of columns */
-}
-
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-    .resource-feature-block {
-        flex-direction: column; /* Stack columns vertically on small screens */
-        gap: 20px; /* Smaller gap when stacked */
-        padding: 20px; /* Adjust padding for smaller screens */
-    }
-
-    /* Ensure the stacking order is consistent regardless of initial desktop order */
-    .resource-feature-block.image-left-text-right {
-        flex-direction: column;
-    }
-}
-
-/* --- Styling for Content within Resource Feature Blocks --- */
-.resource-feature-block .resource-content h3 {
-    color: var(--header-text); /* Uses theme's header text color */
-    font-size: 1.8rem; /* Slightly larger heading for feature blocks */
-    margin-top: 0;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-}
-
-.resource-feature-block .resource-content p {
-    color: var(--text); /* Uses theme's main text color */
-    line-height: 1.6;
-    margin-bottom: 10px;
-}
-
-.resource-feature-block .resource-content ul {
-    list-style: none; /* Remove default bullets */
-    padding: 0;
-    margin-bottom: 20px;
-}
-
-.resource-feature-block .resource-content ul li {
-    position: relative;
-    padding-left: 30px; /* Space for custom bullet/icon */
-    margin-bottom: 10px;
-    color: var(--text);
-    line-height: 1.5;
-}
-
-.resource-feature-block .resource-content ul li::before {
-    content: '✨'; /* Using a sparkle emoji as a bullet */
-    position: absolute;
-    left: 0;
-    color: var(--accent); /* Uses theme's accent color for the bullet */
-    font-size: 1.2em;
-}
-
-/* CTA button within the resource content */
-.resource-feature-block .cta-container {
-    margin-top: 25px;
-    text-align: left;
 }
