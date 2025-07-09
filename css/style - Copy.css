@@ -871,3 +871,111 @@ button[type="submit"]:hover {
   font-weight: 500;
   text-align: center;
 }
+/* --- New Feature Block Styling for Resources Page --- */
+
+/* Variables for the new resource blocks */
+:root {
+    --resource-block-bg: #f9f9f9; /* Light grey for light mode */
+    --resource-block-shadow: rgba(0,0,0,0.08);
+}
+body.dark {
+    --resource-block-bg: #1e0730; /* Darker purple for dark mode */
+    --resource-block-shadow: rgba(0,0,0,0.4);
+}
+
+.resource-feature-block {
+    display: flex; /* Use flexbox for two columns */
+    align-items: stretch; /* CRUCIAL: Makes flex items stretch to match the height of the tallest sibling */
+    gap: 40px; /* Space between text and image columns */
+    margin-bottom: 60px; /* Space between each feature block */
+    padding: 30px; /* Padding inside the block */
+    border-radius: 12px;
+    background-color: var(--resource-block-bg); /* Block background color */
+    box-shadow: 0 5px 15px var(--resource-block-shadow); /* Block shadow */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.resource-feature-block .resource-content,
+.resource-feature-block .resource-image {
+    flex: 1; /* Both columns take equal width */
+    min-width: 0; /* Prevents content from causing overflow */
+    /* No explicit height here, they will stretch naturally as flex items */
+}
+
+.resource-feature-block .resource-image {
+    display: flex; /* Make the image container itself a flex container */
+    align-items: center; /* Center the image vertically if it doesn't quite fill */
+    justify-content: center; /* Center the image horizontally if it doesn't quite fill */
+}
+
+.resource-feature-block .resource-image img {
+    width: 100%; /* Image fills its container horizontally */
+    height: 100%; /* Image fills its container vertically */
+    object-fit: cover; /* CRUCIAL: Image covers its container, cropping if necessary, maintaining aspect ratio */
+    display: block; /* Removes extra space below image */
+    border-radius: 8px; /* Rounded corners for images */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow on images */
+}
+
+/* Specific ordering for alternating layout (Image Left, Text Right) */
+.resource-feature-block.image-left-text-right {
+    flex-direction: row-reverse; /* Swaps the visual order of columns */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .resource-feature-block {
+        flex-direction: column; /* Stack columns vertically on small screens */
+        gap: 20px; /* Smaller gap when stacked */
+        padding: 20px; /* Adjust padding for smaller screens */
+    }
+
+    /* Ensure the stacking order is consistent regardless of initial desktop order */
+    .resource-feature-block.image-left-text-right {
+        flex-direction: column;
+    }
+}
+
+/* --- Styling for Content within Resource Feature Blocks --- */
+.resource-feature-block .resource-content h3 {
+    color: var(--header-text); /* Uses theme's header text color */
+    font-size: 1.8rem; /* Slightly larger heading for feature blocks */
+    margin-top: 0;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.resource-feature-block .resource-content p {
+    color: var(--text); /* Uses theme's main text color */
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.resource-feature-block .resource-content ul {
+    list-style: none; /* Remove default bullets */
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.resource-feature-block .resource-content ul li {
+    position: relative;
+    padding-left: 30px; /* Space for custom bullet/icon */
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.5;
+}
+
+.resource-feature-block .resource-content ul li::before {
+    content: '✨'; /* Using a sparkle emoji as a bullet */
+    position: absolute;
+    left: 0;
+    color: var(--accent); /* Uses theme's accent color for the bullet */
+    font-size: 1.2em;
+}
+
+/* CTA button within the resource content */
+.resource-feature-block .cta-container {
+    margin-top: 25px;
+    text-align: left;
+}
