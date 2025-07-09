@@ -43,22 +43,16 @@ body.dark {
   --text-on-dark: #ffffff; /* Text color for hero content when background is dark (e.g., image) */
 }
 
-/* --- GLOBAL BODY AND HTML STYLES --- */
-html, body {
-  width: 100%;
-  min-width: 320px; /* Ensures a minimum width for mobile devices */
-  overflow-x: hidden; /* CRITICAL: Prevents horizontal scroll for off-canvas menus */
-}
-
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
+  overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* --- HEADER --- */
+/* HEADER */
 header {
   position: fixed; top: 0; left: 0; right: 0;
   display: flex; justify-content: space-between; align-items: center;
@@ -77,62 +71,13 @@ header img { max-height: 65px; width: auto; max-width: 180px; transition: opacit
   gap: 15px;
 }
 
-/* --- NEW/UPDATED MOBILE MENU NAVIGATION LINKS --- */
-/* These styles apply universally, setting up the off-canvas behavior.
-   They will be overridden by desktop media queries for larger screens. */
+/* NAVIGATION LINKS */
 .nav-links {
-  position: fixed; /* Fixed to the viewport */
-  top: 0;
-  right: 0;        /* Anchor to the right edge of the viewport */
-  width: 70vw;     /* Take up 70% of the viewport width */
-  height: 100vh;   /* Take up 100% of the viewport height */
-  
-  /* Initial state: off-screen to the right and completely invisible */
-  transform: translateX(100%); /* Pushes the menu fully off-screen to the right */
-  visibility: hidden;           /* Hides the element entirely, but it still occupies space */
-  
-  /* Transitions for smooth animation */
-  /* Transition transform, and make visibility change AFTER transform completes (0.3s delay) */
-  transition: transform 0.3s ease-in-out, visibility 0s linear 0.3s; 
-  
-  display: flex; /* Always display as flex (for internal layout), but JS controls when it's seen */
-  flex-direction: column; /* Stack links vertically */
-  background: var(--header-bg); /* Use your theme variable for background */
-  padding-top: 80px; /* Space for your fixed header */
-  box-shadow: -2px 0 10px rgba(0,0,0,0.3); /* Add a clear shadow */
-  overflow-y: auto; /* Allow internal scrolling if menu content overflows */
-  z-index: 1050; /* Ensure it's above main content and the header */
-  -webkit-overflow-scrolling: touch; /* Improves scrolling performance on iOS */
+  display: none; /* Hidden by default (for mobile) */
+  gap: 16px;
+  align-items: center;
 }
 
-/* --- Mobile Menu Open State --- */
-.nav-links.open {
-  transform: translateX(0); /* Slide the menu into view */
-  visibility: visible;      /* Make it visible immediately */
-  /* Transition transform, and make visibility change IMMEDIATELY (0s delay) */
-  transition: transform 0.3s ease-in-out, visibility 0s linear 0s; 
-}
-
-/* --- NEW/UPDATED HAMBURGER ICONS --- */
-/* Default state (hidden, as they are for desktop) */
-.hamburger-menu,
-.hamburger-close {
-  display: none; /* Hide by default */
-  font-size: 1.8rem;
-  cursor: pointer;
-  color: var(--accent); /* Use your theme accent color */
-  z-index: 1060; /* Ensure icons are above the menu and header */
-  position: fixed; /* Making them fixed directly to the viewport */
-  top: 15px; /* Adjust top/right positioning as needed for your header */
-  right: 20px;
-}
-/* Ensure the close icon is initially hidden by default, JS will toggle its display */
-.hamburger-close {
-    display: none;
-}
-
-
-/* NAVIGATION LINKS (GENERAL STYLES - NO CHANGE TO THESE) */
 nav a, nav .dropdown-toggle {
   color: var(--accent); background: none; border: none;
   font-weight: 600; cursor: pointer; text-decoration: none;
@@ -148,7 +93,7 @@ nav a:hover, nav .dropdown-toggle:hover { color: var(--accent-hover); }
   transition: transform 0.2s ease;
 }
 
-/* Dark Mode Toggle Button Styling (NO CHANGE TO THESE) */
+/* Dark Mode Toggle Button Styling */
 .toggle-mode-btn {
   border: 2px solid var(--accent);
   background: none;
@@ -166,7 +111,7 @@ nav a:hover, nav .dropdown-toggle:hover { color: var(--accent-hover); }
   border-color: var(--accent);
 }
 
-/* DROPDOWNS (NO CHANGE TO THESE) */
+/* DROPDOWNS */
 .dropdown { position: relative; }
 .dropdown-content {
   display: none; position: absolute; top: 100%; left: 0;
@@ -186,10 +131,26 @@ nav a:hover, nav .dropdown-toggle:hover { color: var(--accent-hover); }
 .dropdown-content a:hover { background: var(--dropdown-hover-bg-light); }
 body.dark .dropdown-content a:hover { background: var(--dropdown-hover-bg-dark); }
 
-/* HERO SECTION - Consolidated for Homepage and Subpages (NO CHANGE TO THESE) */
+/* Hamburger Menu icons */
+.hamburger-menu,
+.hamburger-close {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--accent);
+  z-index: 1001;
+}
+
+.hamburger-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+}
+
+/* HERO SECTION - Consolidated for Homepage and Subpages */
 .hero {
-  min-height: 100vh;
-  padding: 100px 20px 40px;
+  min-height: 100vh; /* Use min-height for flexibility */
+  padding: 100px 20px 40px; /* Adjusted padding to ensure content is below header */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -197,8 +158,8 @@ body.dark .dropdown-content a:hover { background: var(--dropdown-hover-bg-dark);
   text-align: center;
   position: relative;
   overflow: hidden;
-  color: var(--text-on-dark);
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+  color: var(--text-on-dark); /* Ensures text color is appropriate for hero background */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7); /* Adds subtle shadow for readability on images */
   background: url('/images/hero-light.webp') center/cover no-repeat;
 }
 
@@ -206,7 +167,7 @@ body.dark .hero {
   background: url('/images/hero-dark.webp') center/cover no-repeat;
 }
 
-/* Specific background images for the audit page's hero. (NO CHANGE TO THESE) */
+/* Specific background images for the audit page's hero. */
 section#audit.hero {
   background: url('/images/hero-audit-light.webp') center/cover no-repeat;
 }
@@ -215,7 +176,7 @@ body.dark section#audit.hero {
   background: url('/images/hero-audit-dark.webp') center/cover no-repeat;
 }
 
-/* Specific background images for the GEO page's hero (NO CHANGE TO THESE) */
+/* Specific background images for the GEO page's hero */
 section#geo-hero-section.hero {
   background: url('/images/geo-hero-light.webp') center/cover no-repeat;
 }
@@ -224,43 +185,43 @@ body.dark section#geo-hero-section.hero {
   background: url('/images/geo-hero-dark.webp') center/cover no-repeat;
 }
 
-/* Hero H1 and P for Homepage and all Subpages (Consistent Style) (NO CHANGE TO THESE) */
+/* Hero H1 and P for Homepage and all Subpages (Consistent Style) */
 .hero h1,
-.hero-subpage h1 {
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 700;
-  font-size: 2.8em;
+.hero-subpage h1 { /* Applies to both main hero and subpage heroes */
+  font-family: 'Orbitron', sans-serif; /* Your desired font family */
+  font-weight: 700; /* Bold weight */
+  font-size: 2.8em; /* Desired size (services page size) */
   line-height: 1.2;
   margin-bottom: 0.5em;
-  color: var(--section-heading);
+  color: var(--section-heading); /* CORRECTED: Now uses --section-heading */
 }
 
 .hero p,
-.hero-subpage p {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 1.2em;
+.hero-subpage p { /* Applies to both main hero and subpage heroes */
+  font-family: 'Inter', sans-serif; /* Your desired font family */
+  font-weight: 400; /* Regular weight */
+  font-size: 1.2em; /* Desired size (services page size) */
   line-height: 1.6;
   max-width: 700px;
   margin: 0 auto 1.5em auto;
-  color: var(--paragraph);
+  color: var(--paragraph); /* CORRECTED: Now uses --paragraph */
 }
 
-/* General .hero-subpage container styling (excluding h1/p which are now grouped above) (NO CHANGE TO THESE) */
+/* General .hero-subpage container styling (excluding h1/p which are now grouped above) */
 .hero-subpage {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 400px;
+  min-height: 400px; /* Or whatever height you prefer for your hero section */
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: var(--text-on-dark);
+  justify-content: center; /* Adjust based on where you want text */
+  color: var(--text-on-dark); /* Ensures text is readable on the image (general inheritance) */
   text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-  padding: 80px 20px;
+  padding: 80px 20px; /* Example padding */
 }
 
-/* CTA BUTTON (NO CHANGE TO THESE) */
+/* CTA BUTTON */
 .cta-button {
   background: var(--accent); color: var(--cta-text);
   padding: 12px 24px; border-radius: 8px;
@@ -269,7 +230,7 @@ body.dark section#geo-hero-section.hero {
 }
 .cta-button:hover { background: var(--accent-hover); }
 
-/* GENERIC SECTION STYLING (NO CHANGE TO THESE) */
+/* GENERIC SECTION STYLING */
 .section {
   display: flex;
   flex-direction: column;
@@ -300,7 +261,7 @@ body.dark section#geo-hero-section.hero {
   transition: color 0.3s ease;
 }
 
-/* By default, hide dark mode images and show light mode images (NO CHANGE TO THESE) */
+/* By default, hide dark mode images and show light mode images */
 .dark-mode-img {
     display: none;
 }
@@ -308,7 +269,7 @@ body.dark section#geo-hero-section.hero {
     display: block; /* Ensure it's block for proper layout */
 }
 
-/* When body has 'dark' class, hide light mode images and show dark mode images (NO CHANGE TO THESE) */
+/* When body has 'dark' class, hide light mode images and show dark mode images */
 body.dark .dark-mode-img {
     display: block;
 }
@@ -316,93 +277,94 @@ body.dark .light-mode-img {
     display: none;
 }
 
-/* Styles for the grid container holding audit item cards (NO CHANGE TO THESE) */
+/* Styles for the grid container holding audit item cards */
 .audit-items-grid {
     display: grid;
-    gap: 20px;
-    grid-template-columns: 1fr;
-    margin-top: 30px;
+    gap: 20px; /* Space between the cards */
+    grid-template-columns: 1fr; /* Default: one column on mobile */
+    margin-top: 30px; /* Space from the introductory text */
 }
 
-/* For larger screens (tablets and desktops), display cards in columns (NO CHANGE TO THESE) */
+/* For larger screens (tablets and desktops), display cards in columns */
 @media (min-width: 769px) {
     .audit-items-grid {
+        /* auto-fit will create as many columns as fit, each at least 300px wide */
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
 }
 
-/* Styles for individual audit item cards (NO CHANGE TO THESE) */
+/* Styles for individual audit item cards */
 .audit-item-card {
-    background-color: var(--card-bg);
+    background-color: var(--card-bg); /* Use CSS variable for background */
     padding: 25px;
     border-radius: 8px;
-    border: 1px solid var(--border-color-card);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color-card); /* Use CSS variable for border */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition on hover */
 }
 
-/* Hover effect for cards (NO CHANGE TO THESE) */
+/* Hover effect for cards */
 .audit-item-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px); /* Slightly lift the card */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Enhance shadow */
 }
 
-/* Dark mode specific hover effect (NO CHANGE TO THESE) */
+/* Dark mode specific hover effect */
 body.dark .audit-item-card:hover {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* Styling for headings within the cards (NO CHANGE TO THESE) */
+/* Styling for headings within the cards */
 .audit-item-card h3 {
-    color: var(--accent);
+    color: var(--accent); /* Make heading stand out with accent color */
     margin-top: 0;
     margin-bottom: 15px;
-    font-size: 1.4rem;
+    font-size: 1.4rem; /* Slightly larger heading for prominence */
 }
 
-/* Styling for icons within card headings (NO CHANGE TO THESE) */
+/* Styling for icons within card headings */
 .audit-item-card h3 i.fas {
     margin-right: 10px;
-    color: var(--accent);
+    color: var(--accent); /* Ensure icon color matches heading accent */
 }
 
-/* Styling for paragraphs within cards (NO CHANGE TO THESE) */
+/* Styling for paragraphs within cards */
 .audit-item-card p {
-    font-size: 0.95rem;
+    font-size: 0.95rem; /* Slightly smaller text for better card fit */
     margin-bottom: 15px;
     line-height: 1.6;
 }
 
-/* Styling for lists within cards (NO CHANGE TO THESE) */
+/* Styling for lists within cards */
 .audit-item-card ul {
-    padding-left: 20px;
-    list-style: none;
-    margin-bottom: 0;
+    padding-left: 20px; /* Indent lists */
+    list-style: none; /* Remove default bullets */
+    margin-bottom: 0; /* Remove extra space at the bottom of the list */
 }
 
 .audit-item-card ul li {
     position: relative;
-    padding-left: 25px;
-    margin-bottom: 8px;
+    padding-left: 25px; /* Space for custom bullet */
+    margin-bottom: 8px; /* Space between list items */
     font-size: 0.9rem;
     line-height: 1.5;
 }
 
 .audit-item-card ul li:last-child {
-    margin-bottom: 0;
+    margin-bottom: 0; /* No margin after the last list item */
 }
 
-/* Custom bullet for list items within cards (using a dot for this section) (NO CHANGE TO THESE) */
+/* Custom bullet for list items within cards (using a dot for this section) */
 .audit-item-card ul li:before {
-    content: '•';
-    color: var(--accent);
+    content: '•'; /* A simple dot as a bullet point */
+    color: var(--accent); /* Color the dot with accent color */
     position: absolute;
     left: 0;
-    top: 0.1em;
+    top: 0.1em; /* Adjust vertical alignment of the dot */
     font-weight: bold;
     font-size: 1.2em;
 }
-/* FOOTER (NO CHANGE TO THESE) */
+/* FOOTER */
 footer {
   background: var(--footer-bg-light);
   color: var(--footer-text-light);
@@ -414,18 +376,18 @@ body.dark footer { background: var(--footer-bg-dark); color: var(--footer-text-d
 footer a { color: var(--accent); text-decoration: none; margin: 0 8px; transition: color 0.3s ease; }
 footer a:hover { color: var(--accent-hover); }
 
-/* Common styling for content within sections (NO CHANGE TO THESE) */
+/* Common styling for content within sections */
 .section-content {
     width: 100%;
-    max-width: 800px;
+    max-width: 800px; /* Limit content width for readability */
     margin: 0 auto;
-    text-align: left;
+    text-align: left; /* Default text alignment for content */
 }
 .section-content h2 {
     font-size: 2rem;
     color: var(--section-heading);
     margin-bottom: 20px;
-    text-align: center;
+    text-align: center; /* Center section headings */
 }
 .section-content h2 .fas {
     margin-right: 10px;
@@ -444,16 +406,16 @@ footer a:hover { color: var(--accent-hover); }
     margin-bottom: 15px;
 }
 
-/* General list styling (NO CHANGE TO THESE) */
+/* General list styling */
 .section-content ul {
-    list-style: none;
+    list-style: none; /* Remove default bullet */
     padding: 0;
     margin: 20px 0;
 }
 
 .section-content ul li {
     margin-bottom: 12px;
-    padding-left: 30px;
+    padding-left: 30px; /* Space for custom bullet */
     position: relative;
     line-height: 1.6;
     color: var(--paragraph);
@@ -461,24 +423,24 @@ footer a:hover { color: var(--accent-hover); }
 }
 
 .section-content ul li:before {
-    content: "✓";
+    content: "✓"; /* Custom checkmark bullet */
     color: var(--accent);
     position: absolute;
     left: 0;
     font-size: 1.2em;
     font-weight: bold;
-    top: 0;
+    top: 0; /* Align with text top */
 }
 
-/* Specific styling for the "SEO vs GEO Box" (NO CHANGE TO THESE) */
+/* Specific styling for the "SEO vs GEO Box" */
 .seo-geo-box {
-    background: var(--card-bg, #f5f5f5);
+    background: var(--card-bg, #f5f5f5); /* Use card background for boxes/FAQs */
     border-left: 5px solid var(--accent);
     padding: 25px;
     margin: 40px 0;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    color: var(--text);
+    color: var(--text); /* Ensure text color in card */
 }
 
 .seo-geo-box h3 {
@@ -504,21 +466,21 @@ footer a:hover { color: var(--accent-hover); }
 }
 
 .seo-geo-box ul li:before {
-    content: "•";
+    content: "•"; /* Dot bullet */
     color: var(--accent);
     position: absolute;
     left: 0;
     font-size: 1.5em;
-    line-height: 0.8;
+    line-height: 0.8; /* Adjust vertical alignment */
     top: 5px;
 }
 
-/* Numbered list for "How it Works" (NO CHANGE TO THESE) */
+/* Numbered list for "How it Works" */
 .numbered-list {
     list-style: none;
     padding: 0;
     margin: 20px 0;
-    counter-reset: item;
+    counter-reset: item; /* Initialize counter */
 }
 
 .numbered-list li {
@@ -528,11 +490,11 @@ footer a:hover { color: var(--accent-hover); }
     font-size: 1.1rem;
     line-height: 1.6;
     color: var(--paragraph);
-    counter-increment: item;
+    counter-increment: item; /* Increment counter for each list item */
 }
 
 .numbered-list li:before {
-    content: counter(item);
+    content: counter(item); /* Use CSS counter */
     background: var(--accent);
     color: var(--cta-text);
     border-radius: 50%;
@@ -548,15 +510,15 @@ footer a:hover { color: var(--accent-hover); }
     top: 0;
 }
 
-/* FAQ Section Styling (NO CHANGE TO THESE) */
+/* FAQ Section Styling */
 .section-faq {
-    background: var(--card-bg, #f5f5f5);
+    background: var(--card-bg, #f5f5f5); /* Use card background for the whole FAQ section */
     padding: 60px 20px;
     margin-top: 40px;
 }
 
 .faq-item {
-    background: var(--bg);
+    background: var(--bg); /* Use main background for individual FAQ items */
     border: 1px solid var(--border-color, rgba(0,0,0,0.1));
     border-radius: 8px;
     padding: 20px;
@@ -569,49 +531,73 @@ body.dark .faq-item {
     box-shadow: 0 2px 4px rgba(255,255,255,0.05);
 }
 
-/* New: Left-side visual panel for desktop (NO CHANGE TO THESE) */
+/* New: Left-side visual panel for desktop */
 .geo-section-visual {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    display: none;
-    min-height: 300px;
+    display: none; /* Hidden by default on mobile */
+    min-height: 300px; /* Default height, can be adjusted by content on desktop */
 }
 
-/* CTA container for multiple buttons (NO CHANGE TO THESE) */
+/* CTA container for multiple buttons */
 .cta-container {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
     justify-content: center;
-    gap: 20px;
+    gap: 20px; /* Space between buttons */
     margin-top: 30px;
 }
 
-/* --- MEDIA QUERIES --- */
+/* MEDIA QUERIES */
 
 /* MOBILE Specific Styles (max-width: 768px) */
 @media (max-width: 768px) {
   .hero {
-    padding-top: 80px;
+    /* Mobile font sizes for hero */
+    padding-top: 80px; /* Adjusted for smaller header on mobile */
   }
   
+  /* Mobile font sizes for all hero H1s and Ps */
   .hero h1,
   .hero-subpage h1 {
-    font-size: 2em;
+    font-size: 2em; /* Mobile font size for all hero H1s */
   }
   .hero p,
   .hero-subpage p {
-    font-size: 1em;
+    font-size: 1em; /* Mobile font size for all hero Ps */
   }
 
-  /* --- Show hamburger icon on mobile --- */
+  /* Hide desktop nav and show hamburger controls */
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 70%;
+    height: 100vh;
+    background: var(--header-bg);
+    padding-top: 80px;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%);
+    overflow-y: auto;
+  }
+
+  .nav-links.open {
+    transform: translateX(0);
+    display: flex;
+  }
+
+  /* Show hamburger/close icons on mobile */
   .hamburger-menu {
     display: block;
   }
+  .hamburger-close {
+    display: none;
+  }
 
-  /* The .nav-links styles defined globally handle the core mobile menu behavior
-     (off-canvas, fixed position, transforms). */
-  
   /* Mobile Nav Links Styling (flush left) */
   .nav-links a, .nav-links .dropdown-toggle {
     padding: 15px 20px;
@@ -625,11 +611,10 @@ body.dark .faq-item {
 
   /* Mobile Dark Mode Toggle button positioning */
   .header-right-controls .toggle-mode-btn {
-    display: block; /* Show the header toggle on mobile */
+    display: block;
   }
   .nav-links .toggle-mode-btn {
-    display: block; /* Ensure it's visible when the nav-links is open */
-    margin: 15px 20px; /* Add some margin within the menu */
+    display: none;
   }
 
   /* Dropdown content for mobile */
@@ -639,7 +624,7 @@ body.dark .faq-item {
     border: none;
     box-shadow: none;
     padding-left: 20px;
-    display: none; /* Managed by JS for dropdown toggle */
+    display: none;
   }
 
   .dropdown-content a {
@@ -647,22 +632,22 @@ body.dark .faq-item {
   }
 
   .dropdown.open .dropdown-content {
-    display: flex; /* Show dropdown content when parent dropdown is open */
+    display: flex;
   }
 
   /* Mobile specific ordering for ALL sections: Image, then Text, then CTA */
   .section {
-    flex-direction: column;
-    text-align: center;
+    flex-direction: column; /* Stacks vertically */
+    text-align: center; /* Center text on mobile */
   }
   .section-content {
-      text-align: left;
+      text-align: left; /* Keep content text left-aligned for readability */
   }
   .section-content h2 {
-      text-align: center;
+      text-align: center; /* Ensure headings are centered */
   }
   .section-content ul, .numbered-list {
-      text-align: left;
+      text-align: left; /* Keep list items left-aligned */
   }
 
   /* Mobile specific text sizes */
@@ -673,83 +658,94 @@ body.dark .faq-item {
   .faq-item h3 { font-size: 1.2rem; }
   .faq-item p { font-size: 0.95rem; }
 
- /* Mobile CTA Button Enhancements */
+ /* Mobile CTA Button Enhancements (Refined for better mobile responsiveness) */
 .cta-button {
-    padding: 12px 20px;
-    font-size: 1rem;
-    display: block;
-    width: 100%;
-    max-width: 320px;
-    margin-left: auto;
-    margin-right: auto;
-    box-sizing: border-box;
+    /* General mobile styling for all CTA buttons */
+    padding: 12px 20px; /* Reduced horizontal padding for better fit on small screens */
+    font-size: 1rem; /* Standard mobile font size */
+    display: block; /* Make the button a block element so it takes full width */
+    width: 100%; /* Ensure it always tries to take 100% of its direct parent's available space */
+    max-width: 320px; /* A reasonable maximum width for a single button on mobile. Adjust if needed. */
+    margin-left: auto; /* Center the block button horizontally */
+    margin-right: auto; /* Center the block button horizontally */
+    box-sizing: border-box; /* Ensures padding/border are included in the 100% width calculation */
 }
 
 .cta-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    display: flex; /* Keep flex for potential multiple buttons */
+    flex-direction: column; /* Stack buttons vertically if there are multiple */
+    gap: 15px; /* Space between stacked buttons */
     margin-top: 25px;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 320px;
-    margin-left: auto;
+    justify-content: center; /* Center the stacked buttons within the container */
+    align-items: center; /* Center each individual button (which is already 100% width) */
+    width: 100%; /* Ensure the container itself takes full width */
+    max-width: 320px; /* Match max-width of button for consistency if single button */
+    margin-left: auto; /* Center the container itself */
     margin-right: auto;
 }
 
-/* Ensure all resource feature blocks stack with image first, then content */
+/* Ensure the specific resource block containers also behave well on mobile */
+/* These rules are already in your provided CSS but are crucial for the fix */
 .resource-feature-block {
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px 15px;
-    width: auto;
-    max-width: 100%;
-    margin-left: 0;
+    flex-direction: column; /* Stacks content vertically */
+    gap: 20px; /* Reduced gap when stacked */
+    padding: 20px 15px; /* Adjusted padding: 20px top/bottom, 15px left/right */
+    width: auto; /* Allow it to adapt naturally to its parent's width */
+    max-width: 100%; /* Ensure it never overflows its parent */
+    margin-left: 0; /* Remove any horizontal margins */
     margin-right: 0;
 }
+/* Inside your @media (max-width: 768px) block */
+
+/* Ensure all resource feature blocks stack with image first, then content */
 .resource-feature-block .resource-image {
-    order: 1;
+    order: 1; /* Make the image container appear first */
 }
+
 .resource-feature-block .resource-content {
-    order: 2;
+    order: 2; /* Make the content container appear second */
 }
+
+/* You might also want to ensure the .cta-container is ordered last within the content if it's not already */
 .resource-feature-block .resource-content .cta-container {
-    order: 3;
+    order: 3; /* This ensures the CTA button always comes after the text content */
 }
+
 .resource-feature-block .resource-content {
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
+    width: 100%; /* Take full width of the padded parent block */
+    padding-left: 0; /* Remove any inherited/default horizontal padding */
+    padding-right: 0; /* Remove any inherited/default horizontal padding */
 }
+
+/* Center the CTA container's content on mobile within the resource block */
 .resource-feature-block .cta-container {
     text-align: center;
 }
 
   /* Show image in its own block on mobile for the reverse section */
   .geo-section-visual {
-      display: block;
-      width: 100%;
-      height: 200px;
-      margin-bottom: 30px;
-      background-size: contain;
-      background-position: center;
-      background-repeat: no-repeat;
+      display: block; /* Make it visible on mobile */
+      width: 100%; /* Take full width on mobile */
+      height: 200px; /* Give it a specific height for the background image */
+      margin-bottom: 30px; /* Space below the image */
+      background-size: contain; /* Adjust to 'contain' or 'cover' as desired for mobile */
+      background-position: center; /* Centers the image */
+      background-repeat: no-repeat; /* Ensure it doesn't repeat */
   }
   /* Ensure images in reversed sections appear first on mobile */
   .section.reverse {
-      flex-direction: column;
+      flex-direction: column; /* Revert to column for mobile */
   }
   .section.reverse .geo-section-visual {
-      order: 1;
+      order: 1; /* Image first */
   }
   .section.reverse .section-content {
-      order: 2;
+      order: 2; /* Content second */
   }
 
   .hero-subpage {
-    min-height: 250px;
-    padding-top: 80px;
+    min-height: 250px; /* Even shorter on mobile */
+    padding-top: 80px; /* Adjust for mobile header */
   }
 }
 
@@ -759,34 +755,31 @@ body.dark .faq-item {
     justify-content: space-between;
   }
 
-  /* --- Hide hamburger icons on desktop --- */
   .hamburger-menu, .hamburger-close {
     display: none !important;
   }
 
-  /* --- Desktop navigation links --- */
   .nav-links {
-    display: flex !important; /* Force flex for desktop navigation */
-    flex-direction: row; /* Horizontal layout for desktop */
-    position: static; /* No fixed positioning on desktop */
-    height: auto; /* Auto height */
-    width: auto; /* Auto width */
+    display: flex !important;
+    flex-direction: row;
+    position: static;
+    height: auto;
+    width: auto;
     padding: 0;
     background: none;
     box-shadow: none;
-    transform: translateX(0) !important; /* Ensure no transform (menu is always in view) */
-    visibility: visible !important; /* Always visible on desktop */
-    flex-grow: 1; /* Allows it to take available space */
-    justify-content: flex-end; /* Pushes nav items and desktop toggle to the right */
-    gap: 16px; /* Space between desktop nav items */
+    transform: translateX(0);
+    flex-grow: 1;
+    justify-content: flex-end; /* Pushes nav items and toggle to the right */
+    gap: 16px;
   }
 
-  /* Desktop Dark Mode Toggle visibility */
+  /* Desktop Dark Mode Toggle within nav */
   .header-right-controls .toggle-mode-btn {
-    display: none; /* Hide the smaller header toggle */
+    display: none;
   }
   .nav-links .toggle-mode-btn {
-    display: block; /* Show the larger nav toggle */
+    display: block;
   }
 
   /* Desktop dropdown hover */
@@ -819,48 +812,51 @@ body.dark .faq-item {
   }
 
   /* Desktop specific sections and image alignments */
+  /* Common styling for content within sections */
   .section-content {
-      width: 50%;
-      order: unset;
-      margin: 0;
+      width: 50%; /* Content takes half width */
+      order: unset; /* Reset order for desktop */
+      margin: 0; /* Remove auto margin */
   }
-  .section.reverse .section-content {
+  .section.reverse .section-content { /* For reverse, content is on right */
       order: 2;
   }
 
   .geo-section-visual {
-      display: block;
-      width: 50%;
-      min-height: 300px;
-      order: 1;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      display: block; /* Show on desktop */
+      width: 50%; /* Visual takes half width */
+      min-height: 300px; /* Ensure desktop visual has height */
+      order: 1; /* Visual on left for reverse section on desktop */
+      background-size: cover; /* Image scales to cover container */
+      background-position: center; /* Centers the image */
+      background-repeat: no-repeat; /* Ensures no tiling */
   }
 
   .section-left-aligned {
-      justify-content: flex-start;
-      padding-left: 5%;
-      padding-right: 5%;
+      /* Override centering for this specific section on desktop */
+      justify-content: flex-start; /* Aligns content to the left */
+      padding-left: 5%; /* Optional: Add some padding for a visual "indent" */
+      padding-right: 5%; /* Optional: Keep some padding on the right as well */
   }
 
   .section-left-aligned .section-content {
-      width: 95%;
-      max-width: 1200px;
-      margin: 0;
+      /* Adjust width for the content if necessary to prevent it from being too wide */
+      width: 95%; /* You might want it wider if there's no image */
+      max-width: 1200px; /* Or a specific max-width for readability */
+      margin: 0; /* Ensure no auto margins are centering it */
   }
 }
 
 /* Form styling */
 .hero-subpage form {
-  background: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.85); /* Light mode form bg */
   padding: 20px; border-radius: 8px;
   display: flex; flex-direction: column; gap: 12px;
   max-width: 320px; width: 100%;
 }
 
 body.dark .hero-subpage form {
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.5); /* Dark mode form bg */
 }
 
 /* Form specific styles */
@@ -873,7 +869,7 @@ form {
   gap: 12px;
   max-width: 320px;
   width: 100%;
-  position: relative;
+  position: relative; /* Ensure form is above hero image content */
   z-index: 1;
 }
 
@@ -889,9 +885,9 @@ input[type="url"] {
   border: none;
   border-radius: 4px;
   font-size: 1rem;
-  color: var(--text);
-  background: var(--bg);
-  border: 1px solid var(--border-color, #ccc);
+  color: var(--text); /* Ensures text color changes with theme */
+  background: var(--bg); /* Ensures input background changes with theme */
+  border: 1px solid var(--border-color, #ccc); /* Add a subtle border */
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 input[type="text"]:focus,
@@ -927,58 +923,59 @@ button[type="submit"]:hover {
 
 /* Variables for the new resource blocks */
 :root {
-    --resource-block-bg: #f9f9f9;
+    --resource-block-bg: #f9f9f9; /* Light grey for light mode */
     --resource-block-shadow: rgba(0,0,0,0.08);
 }
 body.dark {
-    --resource-block-bg: #1e0730;
+    --resource-block-bg: #1e0730; /* Darker purple for dark mode */
     --resource-block-shadow: rgba(0,0,0,0.4);
 }
 
 .resource-feature-block {
-    display: flex;
-    align-items: stretch;
-    gap: 40px;
-    margin-bottom: 60px;
-    padding: 30px;
+    display: flex; /* Use flexbox for two columns */
+    align-items: stretch; /* CRUCIAL: Makes flex items stretch to match the height of the tallest sibling */
+    gap: 40px; /* Space between text and image columns */
+    margin-bottom: 60px; /* Space between each feature block */
+    padding: 30px; /* Padding inside the block */
     border-radius: 12px;
-    background-color: var(--resource-block-bg);
-    box-shadow: 0 5px 15px var(--resource-block-shadow);
+    background-color: var(--resource-block-bg); /* Block background color */
+    box-shadow: 0 5px 15px var(--resource-block-shadow); /* Block shadow */
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .resource-feature-block .resource-content,
 .resource-feature-block .resource-image {
-    flex: 1;
-    min-width: 0;
+    flex: 1; /* Both columns take equal width */
+    min-width: 0; /* Prevents content from causing overflow */
+    /* No explicit height here, they will stretch naturally as flex items */
 }
 
 .resource-feature-block .resource-image {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; /* Make the image container itself a flex container */
+    align-items: center; /* Center the image vertically if it doesn't quite fill */
+    justify-content: center; /* Center the image horizontally if it doesn't quite fill */
 }
 
 .resource-feature-block .resource-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Image fills its container horizontally */
+    height: 100%; /* Image fills its container vertically */
+    object-fit: cover; /* CRUCIAL: Image covers its container, cropping if necessary, maintaining aspect ratio */
+    display: block; /* Removes extra space below image */
+    border-radius: 8px; /* Rounded corners for images */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow on images */
 }
 
 /* Specific ordering for alternating layout (Image Left, Text Right) */
 .resource-feature-block.image-left-text-right {
-    flex-direction: row-reverse;
+    flex-direction: row-reverse; /* Swaps the visual order of columns */
 }
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
     .resource-feature-block {
-        flex-direction: column;
-        gap: 20px;
-        padding: 20px;
+        flex-direction: column; /* Stack columns vertically on small screens */
+        gap: 20px; /* Smaller gap when stacked */
+        padding: 20px; /* Adjust padding for smaller screens */
     }
 
     /* Ensure the stacking order is consistent regardless of initial desktop order */
@@ -989,8 +986,8 @@ body.dark {
 
 /* --- Styling for Content within Resource Feature Blocks --- */
 .resource-feature-block .resource-content h3 {
-    color: var(--header-text);
-    font-size: 1.8rem;
+    color: var(--header-text); /* Uses theme's header text color */
+    font-size: 1.8rem; /* Slightly larger heading for feature blocks */
     margin-top: 0;
     margin-bottom: 15px;
     display: flex;
@@ -998,30 +995,30 @@ body.dark {
 }
 
 .resource-feature-block .resource-content p {
-    color: var(--text);
+    color: var(--text); /* Uses theme's main text color */
     line-height: 1.6;
     margin-bottom: 10px;
 }
 
 .resource-feature-block .resource-content ul {
-    list-style: none;
+    list-style: none; /* Remove default bullets */
     padding: 0;
     margin-bottom: 20px;
 }
 
 .resource-feature-block .resource-content ul li {
     position: relative;
-    padding-left: 30px;
+    padding-left: 30px; /* Space for custom bullet/icon */
     margin-bottom: 10px;
     color: var(--text);
     line-height: 1.5;
 }
 
 .resource-feature-block .resource-content ul li::before {
-    content: '✨';
+    content: '✨'; /* Using a sparkle emoji as a bullet */
     position: absolute;
     left: 0;
-    color: var(--accent);
+    color: var(--accent); /* Uses theme's accent color for the bullet */
     font-size: 1.2em;
 }
 
