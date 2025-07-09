@@ -13,7 +13,28 @@
   --dropdown-hover-bg-light: #f0f0f0;
   --footer-bg-light: #f8f8f8;
   --footer-text-light: #555;
+/* Add this at the very top of your style.css or within your root-level CSS */
+html, body {
+  /* Keep your existing rules here first */
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  margin: 0;
 
+  /* NEW AGGRESSIVE OVERRIDES */
+  width: 100vw !important; /* Force to viewport width, overriding anything else */
+  min-width: 100vw !important; /* Ensure it never shrinks below viewport width */
+}
+
+/* Ensure your header also strictly adheres */
+header {
+  /* Keep existing rules */
+  width: 100%;
+  box-sizing: border-box;
+
+  /* NEW AGGRESSIVE OVERRIDE */
+  width: 100vw !important; /* Force header to viewport width */
+}
 
 /* style.css */
 
