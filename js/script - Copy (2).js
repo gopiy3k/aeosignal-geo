@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.getElementById('navLinks');
     const toggleBtnHeader = document.getElementById('toggleModeBtnHeader'); // Button in header-right-controls
     const toggleBtnNav = document.getElementById('toggleModeBtnNav');     // Button inside nav-links
-    
+
     // Helper to check if it's a mobile view
     const isMobileView = () => window.innerWidth <= 768;
 
@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
         navLinks.classList.add('open');
         if (hamburgerMenu) hamburgerMenu.style.display = 'none';
         if (hamburgerClose) hamburgerClose.style.display = 'block';
-        document.body.style.overflow = 'hidden';
+         // CRITICAL CHANGE: Apply overflow hidden to HTML, not BODY
+        document.documentElement.style.overflow = 'hidden'; // Prevents scrolling on the root
         if (hamburgerMenu) hamburgerMenu.setAttribute('aria-expanded', 'true');
         if (hamburgerClose) hamburgerClose.setAttribute('aria-expanded', 'true');
     }
@@ -24,8 +25,9 @@ document.addEventListener('DOMContentLoaded', function() {
         navLinks.classList.remove('open');
         if (hamburgerMenu) hamburgerMenu.style.display = 'block';
         if (hamburgerClose) hamburgerClose.style.display = 'none';
-        document.body.style.overflow = '';
-        document.querySelectorAll('.dropdown.open').forEach(d => {
+ // CRITICAL CHANGE: Remove overflow hidden from HTML
+        document.documentElement.style.overflow = ''; // Allow scrolling on the root
+               document.querySelectorAll('.dropdown.open').forEach(d => {
             d.classList.remove('open');
             const dropdownToggle = d.querySelector('.dropdown-toggle');
             if (dropdownToggle) dropdownToggle.setAttribute('aria-expanded', 'false');
@@ -52,10 +54,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        updateImages(); // Ensure all images are swapped (including backgrounds now)
+        updateImages(); // Ensure all images are swapped
     }
 
-    // Update Images (Logo, Section Images, and BACKGROUND IMAGES) Based on Mode
+    // Update Images (Logo and Section Images) Based on Mode
     function updateImages() {
         const isDark = document.body.classList.contains('dark');
 
@@ -66,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
             logo.alt = isDark ? 'Aeosignal.Space Logo Dark Mode' : 'Aeosignal.Space Logo Light Mode';
         }
 
-        // Update regular section images (e.g., why-geo-img, what-img etc.)
+        // Update regular section images (KEEP THIS BLOCK as it handles other images)
         const sectionImages = [
             { id: 'why-geo-img', light: '/images/why-geo-light.webp', dark: '/images/why-geo-dark.webp', altLight: 'Illustration showing AI concepts for GEO (Light Mode)', altDark: 'Illustration showing AI concepts for GEO (Dark Mode)' },
             { id: 'what-img', light: '/images/what-we-do-light.webp', dark: '/images/what-we-do-dark.webp', altLight: 'Illustration of services offered for GEO (Light Mode)', altDark: 'Illustration of services offered for GEO (Dark Mode)' },
@@ -82,20 +84,26 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // --- IMPORTANT: Logic for BACKGROUND IMAGES (using style.backgroundImage) ---
-        // Update hero section background image for 'what-is-geo' page
-        const geoHeroSection = document.getElementById('geo-hero-section');
-        if (geoHeroSection) {
-            geoHeroSection.style.backgroundImage = `url('${isDark ? '/images/geo-hero-dark.webp' : '/images/geo-hero-light.webp'}')`;
-        }
+        // --- NEW/UPDATED LOGIC FOR BACKGROUND IMAGES ---
 
-        // Update background image for the 'geo-section-visual' div (if it exists)
+   // --- NEW: Handle all elements with data-light-bg/data-dark-bg attributes ---
+document.querySelectorAll('[data-light-bg][data-dark-bg]').forEach(element => {
+    const lightBg = element.getAttribute('data-light-bg');
+    const darkBg = element.getAttribute('data-dark-bg');
+    if (lightBg && darkBg) {
+        element.style.backgroundImage = `url('${isDark ? darkBg : lightBg}')`;
+    }
+});
+// 
+
+        // Update background image for the 'geo-section-visual' div
         const geoSectionVisual = document.getElementById('geo-section-visual');
         if (geoSectionVisual) {
             geoSectionVisual.style.backgroundImage = `url('${isDark ? '/images/what-is-geo-dark.webp' : '/images/what-is-geo-light.webp'}')`;
         }
 
-        // Generic hero background (if used on other pages without specific ID like audit or geo)
+        // Also ensure the generic hero background updates if it uses a dynamic image
+        // This targets any .hero that is NOT the audit page hero or the geo page hero.
         const genericHero = document.querySelector('.hero:not(#audit):not(#geo-hero-section)');
         if (genericHero) {
             genericHero.style.backgroundImage = `url('${isDark ? '/images/hero-dark.webp' : '/images/hero-light.webp'}')`;
@@ -106,6 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (auditHero) {
             auditHero.style.backgroundImage = `url('${isDark ? '/images/hero-audit-dark.webp' : '/images/hero-audit-light.webp'}')`;
         }
+        // --- END NEW/UPDATED LOGIC ---
     }
 
     // Initialize Dark Mode Preference on Page Load
@@ -123,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 btnNav.setAttribute('aria-label', 'Switch to Light Mode');
             }
         }
-        updateImages(); // Call updateImages on initial load to set correct images and backgrounds
+        updateImages(); // Call updateImages on initial load to set correct images
     }
 
     // Event Listeners
@@ -139,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const isClickOnClose = hamburgerClose && hamburgerClose.contains(event.target);
         const isClickOnToggleHeader = toggleBtnHeader && toggleBtnHeader.contains(event.target);
         const isClickOnToggleNav = toggleBtnNav && toggleBtnNav.contains(event.target);
+
 
         if (navLinks && navLinks.classList.contains('open') &&
             !isClickInsideNav && !isClickOnHamburger && !isClickOnClose &&
@@ -199,4 +209,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Run initialization
     initializeMode();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const body = document.body;
+    const themeAwareImages = document.querySelectorAll('.theme-aware-image');
+
+    // Function to update image sources based on current theme
+    function updateThemeImages() {
+        const isDarkMode = body.classList.contains('dark');
+        themeAwareImages.forEach(img => {
+            if (isDarkMode) {
+                img.src = img.dataset.srcDark;
+            } else {
+                img.src = img.dataset.srcLight;
+            }
+        });
+    }
+
+    // Initial update when the page loads
+    updateThemeImages();
+
+    // Observe changes to the body's class list
+    // This is useful if your theme toggle adds/removes the 'dark' class
+    const observer = new MutationObserver((mutationsList) => {
+        for (const mutation of mutationsList) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                updateThemeImages();
+            }
+        }
+    });
+
+    // Start observing the body for attribute changes
+    observer.observe(body, { attributes: true });
 });
