@@ -272,7 +272,7 @@ body.dark section#geo-hero-section.hero {
 }
 
 .section img {
-  max-width: 320px;
+
   width: 100%;
   height: auto;
   border-radius: 8px;
@@ -696,7 +696,7 @@ body.dark .faq-item {
     font-size: 1rem; /* Standard mobile font size */
     display: block; /* Make the button a block element so it takes full width */
     width: 100%; /* Ensure it always tries to take 100% of its direct parent's available space */
-    max-width: 320px; /* A reasonable maximum width for a single button on mobile. Adjust if needed. */
+   
     margin-left: auto; /* Center the block button horizontally */
     margin-right: auto; /* Center the block button horizontally */
     box-sizing: border-box; /* Ensures padding/border are included in the 100% width calculation */
@@ -710,7 +710,7 @@ body.dark .faq-item {
     justify-content: center; /* Center the stacked buttons within the container */
     align-items: center; /* Center each individual button (which is already 100% width) */
     width: 100%; /* Ensure the container itself takes full width */
-    max-width: 320px; /* Match max-width of button for consistency if single button */
+   
     margin-left: auto; /* Center the container itself */
     margin-right: auto;
 }
@@ -883,7 +883,7 @@ body.dark .faq-item {
   background: rgba(255,255,255,0.85); /* Light mode form bg */
   padding: 20px; border-radius: 8px;
   display: flex; flex-direction: column; gap: 12px;
-  max-width: 320px; width: 100%;
+   width: 100%;
 }
 
 body.dark .hero-subpage form {
@@ -898,7 +898,6 @@ form {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-width: 320px;
   width: 100%;
   position: relative; /* Ensure form is above hero image content */
   z-index: 1;
