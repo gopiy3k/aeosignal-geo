@@ -23,10 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Call on initial load
     setFullWidthForBodyAndHtml();
 
-    // Also call on window resize (e.g., orientation change)
-    // This is already handled by your existing resize listener for menu cleanups
-    // window.addEventListener('resize', setFullWidthForBodyAndHtml); // No need to add a duplicate listener
-
     // --- Workaround for Android/Redmi width issue (END) ---
 
     // Open Menu
@@ -59,20 +55,27 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.toggle('dark');
         const isDark = document.body.classList.contains('dark');
 
-        const btnText = isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+        // Define content for the desktop (text) button
+        const desktopBtnText = isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode';
 
-        // Update both toggle buttons' text and aria-label
-        if (toggleBtnHeader) {
-            toggleBtnHeader.textContent = btnText;
-            toggleBtnHeader.setAttribute('aria-label', btnText);
-        }
+        // Define content for the mobile (icon) button
+        const mobileIconHtml = '<i class="fas fa-adjust"></i>'; // Your Font Awesome icon HTML
+
+        // Update the desktop toggle button (toggleBtnNav)
         if (toggleBtnNav) {
-            toggleBtnNav.textContent = btnText;
-            toggleBtnNav.setAttribute('aria-label', btnText);
+            toggleBtnNav.textContent = desktopBtnText; // Keeps text for desktop button
+            toggleBtnNav.setAttribute('aria-label', desktopBtnText);
+        }
+
+        // Update the mobile toggle button (toggleBtnHeader)
+        if (toggleBtnHeader) {
+            toggleBtnHeader.innerHTML = mobileIconHtml; // Uses innerHTML for the icon
+            // Use a descriptive aria-label for accessibility, even with an icon
+            toggleBtnHeader.setAttribute('aria-label', desktopBtnText);
         }
 
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        updateImages(); // Ensure all images are swapped
+        updateImages();
     }
 
     // Update Images (Logo and Section Images) Based on Mode
@@ -137,19 +140,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize Dark Mode Preference on Page Load
     function initializeMode() {
-        if (localStorage.getItem('theme') === 'dark') {
+        const isDark = localStorage.getItem('theme') === 'dark';
+
+        if (isDark) {
             document.body.classList.add('dark');
-            const btnHeader = document.getElementById('toggleModeBtnHeader');
-            const btnNav = document.getElementById('toggleModeBtnNav');
-            if (btnHeader) {
-                btnHeader.textContent = 'Switch to Light Mode';
-                btnHeader.setAttribute('aria-label', 'Switch to Light Mode');
-            }
-            if (btnNav) {
-                btnNav.textContent = 'Switch to Light Mode';
-                btnNav.setAttribute('aria-label', 'Switch to Light Mode');
-            }
         }
+
+        const btnHeader = document.getElementById('toggleModeBtnHeader');
+        const btnNav = document.getElementById('toggleModeBtnNav');
+
+        const desktopBtnInitialText = isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+        const mobileIconInitialHtml = '<i class="fas fa-adjust"></i>'; // The icon
+
+        if (btnHeader) {
+            btnHeader.innerHTML = mobileIconInitialHtml; // Sets the icon for mobile button
+            btnHeader.setAttribute('aria-label', desktopBtnInitialText);
+        }
+        if (btnNav) {
+            btnNav.textContent = desktopBtnInitialText; // Sets the text for desktop button
+            btnNav.setAttribute('aria-label', desktopBtnInitialText);
+        }
+
         updateImages(); // Call updateImages on initial load to set correct images
     }
 
