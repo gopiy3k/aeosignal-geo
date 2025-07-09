@@ -27,7 +27,7 @@ html, body {
 
 /* HEADER - Explicitly set width to 100% and use box-sizing */
 header {
-  position: fixed; top: 0; left: 0; right: 0;
+   top: 0; left: 0; right: 0;
   display: flex; justify-content: space-between; align-items: center;
   padding: 10px 20px; /* Your existing padding */
   background: var(--header-bg);
@@ -81,7 +81,7 @@ body {
 
 /* HEADER */
 header {
-  position: fixed; top: 0; left: 0; right: 0;
+  top: 0; left: 0; right: 0;
   display: flex; justify-content: space-between; align-items: center;
   padding: 10px 20px;
   background: var(--header-bg);
