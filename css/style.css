@@ -13,8 +13,6 @@
   --dropdown-hover-bg-light: #f0f0f0;
   --footer-bg-light: #f8f8f8;
   --footer-text-light: #555;
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 
   /* Hero Specific Variables (These variables are now overridden by specific hero styles) */
   --hero-heading: #007bff; /* Vibrant Blue */
@@ -136,16 +134,13 @@ nav a:hover, nav .dropdown-toggle:hover { color: var(--accent-hover); }
 body.dark .dropdown-content a:hover { background: var(--dropdown-hover-bg-dark); }
 
 /* Hamburger Menu icons */
+.hamburger-menu,
 .hamburger-close {
-    display: none;
-    font-size: 1.8rem;
-    width: 40px;   /* ensure touch target */
-    height: 40px;  /* ensure touch target */
-    line-height: 40px; /* vertically align icon */
-    text-align: center; /* center icon horizontally */
-    cursor: pointer;
-    color: var(--accent);
-    z-index: 1001;
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--accent);
+  z-index: 1001;
 }
 
 .hamburger-close {
