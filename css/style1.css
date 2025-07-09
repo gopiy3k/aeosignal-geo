@@ -43,16 +43,22 @@ body.dark {
   --text-on-dark: #ffffff; /* Text color for hero content when background is dark (e.g., image) */
 }
 
+/* --- GLOBAL BODY AND HTML STYLES --- */
+html, body {
+  width: 100%;
+  min-width: 320px; /* Ensures a minimum width for mobile devices */
+  overflow-x: hidden; /* CRITICAL: Prevents horizontal scroll for off-canvas menus */
+}
+
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
-  overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* HEADER */
+/* --- HEADER --- */
 header {
   position: fixed; top: 0; left: 0; right: 0;
   display: flex; justify-content: space-between; align-items: center;
@@ -71,13 +77,62 @@ header img { max-height: 65px; width: auto; max-width: 180px; transition: opacit
   gap: 15px;
 }
 
-/* NAVIGATION LINKS */
+/* --- NEW/UPDATED MOBILE MENU NAVIGATION LINKS --- */
+/* These styles apply universally, setting up the off-canvas behavior.
+   They will be overridden by desktop media queries for larger screens. */
 .nav-links {
-  display: none; /* Hidden by default (for mobile) */
-  gap: 16px;
-  align-items: center;
+  position: fixed; /* Fixed to the viewport */
+  top: 0;
+  right: 0;        /* Anchor to the right edge of the viewport */
+  width: 70vw;     /* Take up 70% of the viewport width */
+  height: 100vh;   /* Take up 100% of the viewport height */
+  
+  /* Initial state: off-screen to the right and completely invisible */
+  transform: translateX(100%); /* Pushes the menu fully off-screen to the right */
+  visibility: hidden;           /* Hides the element entirely, but it still occupies space */
+  
+  /* Transitions for smooth animation */
+  /* Transition transform, and make visibility change AFTER transform completes (0.3s delay) */
+  transition: transform 0.3s ease-in-out, visibility 0s linear 0.3s; 
+  
+  display: flex; /* Always display as flex (for internal layout), but JS controls when it's seen */
+  flex-direction: column; /* Stack links vertically */
+  background: var(--header-bg); /* Use your theme variable for background */
+  padding-top: 80px; /* Space for your fixed header */
+  box-shadow: -2px 0 10px rgba(0,0,0,0.3); /* Add a clear shadow */
+  overflow-y: auto; /* Allow internal scrolling if menu content overflows */
+  z-index: 1050; /* Ensure it's above main content and the header */
+  -webkit-overflow-scrolling: touch; /* Improves scrolling performance on iOS */
 }
 
+/* --- Mobile Menu Open State --- */
+.nav-links.open {
+  transform: translateX(0); /* Slide the menu into view */
+  visibility: visible;      /* Make it visible immediately */
+  /* Transition transform, and make visibility change IMMEDIATELY (0s delay) */
+  transition: transform 0.3s ease-in-out, visibility 0s linear 0s; 
+}
+
+/* --- NEW/UPDATED HAMBURGER ICONS --- */
+/* Default state (hidden, as they are for desktop) */
+.hamburger-menu,
+.hamburger-close {
+  display: none; /* Hide by default */
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--accent); /* Use your theme accent color */
+  z-index: 1060; /* Ensure icons are above the menu and header */
+  position: fixed; /* Making them fixed directly to the viewport */
+  top: 15px; /* Adjust top/right positioning as needed for your header */
+  right: 20px;
+}
+/* Ensure the close icon is initially hidden by default, JS will toggle its display */
+.hamburger-close {
+    display: none;
+}
+
+
+/* NAVIGATION LINKS (GENERAL STYLES) */
 nav a, nav .dropdown-toggle {
   color: var(--accent); background: none; border: none;
   font-weight: 600; cursor: pointer; text-decoration: none;
@@ -113,15 +168,26 @@ nav a:hover, nav .dropdown-toggle:hover { color: var(--accent-hover); }
 
 /* DROPDOWNS */
 .dropdown { position: relative; }
+
+/* UPDATED: Global Dropdown Content Styling for smooth transitions */
 .dropdown-content {
-  display: none; position: absolute; top: 100%; left: 0;
+  position: absolute; top: 100%; left: 0; /* Position below the dropdown toggle */
   background: var(--bg);
   border: 1px solid var(--border-color);
   border-radius: 6px;
-  flex-direction: column; min-width: 160px; z-index: 9999;
+  flex-direction: column; 
+  min-width: 160px; 
+  z-index: 9999;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+  
+  /* Start hidden with visibility and opacity for smooth fade/slide */
+  visibility: hidden; 
+  opacity: 0;
+  /* Using 'flex' by default, but it's hidden by visibility/opacity */
+  display: flex; 
 }
+
 
 .dropdown-content a {
   padding: 10px 15px; color: var(--text); text-decoration: none;
@@ -131,26 +197,10 @@ nav a:hover, nav .dropdown-toggle:hover { color: var(--accent-hover); }
 .dropdown-content a:hover { background: var(--dropdown-hover-bg-light); }
 body.dark .dropdown-content a:hover { background: var(--dropdown-hover-bg-dark); }
 
-/* Hamburger Menu icons */
-.hamburger-menu,
-.hamburger-close {
-  display: none;
-  font-size: 1.8rem;
-  cursor: pointer;
-  color: var(--accent);
-  z-index: 1001;
-}
-
-.hamburger-close {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-}
-
 /* HERO SECTION - Consolidated for Homepage and Subpages */
 .hero {
-  min-height: 100vh; /* Use min-height for flexibility */
-  padding: 100px 20px 40px; /* Adjusted padding to ensure content is below header */
+  min-height: 100vh;
+  padding: 100px 20px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -158,8 +208,8 @@ body.dark .dropdown-content a:hover { background: var(--dropdown-hover-bg-dark);
   text-align: center;
   position: relative;
   overflow: hidden;
-  color: var(--text-on-dark); /* Ensures text color is appropriate for hero background */
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.7); /* Adds subtle shadow for readability on images */
+  color: var(--text-on-dark);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
   background: url('/images/hero-light.webp') center/cover no-repeat;
 }
 
@@ -187,24 +237,24 @@ body.dark section#geo-hero-section.hero {
 
 /* Hero H1 and P for Homepage and all Subpages (Consistent Style) */
 .hero h1,
-.hero-subpage h1 { /* Applies to both main hero and subpage heroes */
-  font-family: 'Orbitron', sans-serif; /* Your desired font family */
-  font-weight: 700; /* Bold weight */
-  font-size: 2.8em; /* Desired size (services page size) */
+.hero-subpage h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 2.8em;
   line-height: 1.2;
   margin-bottom: 0.5em;
-  color: var(--section-heading); /* CORRECTED: Now uses --section-heading */
+  color: var(--section-heading);
 }
 
 .hero p,
-.hero-subpage p { /* Applies to both main hero and subpage heroes */
-  font-family: 'Inter', sans-serif; /* Your desired font family */
-  font-weight: 400; /* Regular weight */
-  font-size: 1.2em; /* Desired size (services page size) */
+.hero-subpage p {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 1.2em;
   line-height: 1.6;
   max-width: 700px;
   margin: 0 auto 1.5em auto;
-  color: var(--paragraph); /* CORRECTED: Now uses --paragraph */
+  color: var(--paragraph);
 }
 
 /* General .hero-subpage container styling (excluding h1/p which are now grouped above) */
@@ -212,13 +262,13 @@ body.dark section#geo-hero-section.hero {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 400px; /* Or whatever height you prefer for your hero section */
+  min-height: 400px;
   display: flex;
   align-items: center;
-  justify-content: center; /* Adjust based on where you want text */
-  color: var(--text-on-dark); /* Ensures text is readable on the image (general inheritance) */
+  justify-content: center;
+  color: var(--text-on-dark);
   text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-  padding: 80px 20px; /* Example padding */
+  padding: 80px 20px;
 }
 
 /* CTA BUTTON */
@@ -554,50 +604,26 @@ body.dark .faq-item {
 /* MOBILE Specific Styles (max-width: 768px) */
 @media (max-width: 768px) {
   .hero {
-    /* Mobile font sizes for hero */
-    padding-top: 80px; /* Adjusted for smaller header on mobile */
+    padding-top: 80px;
   }
   
-  /* Mobile font sizes for all hero H1s and Ps */
   .hero h1,
   .hero-subpage h1 {
-    font-size: 2em; /* Mobile font size for all hero H1s */
+    font-size: 2em;
   }
   .hero p,
   .hero-subpage p {
-    font-size: 1em; /* Mobile font size for all hero Ps */
+    font-size: 1em;
   }
 
-  /* Hide desktop nav and show hamburger controls */
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 70%;
-    height: 100vh;
-    background: var(--header-bg);
-    padding-top: 80px;
-    box-shadow: -2px 0 5px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease-in-out;
-    transform: translateX(100%);
-    overflow-y: auto;
-  }
-
-  .nav-links.open {
-    transform: translateX(0);
-    display: flex;
-  }
-
-  /* Show hamburger/close icons on mobile */
+  /* --- Show hamburger icon on mobile --- */
   .hamburger-menu {
     display: block;
   }
-  .hamburger-close {
-    display: none;
-  }
 
+  /* The .nav-links styles defined globally handle the core mobile menu behavior
+     (off-canvas, fixed position, transforms). */
+  
   /* Mobile Nav Links Styling (flush left) */
   .nav-links a, .nav-links .dropdown-toggle {
     padding: 15px 20px;
@@ -611,20 +637,23 @@ body.dark .faq-item {
 
   /* Mobile Dark Mode Toggle button positioning */
   .header-right-controls .toggle-mode-btn {
-    display: block;
+    display: block; /* Show the header toggle on mobile */
   }
   .nav-links .toggle-mode-btn {
-    display: none;
+    display: block; /* Ensure it's visible when the nav-links is open */
+    margin: 15px 20px; /* Add some margin within the menu */
   }
 
   /* Dropdown content for mobile */
+  /* This display is controlled by JS for mobile dropdowns (click behavior) */
   .dropdown-content {
-    position: static;
-    background: none;
-    border: none;
-    box-shadow: none;
+    position: static; /* Remove absolute positioning */
+    background: none; /* No background */
+    border: none; /* No border */
+    box-shadow: none; /* No shadow */
     padding-left: 20px;
-    display: none;
+    visibility: visible; /* Always visible if the dropdown.open class is present */
+    opacity: 1; /* Always opaque if the dropdown.open class is present */
   }
 
   .dropdown-content a {
@@ -632,22 +661,22 @@ body.dark .faq-item {
   }
 
   .dropdown.open .dropdown-content {
-    display: flex;
+    display: flex; /* Show dropdown content when parent dropdown is open */
   }
 
   /* Mobile specific ordering for ALL sections: Image, then Text, then CTA */
   .section {
-    flex-direction: column; /* Stacks vertically */
-    text-align: center; /* Center text on mobile */
+    flex-direction: column;
+    text-align: center;
   }
   .section-content {
-      text-align: left; /* Keep content text left-aligned for readability */
+      text-align: left;
   }
   .section-content h2 {
-      text-align: center; /* Ensure headings are centered */
+      text-align: center;
   }
   .section-content ul, .numbered-list {
-      text-align: left; /* Keep list items left-aligned */
+      text-align: left;
   }
 
   /* Mobile specific text sizes */
@@ -658,94 +687,83 @@ body.dark .faq-item {
   .faq-item h3 { font-size: 1.2rem; }
   .faq-item p { font-size: 0.95rem; }
 
- /* Mobile CTA Button Enhancements (Refined for better mobile responsiveness) */
+ /* Mobile CTA Button Enhancements */
 .cta-button {
-    /* General mobile styling for all CTA buttons */
-    padding: 12px 20px; /* Reduced horizontal padding for better fit on small screens */
-    font-size: 1rem; /* Standard mobile font size */
-    display: block; /* Make the button a block element so it takes full width */
-    width: 100%; /* Ensure it always tries to take 100% of its direct parent's available space */
-    max-width: 320px; /* A reasonable maximum width for a single button on mobile. Adjust if needed. */
-    margin-left: auto; /* Center the block button horizontally */
-    margin-right: auto; /* Center the block button horizontally */
-    box-sizing: border-box; /* Ensures padding/border are included in the 100% width calculation */
+    padding: 12px 20px;
+    font-size: 1rem;
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
 }
 
 .cta-container {
-    display: flex; /* Keep flex for potential multiple buttons */
-    flex-direction: column; /* Stack buttons vertically if there are multiple */
-    gap: 15px; /* Space between stacked buttons */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     margin-top: 25px;
-    justify-content: center; /* Center the stacked buttons within the container */
-    align-items: center; /* Center each individual button (which is already 100% width) */
-    width: 100%; /* Ensure the container itself takes full width */
-    max-width: 320px; /* Match max-width of button for consistency if single button */
-    margin-left: auto; /* Center the container itself */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 320px;
+    margin-left: auto;
     margin-right: auto;
 }
 
-/* Ensure the specific resource block containers also behave well on mobile */
-/* These rules are already in your provided CSS but are crucial for the fix */
+/* Ensure all resource feature blocks stack with image first, then content */
 .resource-feature-block {
-    flex-direction: column; /* Stacks content vertically */
-    gap: 20px; /* Reduced gap when stacked */
-    padding: 20px 15px; /* Adjusted padding: 20px top/bottom, 15px left/right */
-    width: auto; /* Allow it to adapt naturally to its parent's width */
-    max-width: 100%; /* Ensure it never overflows its parent */
-    margin-left: 0; /* Remove any horizontal margins */
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 15px;
+    width: auto;
+    max-width: 100%;
+    margin-left: 0;
     margin-right: 0;
 }
-/* Inside your @media (max-width: 768px) block */
-
-/* Ensure all resource feature blocks stack with image first, then content */
 .resource-feature-block .resource-image {
-    order: 1; /* Make the image container appear first */
+    order: 1;
 }
-
 .resource-feature-block .resource-content {
-    order: 2; /* Make the content container appear second */
+    order: 2;
 }
-
-/* You might also want to ensure the .cta-container is ordered last within the content if it's not already */
 .resource-feature-block .resource-content .cta-container {
-    order: 3; /* This ensures the CTA button always comes after the text content */
+    order: 3;
 }
-
 .resource-feature-block .resource-content {
-    width: 100%; /* Take full width of the padded parent block */
-    padding-left: 0; /* Remove any inherited/default horizontal padding */
-    padding-right: 0; /* Remove any inherited/default horizontal padding */
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
 }
-
-/* Center the CTA container's content on mobile within the resource block */
 .resource-feature-block .cta-container {
     text-align: center;
 }
 
   /* Show image in its own block on mobile for the reverse section */
   .geo-section-visual {
-      display: block; /* Make it visible on mobile */
-      width: 100%; /* Take full width on mobile */
-      height: 200px; /* Give it a specific height for the background image */
-      margin-bottom: 30px; /* Space below the image */
-      background-size: contain; /* Adjust to 'contain' or 'cover' as desired for mobile */
-      background-position: center; /* Centers the image */
-      background-repeat: no-repeat; /* Ensure it doesn't repeat */
+      display: block;
+      width: 100%;
+      height: 200px;
+      margin-bottom: 30px;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
   }
   /* Ensure images in reversed sections appear first on mobile */
   .section.reverse {
-      flex-direction: column; /* Revert to column for mobile */
+      flex-direction: column;
   }
   .section.reverse .geo-section-visual {
-      order: 1; /* Image first */
+      order: 1;
   }
   .section.reverse .section-content {
-      order: 2; /* Content second */
+      order: 2;
   }
 
   .hero-subpage {
-    min-height: 250px; /* Even shorter on mobile */
-    padding-top: 80px; /* Adjust for mobile header */
+    min-height: 250px;
+    padding-top: 80px;
   }
 }
 
@@ -755,35 +773,48 @@ body.dark .faq-item {
     justify-content: space-between;
   }
 
+  /* --- Hide hamburger icons on desktop --- */
   .hamburger-menu, .hamburger-close {
     display: none !important;
   }
 
+  /* --- Desktop navigation links --- */
   .nav-links {
-    display: flex !important;
-    flex-direction: row;
-    position: static;
-    height: auto;
-    width: auto;
+    display: flex !important; /* Force flex for desktop navigation */
+    flex-direction: row; /* Horizontal layout for desktop */
+    position: static; /* No fixed positioning on desktop */
+    height: auto; /* Auto height */
+    width: auto; /* Auto width */
     padding: 0;
     background: none;
     box-shadow: none;
-    transform: translateX(0);
-    flex-grow: 1;
-    justify-content: flex-end; /* Pushes nav items and toggle to the right */
-    gap: 16px;
+    transform: translateX(0) !important; /* Ensure no transform (menu is always in view) */
+    visibility: visible !important; /* Always visible on desktop */
+    flex-grow: 1; /* Allows it to take available space */
+    justify-content: flex-end; /* Pushes nav items and desktop toggle to the right */
+    gap: 16px; /* Space between desktop nav items */
   }
 
-  /* Desktop Dark Mode Toggle within nav */
+  /* Desktop Dark Mode Toggle visibility */
   .header-right-controls .toggle-mode-btn {
-    display: none;
+    display: none; /* Hide the smaller header toggle */
   }
   .nav-links .toggle-mode-btn {
-    display: block;
+    display: block; /* Show the larger nav toggle */
   }
 
-  /* Desktop dropdown hover */
-  .dropdown:hover .dropdown-content { display: flex; }
+  /* UPDATED: Desktop dropdown hover */
+  .dropdown-content {
+      /* Ensure it's hidden by default on desktop, but ready to be shown */
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none; /* Prevents interaction when hidden */
+  }
+  .dropdown:hover .dropdown-content { 
+      visibility: visible; 
+      opacity: 1; 
+      pointer-events: auto; /* Allow interaction when visible */
+  }
   .dropdown:hover .dropdown-toggle .dropdown-arrow { transform: rotate(180deg); }
 
 
@@ -812,51 +843,48 @@ body.dark .faq-item {
   }
 
   /* Desktop specific sections and image alignments */
-  /* Common styling for content within sections */
   .section-content {
-      width: 50%; /* Content takes half width */
-      order: unset; /* Reset order for desktop */
-      margin: 0; /* Remove auto margin */
+      width: 50%;
+      order: unset;
+      margin: 0;
   }
-  .section.reverse .section-content { /* For reverse, content is on right */
+  .section.reverse .section-content {
       order: 2;
   }
 
   .geo-section-visual {
-      display: block; /* Show on desktop */
-      width: 50%; /* Visual takes half width */
-      min-height: 300px; /* Ensure desktop visual has height */
-      order: 1; /* Visual on left for reverse section on desktop */
-      background-size: cover; /* Image scales to cover container */
-      background-position: center; /* Centers the image */
-      background-repeat: no-repeat; /* Ensures no tiling */
+      display: block;
+      width: 50%;
+      min-height: 300px;
+      order: 1;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
   }
 
   .section-left-aligned {
-      /* Override centering for this specific section on desktop */
-      justify-content: flex-start; /* Aligns content to the left */
-      padding-left: 5%; /* Optional: Add some padding for a visual "indent" */
-      padding-right: 5%; /* Optional: Keep some padding on the right as well */
+      justify-content: flex-start;
+      padding-left: 5%;
+      padding-right: 5%;
   }
 
   .section-left-aligned .section-content {
-      /* Adjust width for the content if necessary to prevent it from being too wide */
-      width: 95%; /* You might want it wider if there's no image */
-      max-width: 1200px; /* Or a specific max-width for readability */
-      margin: 0; /* Ensure no auto margins are centering it */
+      width: 95%;
+      max-width: 1200px;
+      margin: 0;
   }
 }
 
 /* Form styling */
 .hero-subpage form {
-  background: rgba(255,255,255,0.85); /* Light mode form bg */
+  background: rgba(255,255,255,0.85);
   padding: 20px; border-radius: 8px;
   display: flex; flex-direction: column; gap: 12px;
   max-width: 320px; width: 100%;
 }
 
 body.dark .hero-subpage form {
-  background: rgba(0,0,0,0.5); /* Dark mode form bg */
+  background: rgba(0,0,0,0.5);
 }
 
 /* Form specific styles */
@@ -869,7 +897,7 @@ form {
   gap: 12px;
   max-width: 320px;
   width: 100%;
-  position: relative; /* Ensure form is above hero image content */
+  position: relative;
   z-index: 1;
 }
 
@@ -885,9 +913,9 @@ input[type="url"] {
   border: none;
   border-radius: 4px;
   font-size: 1rem;
-  color: var(--text); /* Ensures text color changes with theme */
-  background: var(--bg); /* Ensures input background changes with theme */
-  border: 1px solid var(--border-color, #ccc); /* Add a subtle border */
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border-color, #ccc);
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 input[type="text"]:focus,
@@ -923,59 +951,58 @@ button[type="submit"]:hover {
 
 /* Variables for the new resource blocks */
 :root {
-    --resource-block-bg: #f9f9f9; /* Light grey for light mode */
+    --resource-block-bg: #f9f9f9;
     --resource-block-shadow: rgba(0,0,0,0.08);
 }
 body.dark {
-    --resource-block-bg: #1e0730; /* Darker purple for dark mode */
+    --resource-block-bg: #1e0730;
     --resource-block-shadow: rgba(0,0,0,0.4);
 }
 
 .resource-feature-block {
-    display: flex; /* Use flexbox for two columns */
-    align-items: stretch; /* CRUCIAL: Makes flex items stretch to match the height of the tallest sibling */
-    gap: 40px; /* Space between text and image columns */
-    margin-bottom: 60px; /* Space between each feature block */
-    padding: 30px; /* Padding inside the block */
+    display: flex;
+    align-items: stretch;
+    gap: 40px;
+    margin-bottom: 60px;
+    padding: 30px;
     border-radius: 12px;
-    background-color: var(--resource-block-bg); /* Block background color */
-    box-shadow: 0 5px 15px var(--resource-block-shadow); /* Block shadow */
+    background-color: var(--resource-block-bg);
+    box-shadow: 0 5px 15px var(--resource-block-shadow);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .resource-feature-block .resource-content,
 .resource-feature-block .resource-image {
-    flex: 1; /* Both columns take equal width */
-    min-width: 0; /* Prevents content from causing overflow */
-    /* No explicit height here, they will stretch naturally as flex items */
+    flex: 1;
+    min-width: 0;
 }
 
 .resource-feature-block .resource-image {
-    display: flex; /* Make the image container itself a flex container */
-    align-items: center; /* Center the image vertically if it doesn't quite fill */
-    justify-content: center; /* Center the image horizontally if it doesn't quite fill */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .resource-feature-block .resource-image img {
-    width: 100%; /* Image fills its container horizontally */
-    height: 100%; /* Image fills its container vertically */
-    object-fit: cover; /* CRUCIAL: Image covers its container, cropping if necessary, maintaining aspect ratio */
-    display: block; /* Removes extra space below image */
-    border-radius: 8px; /* Rounded corners for images */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow on images */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Specific ordering for alternating layout (Image Left, Text Right) */
 .resource-feature-block.image-left-text-right {
-    flex-direction: row-reverse; /* Swaps the visual order of columns */
+    flex-direction: row-reverse;
 }
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
     .resource-feature-block {
-        flex-direction: column; /* Stack columns vertically on small screens */
-        gap: 20px; /* Smaller gap when stacked */
-        padding: 20px; /* Adjust padding for smaller screens */
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
     }
 
     /* Ensure the stacking order is consistent regardless of initial desktop order */
@@ -986,8 +1013,8 @@ body.dark {
 
 /* --- Styling for Content within Resource Feature Blocks --- */
 .resource-feature-block .resource-content h3 {
-    color: var(--header-text); /* Uses theme's header text color */
-    font-size: 1.8rem; /* Slightly larger heading for feature blocks */
+    color: var(--header-text);
+    font-size: 1.8rem;
     margin-top: 0;
     margin-bottom: 15px;
     display: flex;
@@ -995,30 +1022,30 @@ body.dark {
 }
 
 .resource-feature-block .resource-content p {
-    color: var(--text); /* Uses theme's main text color */
+    color: var(--text);
     line-height: 1.6;
     margin-bottom: 10px;
 }
 
 .resource-feature-block .resource-content ul {
-    list-style: none; /* Remove default bullets */
+    list-style: none;
     padding: 0;
     margin-bottom: 20px;
 }
 
 .resource-feature-block .resource-content ul li {
     position: relative;
-    padding-left: 30px; /* Space for custom bullet/icon */
+    padding-left: 30px;
     margin-bottom: 10px;
     color: var(--text);
     line-height: 1.5;
 }
 
 .resource-feature-block .resource-content ul li::before {
-    content: '✨'; /* Using a sparkle emoji as a bullet */
+    content: '✨';
     position: absolute;
     left: 0;
-    color: var(--accent); /* Uses theme's accent color for the bullet */
+    color: var(--accent);
     font-size: 1.2em;
 }
 
