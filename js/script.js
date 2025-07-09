@@ -9,12 +9,31 @@ document.addEventListener('DOMContentLoaded', function() {
     // Helper to check if it's a mobile view
     const isMobileView = () => window.innerWidth <= 768;
 
+    // --- Workaround for Android/Redmi width issue (START) ---
+    function setFullWidthForBodyAndHtml() {
+        const viewportWidth = window.innerWidth;
+        // Use document.documentElement for html and document.body for body
+        document.documentElement.style.width = `${viewportWidth}px`;
+        document.body.style.width = `${viewportWidth}px`;
+
+        // Optional: Log to console for debugging on device
+        console.log(`Forced html/body width to: ${viewportWidth}px`);
+    }
+
+    // Call on initial load
+    setFullWidthForBodyAndHtml();
+
+    // Also call on window resize (e.g., orientation change)
+    // This is already handled by your existing resize listener for menu cleanups
+    // window.addEventListener('resize', setFullWidthForBodyAndHtml); // No need to add a duplicate listener
+
+    // --- Workaround for Android/Redmi width issue (END) ---
+
     // Open Menu
     function openMenu() {
         navLinks.classList.add('open');
         if (hamburgerMenu) hamburgerMenu.style.display = 'none';
         if (hamburgerClose) hamburgerClose.style.display = 'block';
-         // CRITICAL CHANGE: Apply overflow hidden to HTML, not BODY
         document.documentElement.style.overflow = 'hidden'; // Prevents scrolling on the root
         if (hamburgerMenu) hamburgerMenu.setAttribute('aria-expanded', 'true');
         if (hamburgerClose) hamburgerClose.setAttribute('aria-expanded', 'true');
@@ -25,9 +44,8 @@ document.addEventListener('DOMContentLoaded', function() {
         navLinks.classList.remove('open');
         if (hamburgerMenu) hamburgerMenu.style.display = 'block';
         if (hamburgerClose) hamburgerClose.style.display = 'none';
- // CRITICAL CHANGE: Remove overflow hidden from HTML
         document.documentElement.style.overflow = ''; // Allow scrolling on the root
-               document.querySelectorAll('.dropdown.open').forEach(d => {
+        document.querySelectorAll('.dropdown.open').forEach(d => {
             d.classList.remove('open');
             const dropdownToggle = d.querySelector('.dropdown-toggle');
             if (dropdownToggle) dropdownToggle.setAttribute('aria-expanded', 'false');
@@ -86,15 +104,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // --- NEW/UPDATED LOGIC FOR BACKGROUND IMAGES ---
 
-   // --- NEW: Handle all elements with data-light-bg/data-dark-bg attributes ---
-document.querySelectorAll('[data-light-bg][data-dark-bg]').forEach(element => {
-    const lightBg = element.getAttribute('data-light-bg');
-    const darkBg = element.getAttribute('data-dark-bg');
-    if (lightBg && darkBg) {
-        element.style.backgroundImage = `url('${isDark ? darkBg : lightBg}')`;
-    }
-});
-// 
+        // Handle all elements with data-light-bg/data-dark-bg attributes
+        document.querySelectorAll('[data-light-bg][data-dark-bg]').forEach(element => {
+            const lightBg = element.getAttribute('data-light-bg');
+            const darkBg = element.getAttribute('data-dark-bg');
+            if (lightBg && darkBg) {
+                element.style.backgroundImage = `url('${isDark ? darkBg : lightBg}')`;
+            }
+        });
+        //
 
         // Update background image for the 'geo-section-visual' div
         const geoSectionVisual = document.getElementById('geo-section-visual');
@@ -198,19 +216,23 @@ document.querySelectorAll('[data-light-bg][data-dark-bg]').forEach(element => {
         });
     });
 
-    // Handle window resize cleanups
+    // Handle window resize cleanups (also implicitly handles the width workaround)
     window.addEventListener('resize', () => {
         if (!isMobileView()) {
             if (navLinks && navLinks.classList.contains('open')) {
                 closeMenu();
             }
         }
+        // Ensure width is reapplied on resize/orientation change
+        setFullWidthForBodyAndHtml();
     });
 
     // Run initialization
     initializeMode();
 });
 
+// This is a separate DOMContentLoaded block for theme-aware images.
+// It's fine to keep it separate as it's self-contained and not directly impacting main layout.
 document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
     const themeAwareImages = document.querySelectorAll('.theme-aware-image');
@@ -231,7 +253,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateThemeImages();
 
     // Observe changes to the body's class list
-    // This is useful if your theme toggle adds/removes the 'dark' class
     const observer = new MutationObserver((mutationsList) => {
         for (const mutation of mutationsList) {
             if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
