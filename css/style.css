@@ -576,14 +576,13 @@ body.dark .faq-item {
     flex-direction: column;
     position: fixed;
     top: 0;
-    right: 0;
     width: 70vw;
     height: 100vh;
+   left: 100vw; 
     background: var(--header-bg);
     padding-top: 80px;
     box-shadow: -2px 0 5px rgba(0,0,0,0.2);
     transition: transform 0.3s ease-in-out;
-    transform: translateX(100%);
     overflow-y: auto;
    z-index: 1050;
     -webkit-overflow-scrolling: touch;
@@ -591,6 +590,7 @@ body.dark .faq-item {
 
   .nav-links.open {
     transform: translateX(0);
+  left: 30vw; /* When open, slide it in to occupy the right 70% (100vw - 70vw = 30vw from left)
     display: flex;
   }
 
