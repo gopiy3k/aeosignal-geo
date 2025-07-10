@@ -3,58 +3,102 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ title or "Aeosignal.Space" }}</title>
-  <meta name="description" content="{{ description or 'Future-Proof Your Website with Generative Engine Optimization (GEO).' }}">
+  <title>{{ title or "Aeosignal.Space" }}</title> {# ✅ 4. SEO Essentials (Meta title) #}
+  <meta name="description" content="{{ description or 'Future-Proof Your Website with Generative Engine Optimization (GEO).' }}"> {# ✅ 4. SEO Essentials (Meta description) #}
+
+  {# ✅ 4. SEO Essentials (Canonical URL) #}
+  <link rel="canonical" href="{{ canonicalUrl or page.url | url | absoluteUrl(site.url) }}">
+
+  {# ✅ 4. SEO Essentials (OpenGraph Tags for Social Media Sharing) #}
   <meta property="og:title" content="{{ title or 'Aeosignal.Space' }}">
   <meta property="og:description" content="{{ description or 'Future-Proof Your Website with Generative Engine Optimization (GEO).' }}">
+  <meta property="og:url" content="{{ page.url | url | absoluteUrl(site.url) }}">
   <meta property="og:image" content="{{ ogImage or '/images/hero-light.webp' }}">
+  <meta property="og:type" content="{{ ogType or 'website' }}">
+
+  {# ✅ 4. SEO Essentials (Twitter Card Tags) #}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title or 'Aeosignal.Space' }}">
+  <meta name="twitter:description" content="{{ description or 'Future-Proof Your Website with Generative Engine Optimization (GEO).' }}">
+  <meta name="twitter:image" content="{{ ogImage or '/images/hero-light.webp' }}">
+  {# <meta name="twitter:creator" content="@YourTwitterHandle"> #}
+
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" href="/css/style.css" />
+
+  {# Google Fonts - ✅ 6. Performance & Technical Health #}
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  {# Example preload (you'd need to get exact woff2 paths):
+  <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMwM.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://fonts.gstatic.com/s/orbitron/v30/L0xtDF4xlVFDlFXre5JEWl4.woff2" as="font" type="font/woff2" crossorigin>
+  #}
+
+  {# Font Awesome Kit - ✅ 3. Use font awesome for emojis #}
   <script src="https://kit.fontawesome.com/19bfeb220d.js" crossorigin="anonymous"></script>
 </head>
-<script>
-
-// Ensure it runs on initial load
-document.addEventListener('DOMContentLoaded', updateHeroBackground);
-
-// Observe body class changes for dark mode using MutationObserver
-const observer = new MutationObserver(updateHeroBackground);
-observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-
-// Hook into existing toggleMode function if it exists
-if (typeof toggleMode === 'function') {
-  const originalToggleMode = toggleMode;
-  window.toggleMode = function() {
-    originalToggleMode();
-    updateHeroBackground();
-  }
-}
-</script>
-
-
 
 <body>
 
-  {% include "header.html" %}
+  <script>
+    function updateHeroBackground() {
+      // Prioritize specific hero sections based on ID or more specific class if available
+      let heroSection = document.getElementById('blog-hero-section'); // For blog page
+      if (!heroSection) {
+        heroSection = document.querySelector('.hero-subpage'); // For other subpages
+      }
+      if (!heroSection) {
+        heroSection = document.querySelector('.hero'); // For index page (main hero)
+      }
+
+      if (!heroSection) return; // Exit if no hero section found
+
+      const isDarkMode = document.body.classList.contains('dark');
+      // Use data attributes specific to the section, fall back to a default if not found
+      const lightBg = heroSection.dataset.lightBg || '/images/hero-light.webp'; // Default for pages without specific data attributes
+      const darkBg = heroSection.dataset.darkBg || '/images/hero-dark.webp';
+
+      heroSection.style.backgroundImage = `url(${isDarkMode ? darkBg : lightBg})`;
+      heroSection.style.backgroundPosition = `center`; // Ensure image is centered
+      heroSection.style.backgroundSize = `cover`; // Ensure image covers the area
+    }
+
+    document.addEventListener('DOMContentLoaded', updateHeroBackground);
+
+    const observer = new MutationObserver(updateHeroBackground);
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+    // Hook into existing toggleMode function if it exists
+    if (typeof window.toggleMode === 'function') {
+      const originalToggleMode = window.toggleMode;
+      window.toggleMode = function() {
+        originalToggleMode();
+        updateHeroBackground();
+      }
+    } else {
+        // Fallback: If toggleMode is defined later (e.g., in script.js with defer),
+        // you might need to ensure this hook applies after script.js loads.
+    }
+  </script>
+
+  {% include "header.html" %} {# ✅ 1. Structure & Layout (Consistent header) #}
 
   <main>
-    {{ content | safe }} {# This is where the content of your pages will be injected #}
+    {{ content | safe }} {# ✅ 4. SEO Essentials (Accessible semantic HTML) #}
   </main>
 
-  <footer>
+  <footer> {# ✅ 1. Structure & Layout (Consistent footer) #}
     <h2><i class="fas fa-pen-nib"></i> Ready to Lead in the AI Era?</h2>
     <p>Future visibility isn’t an option—it’s a necessity.</p>
     <a href="/free_gpt_audit_landing.html" class="cta-button">Get Your Free GEO Audit Today →</a>
     <p style="margin-top:20px;">
       <a href="/privacy-policy">Privacy Policy</a> |
-      <a href="/terms-of-service">Terms of Service</a> |
+      <a href="/terms-of-service">Terms of service</a> |
       <a href="/contact">Contact</a>
     </p>
     <p>©️ 2025 Aeosignal.Space | Generative Engine Optimization</p>
   </footer>
 
-  <script src="/js/script.js"></script>
+  <script src="/js/script.js" defer></script> {# ✅ 6. Performance & Technical Health (Fast load times - defer) #}
 </body>
 </html>
