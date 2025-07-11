@@ -17,7 +17,20 @@
   background: var(--header-bg);
   color: var(--text);
   text-align: center;
-  padding: 100px 20px 60px;
+  padding: 100px 20px 60px; /* or adjust as needed */
+}
+#blog-hero-section {
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 120px 20px 80px;
+  text-align: center;
+}
+
+#blog-hero-section .section-content {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 body.dark .section-hero {
@@ -75,6 +88,12 @@ body.dark .section-hero {
   color: var(--paragraph);
   line-height: 1.6;
   margin-bottom: 15px;
+}
+
+
+.section-intro, .section-discover {
+  padding: 2rem 1rem;
+  text-align: center;
 }
 
 /* ===============================
