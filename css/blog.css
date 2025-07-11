@@ -1,0 +1,277 @@
+/* blog.css - AEOSIGNAL.SPACE Blog Page Styling */
+
+/* ===============================
+   GENERAL LAYOUT
+================================= */
+.blog-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 80px; /* clear header */
+}
+
+/* ===============================
+   HERO SECTION
+================================= */
+.section-hero {
+  background: var(--header-bg);
+  color: var(--text);
+  text-align: center;
+  padding: 100px 20px 60px;
+}
+
+body.dark .section-hero {
+  background: var(--header-bg);
+  color: var(--text-on-dark);
+}
+.breadcrumbs {
+  display: none;
+}
+
+.section-hero h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  color: var(--section-heading);
+  margin-bottom: 20px;
+}
+
+.section-hero p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  color: var(--paragraph);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.scroll-indicator {
+  font-size: 2rem;
+  margin-top: 20px;
+  color: var(--accent);
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0);}
+  50% { transform: translateY(-8px);}
+}
+
+/* ===============================
+   INTRO SECTION
+================================= */
+.section-intro {
+  padding: 60px 20px;
+  max-width: 800px;
+  text-align: center;
+}
+
+.section-intro h2 {
+  font-size: 2rem;
+  color: var(--section-heading);
+  margin-bottom: 20px;
+}
+
+.section-intro p {
+  font-size: 1.1rem;
+  color: var(--paragraph);
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+/* ===============================
+   DISCOVER SECTION
+================================= */
+.section-discover {
+  padding: 60px 20px;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.section-discover h2 {
+  font-size: 2rem;
+  color: var(--section-heading);
+  margin-bottom: 40px;
+}
+
+.discover-grid {
+  display: grid;
+  gap: 20px;
+}
+
+@media (min-width: 769px) {
+  .discover-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.discover-card {
+  background: var(--card-bg, #f9f9f9);
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 8px;
+  padding: 25px;
+  text-align: left;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.discover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.discover-card strong {
+  font-size: 1.2rem;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 15px;
+}
+
+.discover-card ul {
+  padding-left: 20px;
+  list-style: none;
+}
+
+.discover-card ul li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  color: var(--paragraph);
+  font-size: 0.95rem;
+}
+
+.discover-card ul li::before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900; /* for solid icons */
+  content: "\f005"; /* Unicode for solid star */
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+
+/* ===============================
+   FEATURED ARTICLES SECTION
+================================= */
+.section-featured-articles {
+  padding: 60px 20px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.section-featured-articles h2 {
+  font-size: 2rem;
+  color: var(--section-heading);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.articles-grid {
+  display: grid;
+  gap: 20px;
+}
+
+@media (min-width: 769px) {
+  .articles-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+.article-card {
+  background: var(--card-bg, #f9f9f9);
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.article-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.article-card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 16/9;
+}
+
+.article-content {
+  padding: 20px;
+  flex: 1;
+}
+
+.article-content h3 {
+  font-size: 1.2rem;
+  color: var(--accent);
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.article-content p {
+  font-size: 0.95rem;
+  color: var(--paragraph);
+  line-height: 1.5;
+}
+
+.read-more {
+  display: inline-block;
+  margin-top: 10px;
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.read-more:hover {
+  color: var(--accent-hover);
+}
+
+/* ===============================
+   CLOSING CTA SECTION
+================================= */
+.section-closing-cta {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.section-closing-cta h2 {
+  font-size: 2rem;
+  color: var(--section-heading);
+  margin-bottom: 20px;
+}
+
+.section-closing-cta p {
+  font-size: 1.1rem;
+  color: var(--paragraph);
+  max-width: 700px;
+  margin: 0 auto 20px auto;
+}
+
+.section-closing-cta .cta-button {
+  background: var(--accent);
+  color: var(--cta-text);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.section-closing-cta .cta-button:hover {
+  background: var(--accent-hover);
+}
+
+/* ===============================
+   UTILITIES
+================================= */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

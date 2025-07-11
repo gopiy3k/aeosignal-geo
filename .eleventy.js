@@ -3,12 +3,13 @@
 module.exports = function(eleventyConfig) {
 
     // --- Passthrough Copies (Copy files directly to output) ---
+    // ✅ 6. Performance & Technical Health (Image optimization)
     eleventyConfig.addPassthroughCopy("css");
     eleventyConfig.addPassthroughCopy("js");
     eleventyConfig.addPassthroughCopy("images");
     eleventyConfig.addPassthroughCopy("favicon.png");
-    // Add any other static assets you need to copy
-    // eleventyConfig.addPassthroughCopy("path/to/your/asset");
+    // Ensure all image subdirectories are copied (e.g., 'images/hero/', 'images/placeholders/')
+    eleventyConfig.addPassthroughCopy("images/**/*");
 
 
     // --- Custom Nunjucks Filters ---
@@ -37,38 +38,57 @@ module.exports = function(eleventyConfig) {
     });
 
     // absoluteUrl filter for making relative URLs absolute (for canonical, OG, etc.)
+    // ✅ 4. SEO Essentials (Canonical, OpenGraph)
     eleventyConfig.addNunjucksFilter("absoluteUrl", function(url, base) {
-        // Ensure base is provided and is a string for the URL constructor
         if (!base || typeof base !== 'string') {
-            console.warn("absoluteUrl filter: 'base' URL is missing or invalid.");
-            return url; // Return original URL if base is not provided/invalid
+            console.warn("absoluteUrl filter: 'base' URL is missing or invalid. Returning original URL.");
+            return url;
         }
         try {
-            // Handle cases where `url` might already be absolute or just a path
             if (url.startsWith('http://') || url.startsWith('https://')) {
-                return url; // Already an absolute URL
+                return url;
             }
             return (new URL(url, base)).toString();
         } catch (e) {
             console.error(`absoluteUrl filter: Error processing URL '${url}' with base '${base}':`, e);
-            return url; // Fallback to original URL on error
+            return url;
         }
     });
 
-    // --- End Custom Nunjucks Filters ---
+    // Add the Nunjucks `range` filter (THIS IS THE NEW ADDITION)
+    eleventyConfig.addNunjucksFilter("range", (start, end) => {
+        if (end === undefined) {
+            end = start;
+            start = 0;
+        }
+        const result = [];
+        for (let i = start; i < end; i++) {
+            result.push(i);
+        }
+        return result;
+    });
+
+
+    // --- Eleventy Collections ---
+    // Define your 'posts' collection for blog articles
+    // ✅ 3. Article Listing (Auto-pull articles)
+    eleventyConfig.addCollection("posts", function(collection) {
+        // Assuming your blog posts are in a 'blog' subfolder, e.g., 'blog/my-first-post.md'
+        // Adjust the glob pattern to match where your actual blog post Markdown files are
+        return collection.getFilteredByGlob("./blog/*.md");
+    });
 
 
     // --- Directory and Template Configuration ---
     return {
         dir: {
-            input: ".",         // Eleventy will look for files in the current directory
-            includes: "_includes", // This is where layouts and partials live
-            data: "_data",      // Optional: For global data files
-            output: "_site"     // This is where the compiled site will be built
+            input: ".",
+            includes: "_includes",
+            data: "_data",
+            output: "_site"
         },
-        templateFormats: ["html", "njk", "md"], // Ensure .html files are processed
-        htmlTemplateEngine: "njk", // Treat .html files as Nunjucks templates
-        markdownTemplateEngine: "njk" // Process markdown using Nunjucks for front matter, etc.
-        // You can add other template engine options here if needed
+        templateFormats: ["html", "njk", "md"],
+        htmlTemplateEngine: "njk",
+        markdownTemplateEngine: "njk"
     };
 };

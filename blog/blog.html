@@ -1,0 +1,120 @@
+---
+layout: base.njk
+title: "The Blog | AI Search & GEO Strategies | AEOSIGNAL.SPACE"
+description: "Expert insights, actionable strategies, and niche-focused guides to master AI-powered search and GEO optimization for your business. Read the latest on our blog."
+permalink: "/blog/"
+---
+
+<!-- ✅ Breadcrumbs Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://aeosignal.space/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Resources",
+      "item": "https://aeosignal.space/resources/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Blog",
+      "item": "https://aeosignal.space/blog/"
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="/css/blog.css">
+<main class="blog-page">
+
+  <!-- ✅ Breadcrumbs -->
+  <nav aria-label="Breadcrumb" class="breadcrumbs">
+    <a href="/">Home</a> › 
+    <a href="/resources/">Resources</a> › 
+    <span>Blog</span>
+  </nav>
+
+  <!-- ✅ Hero Section -->
+  <section class="section-hero">
+    <h1>The Blog: Your Edge in the AI Search Era</h1>
+    <p>Stay ahead with expert insights, proven strategies, and actionable frameworks to master AI-powered search and GEO-driven growth in your niche.</p>
+    <div class="scroll-indicator">⬇️ Explore Articles</div>
+  </section>
+
+  <!-- ✅ Navigate the Future Section -->
+  <section class="section-intro">
+    <h2>Navigate the Future of Search, Today</h2>
+    <p>Generative AI, Large Language Models, and evolving search engines are reshaping how businesses are discovered. Our blog is your essential hub to decode these shifts, master GEO, and drive real results in your targeted markets.</p>
+    <p>Whether you’re scaling a crypto project, growing a D2C brand, innovating in AI, or leading an SEO agency, our articles deliver clarity, actionable tactics, and strategic foresight to keep you ahead.</p>
+  </section>
+
+  <!-- ✅ What You’ll Discover Section -->
+  <section class="section-discover">
+    <h2>What You’ll Discover on Our Blog</h2>
+    <div class="discover-grid">
+      <div class="discover-card">
+     </i> <strong>Decoding AI Search & GEO</strong>
+
+        <ul>
+          <li>How LLMs interpret your content</li>
+          <li>Advanced structured data tactics</li>
+          <li>AEO strategies for AI summaries</li>
+          <li>Future predictions & readiness</li>
+        </ul>
+      </div>
+      <div class="discover-card">
+        <strong>Niche-Specific Strategies</strong>
+        <ul>
+          <li>Crypto marketing in the AI era</li>
+          <li>AI platform positioning for growth</li>
+          <li>Scaling D2C with AI recommendations</li>
+          <li>Advanced GEO for agencies</li>
+        </ul>
+      </div>
+      <div class="discover-card">
+        <strong>SEO & Digital Marketing for AI</strong>
+        <ul>
+          <li>Human-friendly, AI-ready content</li>
+          <li>Technical SEO for AI crawling</li>
+          <li>Building E-E-A-T authority</li>
+          <li>Adapting to AI-driven search</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ Featured Articles Section -->
+  <section class="section-featured-articles">
+    <h2>Featured Articles</h2>
+    <div class="articles-grid">
+      {% for post in collections.posts | reverse %}
+      <article class="article-card">
+        <a href="{{ post.url }}">
+          <img src="{{ post.data.featuredImage }}" alt="{{ post.data.title }}" loading="lazy" />
+          <div class="article-content">
+            <h3>{{ post.data.title }}</h3>
+            <p>{{ post.data.excerpt }}</p>
+            <span class="read-more">→ Read Article</span>
+          </div>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- ✅ Closing CTA -->
+  <section class="section-closing-cta">
+    <h2>Don’t Just Keep Up. Set the Pace.</h2>
+    <p>The AI search era isn’t coming—it’s here. Dive into the articles below to gain the clarity and strategic advantage you need to thrive.</p>
+    <a href="#articles" class="cta-button">Explore Articles Now</a>
+  </section>
+
+</main>
