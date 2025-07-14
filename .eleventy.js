@@ -10,6 +10,8 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("favicon.png");
     // Ensure all image subdirectories are copied (e.g., 'images/hero/', 'images/placeholders/')
     eleventyConfig.addPassthroughCopy("images/**/*");
+    eleventyConfig.addPassthroughCopy("robots.txt");
+
 
 
     // --- Custom Nunjucks Filters ---
