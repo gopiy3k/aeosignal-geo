@@ -1,0 +1,22 @@
+// File: src/sitemap.njk
+// Description: Generates dynamic sitemap.xml during 11ty build for Aeosignal.Space
+// using Nunjucks + collections without manual updates.
+
+---
+permalink: "/sitemap.xml"
+layout: null
+content-type: "application/xml"
+---
+
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{% set urls = collections.all | eleventyNavigation %}
+{% for page in collections.all %}
+  {% if page.url and not page.data.draft %}
+  <url>
+    <loc>{{ site.url | url }}{{ page.url | url }}</loc>
+    <lastmod>{{ page.date | date("%Y-%m-%d") }}</lastmod>
+  </url>
+  {% endif %}
+{% endfor %}
+</urlset>
