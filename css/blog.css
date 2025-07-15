@@ -17,21 +17,30 @@
   background: var(--header-bg);
   color: var(--text);
   text-align: center;
-  padding: 100px 20px 60px; /* or adjust as needed */
+  padding: 20px 60px; /* or adjust as needed */
 }
+
 #blog-hero-section {
   width: 100%;
-  background-position: center;
+  background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
   padding: 120px 20px 80px;
   text-align: center;
+  max-height: 600px; /* optional cap */
+  overflow: hidden; /* ensure image does not overflow container */
 }
 
+@media (max-width: 768px) {
+  #blog-hero-section {
+    padding: 80px 20px 60px; /* reduce padding on mobile */
+  }
+}
 #blog-hero-section .section-content {
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
 }
+
 
 body.dark .section-hero {
   background: var(--header-bg);
