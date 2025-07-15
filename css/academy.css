@@ -1,0 +1,170 @@
+/* academy.css - AEOSIGNAL.SPACE GEO Academy Page Styling */
+
+/* ===============================
+   GENERAL LAYOUT
+================================= */
+.academy-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 80px; /* clear header */
+}
+
+/* ===============================
+   HERO SECTION
+================================= */
+#academy-hero {
+  width: 100%;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 120px 20px 80px;
+  text-align: center;
+  max-height: 600px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  #academy-hero {
+    padding: 80px 20px 60px;
+  }
+}
+
+#academy-hero .section-content {
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+#academy-hero h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.4rem;
+  color: var(--section-heading);
+  margin-bottom: 20px;
+}
+
+#academy-hero p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: var(--paragraph);
+  line-height: 1.5;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.cta-button {
+  background: var(--accent);
+  color: var(--cta-text);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: 20px;
+  display: inline-block;
+  transition: background 0.3s;
+}
+
+.cta-button:hover {
+  background: var(--accent-hover);
+}
+
+/* ===============================
+   SECTION STRUCTURE
+================================= */
+.section {
+  padding: 60px 20px;
+  max-width: 1000px;
+  width: 100%;
+  text-align: center;
+}
+
+.section h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  color: var(--section-heading);
+  margin-bottom: 20px;
+}
+
+.section h2 i {
+  margin-right: 10px;
+  color: var(--accent);
+}
+
+.section p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: var(--paragraph);
+  line-height: 1.6;
+  max-width: 750px;
+  margin: 0 auto 20px auto;
+}
+
+.section ul {
+  text-align: left;
+  max-width: 750px;
+  margin: 0 auto;
+  padding-left: 20px;
+}
+
+.section ul li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 10px;
+  color: var(--paragraph);
+  font-size: 0.95rem;
+}
+
+.section ul li::before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f058"; /* check-circle */
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* ===============================
+   IMAGE SECTIONS
+================================= */
+.section img {
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+/* ===============================
+   CLOSING CTA SECTION
+================================= */
+.section-closing-cta {
+  background: var(--card-bg, #f9f9f9);
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.section-closing-cta h2 {
+  font-size: 2rem;
+  color: var(--section-heading);
+  margin-bottom: 20px;
+}
+
+.section-closing-cta p {
+  font-size: 1.1rem;
+  color: var(--paragraph);
+  max-width: 700px;
+  margin: 0 auto 20px auto;
+}
+
+/* ===============================
+   UTILITIES
+================================= */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

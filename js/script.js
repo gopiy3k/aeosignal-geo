@@ -275,21 +275,46 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener("DOMContentLoaded", () => {
     const faders = document.querySelectorAll('.fade-in');
 
-    const appearOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
-    };
+    if ('IntersectionObserver' in window) {
+        const appearOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
 
-    const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add('visible');
-            appearOnScroll.unobserve(entry.target);
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
         });
-    }, appearOptions);
+    } else {
+        // Fallback: Show all if IntersectionObserver is unsupported
+        faders.forEach(fader => fader.classList.add('visible'));
+    }
+});// Accordion Toggle for glossary
+const accordionToggles = document.querySelectorAll('.accordion-toggle');
 
-    faders.forEach(fader => {
-        appearOnScroll.observe(fader);
+accordionToggles.forEach(toggle => {
+    toggle.addEventListener('click', function () {
+        const content = this.nextElementSibling;
+        const icon = this.querySelector('.toggle-icon');
+
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+
+        if (isExpanded) {
+            content.hidden = true;
+            if (icon) icon.classList.remove('rotate');
+        } else {
+            content.hidden = false;
+            if (icon) icon.classList.add('rotate');
+        }
     });
 });
 
