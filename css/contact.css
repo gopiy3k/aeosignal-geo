@@ -1,0 +1,139 @@
+/* contact.css - AEOSIGNAL.Space Final Cleanup */
+
+:root {
+  --bg: #ffffff;
+  --text: #1f2937;
+  --accent: #0056FF;
+  --accent-hover: #003ECC;
+  --cta-text: #ffffff;
+  --section-heading: #1F4287;
+  --paragraph: #333333;
+  --card-bg: #f9f9f9;
+  --success: #00cc99;
+  --error: #ff4d4d;
+}
+
+body.dark {
+  --bg: #0d011b;
+  --text: #ffffff;
+  --accent: #00ffff;
+  --accent-hover: #00cccc;
+  --cta-text: #000000;
+  --section-heading: #ffffff;
+  --paragraph: #dddddd;
+  --card-bg: #1a023b;
+  --success: #00ffcc;
+  --error: #ff4d4d;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+.hero {
+  background: url('/images/contact-hero.webp') center/cover no-repeat;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 100px 20px 40px;
+}
+
+.hero h1 {
+  font-size: 2.4rem;
+  color: var(--accent);
+  margin-bottom: 15px;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: var(--paragraph);
+  max-width: 600px;
+  margin-bottom: 30px;
+}
+
+form {
+  background: var(--card-bg);
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+input, textarea {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  font-size: 1rem;
+  background: rgba(255,255,255,0.8);
+  color: var(--text);
+  transition: border 0.3s, background 0.3s;
+}
+
+body.dark input, body.dark textarea {
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+}
+
+input::placeholder, textarea::placeholder {
+  color: #999999;
+}
+
+button[type="submit"] {
+  background: var(--accent);
+  color: var(--cta-text);
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+button[type="submit"]:hover {
+  background: var(--accent-hover);
+}
+
+#status {
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+#status.success {
+  color: var(--success);
+}
+
+#status.error {
+  color: var(--error);
+}
+
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 0.9rem;
+  color: var(--paragraph);
+}
+
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+  margin: 0 8px;
+  transition: color 0.3s;
+}
+
+footer a:hover {
+  color: var(--accent-hover);
+}
