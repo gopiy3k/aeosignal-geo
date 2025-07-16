@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://aeosignal.space/sitemap.xml
+
+# RSS Feed
+Allow: /feed.xml

@@ -1,5 +1,4 @@
 const { execSync } = require("child_process");
-const { DateTime } = require("luxon");
 
 module.exports = function(eleventyConfig) {
 
@@ -10,9 +9,6 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("favicon.png");
     eleventyConfig.addPassthroughCopy("images/**/*");
     eleventyConfig.addPassthroughCopy("robots.txt");
-    eleventyConfig.addFilter("date", function(dateObj, format = "DDD") {
-        return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat(format);
-    });
 
     // --- Custom Nunjucks Filters ---
     eleventyConfig.addNunjucksFilter("limit", function(array, limit) {

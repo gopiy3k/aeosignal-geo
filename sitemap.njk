@@ -9,7 +9,7 @@ eleventyExcludeFromCollections: true
   {% if page.url and not page.data.draft %}
   <url>
     <loc>{{ site.url }}{{ page.url }}</loc>
-    <lastmod>{{ page.date.toISOString().slice(0,10) }}</lastmod>
+    <lastmod>{{ page.inputPath | gitLastModified }}</lastmod>
   </url>
   {% endif %}
 {% endfor %}

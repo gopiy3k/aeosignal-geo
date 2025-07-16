@@ -1,0 +1,70 @@
+{# _includes/schema.njk (cleaned and corrected) #}
+
+{# Organization Structured Data #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Aeosignal.Space",
+  "url": "https://aeosignal.space",
+  "logo": "https://aeosignal.space/images/logo-neo-sci-fi-transparent.webp",
+  "sameAs": [
+    "https://twitter.com/yourhandle",
+    "https://linkedin.com/company/yourcompany"
+  ]
+}
+</script>
+
+{# Website Structured Data with Sitelinks Search Box #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": "https://aeosignal.space",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://aeosignal.space/search/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+{# WebPage Structured Data (for non-blog pages) #}
+{% if page.url and '/blog/' not in page.url %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "{{ title | escape }}",
+  "description": "{{ description | escape }}",
+  "url": "{{ page.url | absoluteUrl(site.url) }}"
+}
+</script>
+{% endif %}
+
+{# BlogPosting Structured Data (for blog posts) #}
+{% if page.url and '/blog/' in page.url %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ title | escape }}",
+  "description": "{{ description | escape }}",
+  "url": "{{ page.url | absoluteUrl(site.url) }}",
+  "author": {
+    "@type": "Person",
+    "name": "Aeosignal.Space"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Aeosignal.Space",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://aeosignal.space/images/logo-neo-sci-fi-transparent.webp"
+    }
+  },
+  "datePublished": "{{ page.date | date('yyyy-MM-dd') }}",
+  "dateModified": "{{ page.date | date('yyyy-MM-dd') }}"
+}
+</script>
+{% endif %}

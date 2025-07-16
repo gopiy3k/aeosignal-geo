@@ -1,0 +1,33 @@
+---
+permalink: "/feed.xml"
+layout: null
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>Aeosignal.Space Blog</title>
+  <link>{{ site.url }}/blog/</link>
+  <description>GEO, GPT indexing, and AI search mastery articles from Aeosignal.Space</description>
+  <language>en-us</language>
+  <lastBuildDate>
+    {% if collections.posts.length %}
+      {{ collections.posts | first | date("ccc, dd LLL yyyy HH:mm:ss ZZZ") }}
+    {% else %}
+      {{ "now" | date("ccc, dd LLL yyyy HH:mm:ss ZZZ") }}
+    {% endif %}
+  </lastBuildDate>
+
+  {% for post in collections.posts | reverse %}
+  <item>
+    <title>{{ post.data.title }}</title>
+    <link>{{ site.url }}{{ post.url }}</link>
+    <guid>{{ site.url }}{{ post.url }}</guid>
+    <pubDate>{{ post.date | date("ccc, dd LLL yyyy HH:mm:ss ZZZ") }}</pubDate>
+    <description><![CDATA[
+      {{ post.templateContent | truncate(200, true, '...') | safe }}
+    ]]></description>
+  </item>
+  {% endfor %}
+</channel>
+</rss>
