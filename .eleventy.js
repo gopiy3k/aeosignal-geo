@@ -12,6 +12,10 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("robots.txt");
     eleventyConfig.addFilter("date", function(dateObj, format = "DDD") {
         return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat(format);
+});// Split filter for Nunjucks (needed for schema breadcrumb)
+eleventyConfig.addNunjucksFilter("split", function(str, separator) {
+    if (!str || typeof str !== "string") return [];
+    return str.split(separator);
     });
 
     // --- Custom Nunjucks Filters ---

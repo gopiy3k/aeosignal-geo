@@ -133,3 +133,29 @@
 </script>
 {% endif %}
 
+{# BreadcrumbList Structured Data #}
+{% if page.url and page.url != "/" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ site.url }}/"
+    }
+    {% set segments = page.url | trim('/') | split('/') %}
+    {% for segment, index in segments %}
+    ,{
+      "@type": "ListItem",
+      "position": {{ index + 2 }},
+      "name": "{{ segment | replace("-", " ") | capitalize }}",
+      "item": "{{ site.url }}/{{ segments | slice(0, index + 1) | join('/') }}/"
+    }
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}
