@@ -1,125 +1,127 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>GEO Case Studies | Aeosignal.Space</title>
-<meta name="description" content="See how Aeosignal.Space helps websites gain visibility in ChatGPT, Perplexity, and AI search engines through Generative Engine Optimization." />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-body { margin: 0; font-family: 'Inter', sans-serif; background: #0d011b; color: #ffffff; }
-header {
-  position: fixed; top: 0; left: 0; right: 0; height: 60px;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 0 20px; background: rgba(0,0,0,0.3); z-index: 1000;
-}
-header img { width: 130px; height: auto; }
-.menu-icon { font-size: 1.8rem; cursor: pointer; }
-#menu { display: none; flex-direction: column; background: rgba(0,0,0,0.9); position: absolute; top: 60px; right: 20px; border-radius: 8px; padding: 10px; }
-#menu a { color: #fff; text-decoration: none; margin: 8px 0; }
-#menu a:hover { color: #00ffff; }
-
-.hero {
-  background: url('/images/case-studies-hero.webp') center center / cover no-repeat;
-  min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-  text-align: center; padding: 80px 20px 20px;
-}
-.hero h1 { font-size: 2.2rem; color: #ff00ff; margin-bottom: 15px; }
-.hero p { font-size: 1.1rem; color: #cccccc; max-width: 600px; margin-bottom: 25px; }
-.cta-button {
-  background: #00ffff; color: #0d011b; padding: 12px 24px; border-radius: 6px;
-  text-decoration: none; font-weight: 700; display: inline-block;
-}
-.cta-button:hover { background: #00cccc; }
-
-.case-studies-grid {
-  display: flex; flex-wrap: wrap; justify-content: center;
-  max-width: 1200px; margin: 40px auto; padding: 20px;
-}
-.case-study-card {
-  background: rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden;
-  width: 300px; margin: 15px; text-align: left; display: flex; flex-direction: column;
-}
-.case-study-card img { width: 100%; height: auto; }
-.case-study-card-content { padding: 15px; }
-.case-study-card-content h3 { color: #ff00ff; font-size: 1.2rem; margin: 10px 0; }
-.case-study-card-content p { color: #cccccc; font-size: 0.95rem; }
-.case-study-card-content a {
-  display: inline-block; margin-top: 10px; color: #00ffff; text-decoration: none; font-weight: 600;
-}
-.case-study-card-content a:hover { color: #00cccc; }
-
-footer { text-align: center; padding: 30px 20px; font-size: 0.9rem; color: #777; }
-footer a { color: #00ffff; text-decoration: none; margin: 0 6px; }
-footer a:hover { color: #00cccc; }
-</style>
-</head>
-<body>
-
-<header>
-  <a href="/"><img src="/images/logo-neo-sci-fi-transparent.webp" alt="Aeosignal.Space Logo"></a>
-  <div class="menu-icon" onclick="toggleMenu()">☰</div>
-  <div id="menu">
-    <a href="/">Home</a>
-    <a href="/services">Services</a>
-    <a href="/what-is-geo">What is GEO?</a>
-    <a href="/resources">Resources</a>
-    <a href="/contact">Contact</a>
-  </div>
-</header>
-
-<section class="hero">
-  <h1>GEO Case Studies</h1>
-  <p>See how websites have achieved AI visibility and GPT discoverability with Aeosignal.Space's GEO services.</p>
-  <a href="/free_gpt_audit_landing.html" class="cta-button">🔍 Get Your Free GEO Audit</a>
-</section>
-
-<section class="case-studies-grid">
-  <div class="case-study-card">
-    <img src="/images/case-study1.webp" alt="Tech SaaS GEO Visibility">
-    <div class="case-study-card-content">
-      <h3>Tech SaaS Boosts AI Visibility</h3>
-      <p>Learn how a SaaS brand achieved GPT indexing and improved AI discoverability through structured GEO implementation.</p>
-      <a href="#">Read Case Study →</a>
-    </div>
-  </div>
-  <div class="case-study-card">
-    <img src="/images/case-study2.webp" alt="E-commerce GEO Optimization">
-    <div class="case-study-card-content">
-      <h3>E-commerce GEO Optimization</h3>
-      <p>How an e-commerce brand leveraged GEO to future-proof its catalog for AI engines and generative search.</p>
-      <a href="#">Read Case Study →</a>
-    </div>
-  </div>
-  <div class="case-study-card">
-    <img src="/images/case-study3.webp" alt="Content Site AI Discovery">
-    <div class="case-study-card-content">
-      <h3>Content Site Gains AI Discovery</h3>
-      <p>See how structured content and schema optimization helped a content site appear in AI-generated search results.</p>
-      <a href="#">Read Case Study →</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  © 2025 Aeosignal.Space | Generative Engine Optimization<br>
-  <a href="/privacy-policy">Privacy Policy</a> |
-  <a href="/terms-of-service">Terms of Service</a> |
-  <a href="/contact">Contact</a>
-</footer>
-
-<script>
-function toggleMenu() {
-    const menu = document.getElementById('menu');
-    menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
-    document.addEventListener('click', function handler(e) {
-        if (!menu.contains(e.target) && !e.target.classList.contains('menu-icon')) {
-            menu.style.display = 'none';
-            document.removeEventListener('click', handler);
-        }
-    });
+---
+layout: base.njk
+title: "GEO Case Studies | Real AI Visibility Wins | AEOSIGNAL.SPACE"
+description: "See how Generative Engine Optimization transforms brands with real-world AI visibility, GPT indexing, and measurable growth. Explore our GEO case studies now."
+permalink: "/resources/case-studies/"
+---
+{% if page.url == "/resources/case-studies/" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "GEO Case Studies",
+  "description": "Explore real-world examples of Generative Engine Optimization improving AI visibility, GPT indexing, and measurable brand growth.",
+  "url": "https://aeosignal.space/resources/case-studies/",
+  "mainEntity": [
+    {
+      "@type": "CaseStudy",
+      "name": "Crypto Project: GPT Visibility Breakthrough",
+      "url": "https://aeosignal.space/resources/case-studies/#crypto-project",
+      "description": "A DeFi project leveraged advanced schema and entity alignment to increase GPT indexing and AI visibility by 45%.",
+      "about": {
+        "@type": "Thing",
+        "name": "Generative Engine Optimization"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "AEOSIGNAL.Space",
+        "url": "https://aeosignal.space"
+      }
+    },
+    {
+      "@type": "CaseStudy",
+      "name": "D2C Brand: AI Search Domination",
+      "url": "https://aeosignal.space/resources/case-studies/#d2c-brand",
+      "description": "A wellness D2C brand implemented semantic site architecture and JSON-LD, achieving a 37% increase in AI-assisted traffic.",
+      "about": {
+        "@type": "Thing",
+        "name": "Generative Engine Optimization"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "AEOSIGNAL.Space",
+        "url": "https://aeosignal.space"
+      }
+    },
+    {
+      "@type": "CaseStudy",
+      "name": "AI SaaS Startup: LLM Content Readiness",
+      "url": "https://aeosignal.space/resources/case-studies/#ai-saas-startup",
+      "description": "An AI SaaS startup optimized technical documentation for LLM ingestion, resulting in a 52% increase in GPT references.",
+      "about": {
+        "@type": "Thing",
+        "name": "Generative Engine Optimization"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "AEOSIGNAL.Space",
+        "url": "https://aeosignal.space"
+      }
+    }
+  ]
 }
 </script>
+{% endif %}
 
-</body>
-</html>
+
+<link rel="stylesheet" href="/css/case-studies.css">
+
+<main class="case-studies-page">
+
+<section class="hero-subpage" id="case-studies-hero"
+         data-light-bg="/images/case-studies-hero-light.webp"
+         data-dark-bg="/images/case-studies-hero-dark.webp">
+    <div class="section-content">
+        <h1><i class="fas fa-rocket"></i> GEO Case Studies: Real Results</h1>
+        <p>Discover how Generative Engine Optimization drives AI-powered visibility, GPT indexing, and measurable growth for brands across industries.</p>
+    </div>
+</section>
+
+<section class="case-studies-intro-box">
+    <div class="intro-content">
+        <div class="intro-text">
+            <h2><i class="fas fa-chart-line"></i> GEO: Measurable Impact, Not Theory</h2>
+            <p>Generative Engine Optimization (GEO) isn't theory—it's measurable impact. Below are anonymized case studies demonstrating how we position brands to win in AI search, structured data, and LLM-ready content pipelines.</p>
+            <p>Get inspired, see what's possible, and imagine your brand here next.</p>
+        </div>
+        <div class="intro-image">
+            <img src="/images/case-studies-intro.webp" alt="Illustration showing measurable GEO impact" loading="lazy" />
+        </div>
+    </div>
+</section>
+
+
+<section class="case-studies-grid">
+<article class="case-study-card">
+<img src="/images/case-study-crypto.webp" alt="Crypto Project GPT Visibility Case Study" class="case-study-thumb">
+    <h3><i class="fas fa-coins"></i> Crypto Project: GPT Visibility Breakthrough</h3>
+    <p><strong>Problem:</strong> A DeFi project lacked structured data and struggled with AI summary visibility despite high domain authority.</p>
+    <p><strong>Strategy:</strong> Implemented advanced schema markup, entity alignment, and structured topical clusters optimized for LLM ingestion.</p>
+    <p><strong>Results:</strong> Achieved +45% GPT indexing footprint, consistent appearances in AI summaries, and increased crawl frequency from 2x/week to daily.</p>
+</article>
+
+<article class="case-study-card">
+    <img src="/images/case-study-d2c.webp" alt="D2C Brand AI Search Case Study" class="case-study-thumb">
+    <h3><i class="fas fa-shopping-cart"></i> D2C Brand: AI Search Domination</h3>
+    <p><strong>Problem:</strong> A consumer wellness brand was invisible to generative search engines and voice assistants despite solid SEO.</p>
+    <p><strong>Strategy:</strong> Re-architected site for semantic clarity, added JSON-LD schema for all products and FAQs, and optimized content for E-E-A-T signals.</p>
+    <p><strong>Results:</strong> Product pages featured in ChatGPT plugin responses, a 37% boost in AI-assisted traffic, and topical authority signals strengthened.</p>
+</article>
+
+<article class="case-study-card">
+    <img src="/images/case-study-saas.webp" alt="AI SaaS Startup LLM Content Case Study" class="case-study-thumb">
+    <h3><i class="fas fa-robot"></i> AI SaaS Startup: LLM Content Readiness</h3>
+    <p><strong>Problem:</strong> An AI SaaS startup wanted to ensure their technical documentation was utilized by GPT models for accurate generative responses.</p>
+    <p><strong>Strategy:</strong> Structured comprehensive FAQ content, layered advanced schema, and optimized site speed for AI ingestion readiness.</p>
+    <p><strong>Results:</strong> GPT responses citing their documentation grew by 52% within 3 months, improving brand visibility in conversational AI contexts.</p>
+</article>
+
+</section>
+
+<section class="section-closing-cta">
+    <h2><i class="fas fa-bolt"></i> Ready to Be Our Next Success Story?</h2>
+    <p>Position your brand for AI discovery and GPT indexing today. Get your free GEO audit and unlock your AI visibility potential.</p>
+    <a href="/free_gpt_audit_landing/" class="cta-button">Request Your Free GEO Audit</a>
+</section>
+
+</main>

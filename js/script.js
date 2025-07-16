@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 // Fade-in on scroll for AEOSIGNAL.SPACE
 document.addEventListener("DOMContentLoaded", () => {
-    const faders = document.querySelectorAll('.fade-in');
+    const faders = document.querySelectorAll('.fade-in, .fade-lift');
 
     if ('IntersectionObserver' in window) {
         const appearOptions = {
@@ -293,6 +293,14 @@ document.addEventListener("DOMContentLoaded", () => {
         faders.forEach(fader => {
             appearOnScroll.observe(fader);
         });
+  // ✅ Fix for above-the-fold elements on load
+        faders.forEach(fader => {
+            const rect = fader.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                fader.classList.add('visible');
+            }
+        });
+
     } else {
         // Fallback: Show all if IntersectionObserver is unsupported
         faders.forEach(fader => fader.classList.add('visible'));

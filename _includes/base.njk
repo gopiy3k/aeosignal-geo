@@ -70,17 +70,7 @@
     const observer = new MutationObserver(updateHeroBackground);
     observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 
-    // Hook into existing toggleMode function if it exists
-    if (typeof window.toggleMode === 'function') {
-      const originalToggleMode = window.toggleMode;
-      window.toggleMode = function() {
-        originalToggleMode();
-        updateHeroBackground();
-      }
-    } else {
-        // Fallback: If toggleMode is defined later (e.g., in script.js with defer),
-        // you might need to ensure this hook applies after script.js loads.
-    }
+
   </script>
 
   {% include "header.html" %} {# ✅ 1. Structure & Layout (Consistent header) #}
@@ -88,6 +78,7 @@
   <main>
     {{ content | safe }} {# ✅ 4. SEO Essentials (Accessible semantic HTML) #}
   </main>
+
 
   <footer> {# ✅ 1. Structure & Layout (Consistent footer) #}
     <h2><i class="fas fa-pen-nib"></i> Ready to Lead in the AI Era?</h2>
