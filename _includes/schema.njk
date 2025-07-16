@@ -1,21 +1,26 @@
-{# _includes/schema.njk (cleaned and corrected) #}
+{# _includes/schema.njk | Final Structured Data Layer #}
 
-{# Organization Structured Data #}
+{# ✅ Organization on ALL pages #}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Aeosignal.Space",
   "url": "https://aeosignal.space",
-  "logo": "https://aeosignal.space/images/logo-neo-sci-fi-transparent.webp",
+  "logo": "https://aeosignal.space/images/logo-light.webp",
   "sameAs": [
-    "https://twitter.com/yourhandle",
-    "https://linkedin.com/company/yourcompany"
-  ]
+    "https://x.com/aeosignal",
+    "https://www.linkedin.com/company/aeosignal"
+  ],
+  "founder": {
+    "@type": "Person",
+    "name": "Aeosignal Founder"
+  }
 }
 </script>
 
-{# Website Structured Data with Sitelinks Search Box #}
+{# ✅ WebSite with SearchAction ONLY on homepage #}
+{% if page.url == '/' %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -28,31 +33,18 @@
   }
 }
 </script>
-
-{# WebPage Structured Data (for non-blog pages) #}
-{% if page.url and '/blog/' not in page.url %}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "{{ title | escape }}",
-  "description": "{{ description | escape }}",
-  "url": "{{ page.url | absoluteUrl(site.url) }}"
-}
-</script>
 {% endif %}
 
-{# BlogPosting Structured Data (for blog posts) #}
+{# ✅ Article Schema for blog posts #}
 {% if page.url and '/blog/' in page.url %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BlogPosting",
+  "@type": "Article",
   "headline": "{{ title | escape }}",
   "description": "{{ description | escape }}",
-  "url": "{{ page.url | absoluteUrl(site.url) }}",
   "author": {
-    "@type": "Person",
+    "@type": "Organization",
     "name": "Aeosignal.Space"
   },
   "publisher": {
@@ -60,11 +52,84 @@
     "name": "Aeosignal.Space",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://aeosignal.space/images/logo-neo-sci-fi-transparent.webp"
+      "url": "https://aeosignal.space/images/logo-light.webp"
     }
   },
+  "url": "{{ page.url | absoluteUrl(site.url) }}",
   "datePublished": "{{ page.date | date('yyyy-MM-dd') }}",
   "dateModified": "{{ page.date | date('yyyy-MM-dd') }}"
 }
 </script>
 {% endif %}
+
+{# ✅ BreadcrumbList for ALL pages except homepage #}
+{% if page.url != '/' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://aeosignal.space/"
+    }
+    {% if page.url and page.url != '/' %}
+    ,
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "{{ title | escape }}",
+      "item": "{{ page.url | absoluteUrl(site.url) }}"
+    }
+    {% endif %}
+  ]
+}
+</script>
+{% endif %}
+
+{# ✅ FAQPage schema ONLY on /what-is-geo/ #}
+{% if page.url == '/what-is-geo/' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is GEO replacing SEO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, it complements it. Traditional SEO remains vital for ranking in link-based search results. GEO is essential for ensuring your content is recognized and utilized by AI models that synthesize answers, making them a powerful synergistic duo."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long before results appear?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Expect visibility progress in 3-6 months, especially as AI models ingest updated information. For AI citations in niche or less competitive areas, you might see faster initial recognition."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need GEO if I already have good SEO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, absolutely. While good SEO is a strong foundation, it primarily targets traditional search. GEO specifically covers the AI surface, ensuring your content is understandable and citable by generative AI systems, a critical visibility channel that SEO alone cannot fully address."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is GEO a passing trend?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, it’s foundational for AI-era visibility. The shift towards AI-generated answers is a fundamental transformation in how users access information online. Ignoring GEO means risking digital invisibility as more users turn to AI for instant, synthesized answers."
+      }
+    }
+  ]
+}
+</script>
+{% endif %}
+
