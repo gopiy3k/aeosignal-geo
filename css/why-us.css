@@ -3,11 +3,13 @@
 :root {
     --card-bg: #f9f9f9; /* light mode card background */
     --border-color: #ddd; /* light mode border color */
+--accent: #0056FF;
 }
 
 body.dark {
     --card-bg: #1A1038; /* dark mode card background */
     --border-color: #444; /* dark mode border color */
+ --accent: #00ffff;
 }
 .why-us-page {
     padding-top: 80px;
@@ -104,6 +106,29 @@ body.dark {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
+.highlight-banner {
+    background: var(--accent);
+    color: var(--cta-text);
+    text-align: center;
+    padding: 30px 20px;
+    border-radius: 12px;
+    margin: 40px auto;
+    max-width: 1000px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.highlight-banner p {
+    margin: 0;
+    color: var(--cta-text);
+}
+
+.highlight-banner strong {
+    font-weight: 700;
+}
+
 .trust-section {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
