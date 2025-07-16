@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 // Fade-in on scroll for AEOSIGNAL.SPACE
 document.addEventListener("DOMContentLoaded", () => {
-    const faders = document.querySelectorAll('.fade-in, .fade-lift');
+    const faders = document.querySelectorAll('.fade-in, .fade-lift, .feature-card, .trust-section, .highlight-banner');
 
     if ('IntersectionObserver' in window) {
         const appearOptions = {
