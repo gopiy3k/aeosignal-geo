@@ -178,10 +178,10 @@ body.dark .dropdown-content a:hover { background: var(--dropdown-hover-bg-dark);
   right: 20px;
 }
 
-/* HERO SECTION - Consolidated for Homepage and Subpages */
 .hero {
-  min-height: 100vh; /* Use min-height for flexibility */
-  padding: 100px 20px 40px; /* Adjusted padding to ensure content is below header */
+  height: 100vh;
+  padding: 100px 20px 40px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -189,32 +189,14 @@ body.dark .dropdown-content a:hover { background: var(--dropdown-hover-bg-dark);
   text-align: center;
   position: relative;
   overflow: hidden;
-  color: var(--text-on-dark); /* Ensures text color is appropriate for hero background */
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.7); /* Adds subtle shadow for readability on images */
-  background: url('/images/hero-light.webp') center/cover no-repeat;
-}
-
-body.dark .hero {
-  background: url('/images/hero-dark.webp') center/cover no-repeat;
-}
-
-/* Specific background images for the audit page's hero. */
-section#audit.hero {
-  background: url('/images/hero-audit-light.webp') center/cover no-repeat;
+  color: var(--text-on-dark);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
 }
 
 body.dark section#audit.hero {
   background: url('/images/hero-audit-dark.webp') center/cover no-repeat;
 }
 
-/* Specific background images for the GEO page's hero */
-section#geo-hero-section.hero {
-  background: url('/images/geo-hero-light.webp') center/cover no-repeat;
-}
-
-body.dark section#geo-hero-section.hero {
-  background: url('/images/geo-hero-dark.webp') center/cover no-repeat;
-}
 
 /* Hero H1 and P for Homepage and all Subpages (Consistent Style) */
 .hero h1,

@@ -123,13 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
             geoSectionVisual.style.backgroundImage = `url('${isDark ? '/images/what-is-geo-dark.webp' : '/images/what-is-geo-light.webp'}')`;
         }
 
-        // Also ensure the generic hero background updates if it uses a dynamic image
-        // This targets any .hero that is NOT the audit page hero or the geo page hero.
-        const genericHero = document.querySelector('.hero:not(#audit):not(#geo-hero-section)');
-        if (genericHero) {
-            genericHero.style.backgroundImage = `url('${isDark ? '/images/hero-dark.webp' : '/images/hero-light.webp'}')`;
-        }
-
+        
         // Audit page hero background (if applicable)
         const auditHero = document.getElementById('audit');
         if (auditHero) {

@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
+
   {# Google Fonts - ✅ 6. Performance & Technical Health #}
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -44,36 +45,7 @@
 
 <body>
 
-  <script>
-    function updateHeroBackground() {
-      // Prioritize specific hero sections based on ID or more specific class if available
-      let heroSection = document.getElementById('blog-hero-section'); // For blog page
-      if (!heroSection) {
-        heroSection = document.querySelector('.hero-subpage'); // For other subpages
-      }
-      if (!heroSection) {
-        heroSection = document.querySelector('.hero'); // For index page (main hero)
-      }
 
-      if (!heroSection) return; // Exit if no hero section found
-
-      const isDarkMode = document.body.classList.contains('dark');
-      // Use data attributes specific to the section, fall back to a default if not found
-      const lightBg = heroSection.dataset.lightBg || '/images/hero-light.webp'; // Default for pages without specific data attributes
-      const darkBg = heroSection.dataset.darkBg || '/images/hero-dark.webp';
-
-      heroSection.style.backgroundImage = `url(${isDarkMode ? darkBg : lightBg})`;
-      heroSection.style.backgroundPosition = `center`; // Ensure image is centered
-      heroSection.style.backgroundSize = `cover`; // Ensure image covers the area
-    }
-
-    document.addEventListener('DOMContentLoaded', updateHeroBackground);
-
-    const observer = new MutationObserver(updateHeroBackground);
-    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-
-
-  </script>
 
   {% include "header.html" %} {# ✅ 1. Structure & Layout (Consistent header) #}
 
