@@ -87,8 +87,7 @@ body.dark .hero .container {
 
 
 body.dark .hero {
-  background: linear-gradient( 135deg,
-       #110534);
+  background:#110534;
   background-size: 400% 400%;
   animation: heroGradientShift 20s ease infinite;
 }
