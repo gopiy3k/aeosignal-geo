@@ -2,6 +2,9 @@
 <html lang="en">
 {% include "schema.njk" %}
 <head>
+<link rel="stylesheet" href="/css/style.css">
+ <link rel="preload" href="/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="/css/style.css"></noscript>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ title or "Aeosignal.Space" }}</title> {# ✅ 4. SEO Essentials (Meta title) #}
@@ -25,8 +28,7 @@
   {# <meta name="twitter:creator" content="@YourTwitterHandle"> #}
 
   <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="stylesheet" href="/css/style.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+ 
 
 
 
@@ -40,8 +42,8 @@
 <link rel="alternate" type="application/rss+xml" title="Aeosignal.Space Blog" href="https://aeosignal.space/feed.xml">
 
   {# Font Awesome Kit - ✅ 3. Use font awesome for emojis #}
-  <script src="https://kit.fontawesome.com/19bfeb220d.js" crossorigin="anonymous"></script>
-</head>
+ <script src="https://kit.fontawesome.com/yourkitid.js" crossorigin="anonymous" async></script>
+
 
 <body>
 
