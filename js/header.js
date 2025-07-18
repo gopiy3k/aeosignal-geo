@@ -1,4 +1,4 @@
-// header.js - Clean, modular header handling for Aeosignal.Space
+// header.js - Clean, stable, modular header handling for Aeosignal.Space
 
 document.addEventListener('DOMContentLoaded', function () {
   const hamburgerMenu = document.getElementById('hamburgerMenu');
@@ -9,42 +9,42 @@ document.addEventListener('DOMContentLoaded', function () {
   const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
 
   // Hamburger Open
-hamburgerMenu.addEventListener('click', function () {
+  hamburgerMenu.addEventListener('click', function () {
     navLinks.classList.add('open');
     hamburgerMenu.style.display = 'none';
     hamburgerClose.style.display = 'block';
-    body.classList.add('no-scroll');
-    body.classList.add('menu-open'); // ✅ Add this
-});
+    body.classList.add('no-scroll', 'menu-open');
+  });
 
-// Hamburger Close
-hamburgerClose.addEventListener('click', function () {
+  // Hamburger Close
+  hamburgerClose.addEventListener('click', function () {
     navLinks.classList.remove('open');
     hamburgerMenu.style.display = 'block';
     hamburgerClose.style.display = 'none';
-    body.classList.remove('no-scroll');
-    body.classList.remove('menu-open'); // ✅ Remove on close
-});
-  // Dropdown toggle support for mobile
+    body.classList.remove('no-scroll', 'menu-open');
+  });
+
+  // Dropdown toggle for mobile
   dropdownToggles.forEach(toggle => {
     toggle.addEventListener('click', function (e) {
-      e.preventDefault(); // Prevent default button behavior
-
+      e.preventDefault();
       const parent = this.parentElement;
       const dropdownContent = this.nextElementSibling;
 
-      parent.classList.toggle('open');
-      dropdownContent.classList.toggle('open');
+      const isOpen = parent.classList.contains('open');
 
-      // Close other open dropdowns
+      // Close all other dropdowns
       dropdownToggles.forEach(otherToggle => {
-        if (otherToggle !== this) {
-          otherToggle.parentElement.classList.remove('open');
-          if (otherToggle.nextElementSibling) {
-            otherToggle.nextElementSibling.classList.remove('open');
-          }
+        otherToggle.parentElement.classList.remove('open');
+        if (otherToggle.nextElementSibling) {
+          otherToggle.nextElementSibling.classList.remove('open');
         }
       });
+
+      if (!isOpen) {
+        parent.classList.add('open');
+        if (dropdownContent) dropdownContent.classList.add('open');
+      }
     });
   });
 
@@ -57,7 +57,7 @@ hamburgerClose.addEventListener('click', function () {
     });
   });
 
-  // Set theme on load from localStorage
+  // Load saved theme
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'dark') {
     body.classList.add('dark');
@@ -74,25 +74,19 @@ hamburgerClose.addEventListener('click', function () {
     logoImg.alt = isDark ? 'Aeosignal.Space Logo - Dark' : 'Aeosignal.Space Logo - Light';
   }
 
-  // Ensure hamburger visibility on resize
-  window.addEventListener('resize', function () {
+  // Responsive hamburger visibility
+  function handleResize() {
     if (window.innerWidth >= 768) {
       navLinks.classList.remove('open');
       hamburgerMenu.style.display = 'none';
       hamburgerClose.style.display = 'none';
-      body.classList.remove('no-scroll');
+      body.classList.remove('no-scroll', 'menu-open');
     } else {
       hamburgerMenu.style.display = 'block';
       hamburgerClose.style.display = 'none';
     }
-  });
-
-  // Initial hamburger visibility check
-  if (window.innerWidth < 768) {
-    hamburgerMenu.style.display = 'block';
-    hamburgerClose.style.display = 'none';
-  } else {
-    hamburgerMenu.style.display = 'none';
-    hamburgerClose.style.display = 'none';
   }
+
+  window.addEventListener('resize', handleResize);
+  handleResize(); // initial check
 });
