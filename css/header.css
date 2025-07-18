@@ -81,10 +81,13 @@ header {
 
     .nav-links a,
     .nav-links .dropdown-toggle {
-        display: block;
-        padding: 12px 0;
+        padding: 12px 0; padding: 12px 20px;
         text-align: left;
     }
+.dropdown-toggle {
+    justify-content: space-between; /* if using flex */
+    width: 100%;
+}
 
     /* Hide toggle-mode button when menu is open */
     body.menu-open .toggle-mode-btn {

@@ -9,21 +9,22 @@ document.addEventListener('DOMContentLoaded', function () {
   const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
 
   // Hamburger Open
-  hamburgerMenu.addEventListener('click', function () {
+hamburgerMenu.addEventListener('click', function () {
     navLinks.classList.add('open');
     hamburgerMenu.style.display = 'none';
     hamburgerClose.style.display = 'block';
     body.classList.add('no-scroll');
-  });
+    body.classList.add('menu-open'); // ✅ Add this
+});
 
-  // Hamburger Close
-  hamburgerClose.addEventListener('click', function () {
+// Hamburger Close
+hamburgerClose.addEventListener('click', function () {
     navLinks.classList.remove('open');
     hamburgerMenu.style.display = 'block';
     hamburgerClose.style.display = 'none';
     body.classList.remove('no-scroll');
-  });
-
+    body.classList.remove('menu-open'); // ✅ Remove on close
+});
   // Dropdown toggle support for mobile
   dropdownToggles.forEach(toggle => {
     toggle.addEventListener('click', function (e) {
