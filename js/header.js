@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const hamburgerMenu = document.getElementById('hamburgerMenu');
   const hamburgerClose = document.getElementById('hamburgerClose');
   const navLinks = document.getElementById('navLinks');
-  const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
   const body = document.body;
   const toggleModeButtons = document.querySelectorAll('.toggle-mode-btn');
+  const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
 
   // Hamburger Open
   hamburgerMenu.addEventListener('click', function () {
@@ -23,45 +23,28 @@ document.addEventListener('DOMContentLoaded', function () {
     hamburgerClose.style.display = 'none';
     body.classList.remove('no-scroll');
   });
-// Dropdown toggle support for mobile
-const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
 
-dropdownToggles.forEach(toggle => {
-  toggle.addEventListener('click', function(e) {
-    e.preventDefault(); // prevent link behavior
-    const parentDropdown = this.parentElement;
-    parentDropdown.classList.toggle('open');
-
-    // Optional: close other dropdowns
-    dropdownToggles.forEach(otherToggle => {
-      if (otherToggle !== this) {
-        otherToggle.parentElement.classList.remove('open');
-      }
-    });
-  });
-});
-  // Dropdown toggles (mobile)
+  // Dropdown toggle support for mobile
   dropdownToggles.forEach(toggle => {
-    toggle.addEventListener('click', function () {
-      const dropdownContent = this.nextElementSibling;
-      const isOpen = dropdownContent.classList.contains('open');
-      document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('open'));
-      if (!isOpen) {
-        dropdownContent.classList.add('open');
-      }
-    });
-  });
+    toggle.addEventListener('click', function (e) {
+      e.preventDefault(); // Prevent default button behavior
 
-  // Close nav on resize to desktop
-  window.addEventListener('resize', function () {
-    if (window.innerWidth >= 768) {
-      navLinks.classList.remove('open');
-      hamburgerMenu.style.display = 'none';
-      hamburgerClose.style.display = 'none';
-      body.classList.remove('no-scroll');
-    } else {
-      hamburgerMenu.style.display = 'block';
-    }
+      const parent = this.parentElement;
+      const dropdownContent = this.nextElementSibling;
+
+      parent.classList.toggle('open');
+      dropdownContent.classList.toggle('open');
+
+      // Close other open dropdowns
+      dropdownToggles.forEach(otherToggle => {
+        if (otherToggle !== this) {
+          otherToggle.parentElement.classList.remove('open');
+          if (otherToggle.nextElementSibling) {
+            otherToggle.nextElementSibling.classList.remove('open');
+          }
+        }
+      });
+    });
   });
 
   // Dark mode toggle
@@ -88,5 +71,27 @@ dropdownToggles.forEach(toggle => {
     if (!logoImg) return;
     logoImg.src = isDark ? '/images/logo-dark.webp' : '/images/logo-light.webp';
     logoImg.alt = isDark ? 'Aeosignal.Space Logo - Dark' : 'Aeosignal.Space Logo - Light';
+  }
+
+  // Ensure hamburger visibility on resize
+  window.addEventListener('resize', function () {
+    if (window.innerWidth >= 768) {
+      navLinks.classList.remove('open');
+      hamburgerMenu.style.display = 'none';
+      hamburgerClose.style.display = 'none';
+      body.classList.remove('no-scroll');
+    } else {
+      hamburgerMenu.style.display = 'block';
+      hamburgerClose.style.display = 'none';
+    }
+  });
+
+  // Initial hamburger visibility check
+  if (window.innerWidth < 768) {
+    hamburgerMenu.style.display = 'block';
+    hamburgerClose.style.display = 'none';
+  } else {
+    hamburgerMenu.style.display = 'none';
+    hamburgerClose.style.display = 'none';
   }
 });
