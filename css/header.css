@@ -52,6 +52,29 @@ header {
 .nav-links a:hover {
     color: var(--accent-hover, #003ECC);
 }
+/* ===== Submenu (dropdown) styling ===== */
+
+/* Base submenu link styling */
+.dropdown-content a {
+    font-style: italic; /* make italic */
+    padding: 10px 20px;
+    display: block;
+    transition: background 0.3s, color 0.3s;
+    color: var(--accent, #0056FF);
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+/* Hover highlight for submenu links */
+.dropdown-content a:hover {
+    background: var(--accent, #0056FF);
+    color: var(--accent-hover, #003ECC);
+}
+
+/* Optional: improve touch target spacing */
+.dropdown-content a + a {
+    margin-top: 4px;
+}
 
 
 /* Mobile responsiveness */
