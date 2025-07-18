@@ -317,3 +317,121 @@ p {
         font-size: 1.25rem;
     }
 }
+.testimonials-section {
+    padding: 60px 20px;
+    text-align: center;
+    background: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.testimonials-section h2 {
+    font-size: 2rem;
+    color: var(--accent);
+    margin-bottom: 40px;
+}
+
+.testimonials-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    background: var(--bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 25px 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+body.dark .testimonial-card {
+    background: #0a0f33;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+.testimonial-card p {
+    font-size: 1rem;
+    color: var(--paragraph);
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.testimonial-card h3 {
+    font-size: 0.95rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin: 0;
+}
+/* Accordion Structure */
+
+.faq-accordion {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.accordion-item {
+    margin-bottom: 12px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--card-bg, #f9f9f9);
+    border: 1px solid var(--border-color, #ddd);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.accordion-item:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.accordion-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--section-heading);
+    text-align: left;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.accordion-toggle:focus {
+    outline: 2px solid var(--accent);
+}
+
+.accordion-content {
+    padding: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--paragraph);
+    line-height: 1.5;
+}
+
+.toggle-icon {
+    transition: transform 0.3s ease;
+}
+
+.toggle-icon.rotate {
+    transform: rotate(180deg);
+}
+
+.why-it-matters {
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 10px;
+}
