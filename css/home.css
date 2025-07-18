@@ -373,11 +373,11 @@ body.dark .testimonial-card {
 }
 /* Accordion Structure */
 
-.faq-accordion {
-    max-width: 900px;
-    width: 100%;
+
+.faq-container {
+    max-width: 700px;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: 0 20px;
 }
 
 .accordion-item {
@@ -408,6 +408,7 @@ body.dark .testimonial-card {
     color: var(--section-heading);
     text-align: left;
     font-family: 'Orbitron', sans-serif;
+
 }
 
 .accordion-toggle:focus {
