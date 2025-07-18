@@ -1,112 +1,75 @@
-/* header.css for Aeosignal.Space */
-
-.site-header {
-  position: sticky;
-  top: 0;
-  background: #000;
-  z-index: 1000;
-  padding: 0.75rem 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 1px solid rgba(255, 0, 255, 0.2);
-  font-family: 'Inter', sans-serif;
-}
-
-.site-header .container {
-  width: 100%;
-  max-width: 1200px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.logo img {
-  height: 40px;
-  width: auto;
-}
-
-.site-nav ul {
-  display: flex;
-  gap: 1rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.site-nav a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-
-.site-nav a:hover {
-  color: #FF00FF; /* brand neon magenta hover */
-}
-
-.cta-button {
-  background: #FF00FF; /* brand neon magenta */
-  color: #000;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background 0.2s, color 0.2s;
-}
-
-.cta-button:hover {
-  background: #00FFFF; /* brand electric blue */
-  color: #000;
-}
-
-.header-cta {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-#dark-mode-toggle {
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.25rem;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-
-#dark-mode-toggle:hover {
-  color: #FF00FF;
-}
-
-#menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-@media (max-width: 768px) {
-  .site-nav {
-    display: none;
-    position: absolute;
-    top: 64px;
-    right: 0;
-    background: #000;
-    flex-direction: column;
-    width: 200px;
-    padding: 1rem;
-    border-left: 1px solid rgba(255, 0, 255, 0.2);
-    border-bottom: 1px solid rgba(255, 0, 255, 0.2);
-  }
-
-  .site-nav.open {
+/* ===== Header Critical Styles ===== */
+header {
     display: flex;
-  }
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: var(--header-bg, #ffffff);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
 
-  #menu-toggle {
-    display: block;
-  }
+#logo-img {
+    height: 40px;
+    width: auto;
+}
+
+.header-right-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.hamburger-menu,
+.hamburger-close {
+    display: none;
+    cursor: pointer;
+}
+
+.toggle-mode-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--accent, #0056FF);
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--accent-hover, #003ECC);
+}
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: var(--header-bg, #ffffff);
+        padding: 20px;
+    }
+
+    .hamburger-menu {
+        display: block;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
 }
