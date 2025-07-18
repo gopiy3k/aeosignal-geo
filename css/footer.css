@@ -65,14 +65,14 @@ body.dark footer a:hover {
 }
 
 .footer-logo {
-    width:100px;
+    width:70px;
     margin-bottom: 0px;
 }
 
 .footer-tagline {
     font-size: 1rem;
     color: var(--accent);
-    margin-bottom: 10px;
+    margin-bottom: 40px;
 }
 
 .footer-newsletter {

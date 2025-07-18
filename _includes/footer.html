@@ -1,11 +1,11 @@
-<link rel="stylesheet" href="/css/footer.css" />
+
 <footer class="site-footer">
   <div class="footer-container">
 
     <!-- Column 1: Logo, tagline, newsletter -->
     <div class="footer-column">
-      <img src="/images/logo-light.webp" alt="Aeosignal.Space Logo" class="footer-logo" loading="lazy" decoding="async">
-      <p class="footer-tagline">Future-Proof Your Site with GEO.</p>
+      <img src="/images/aeo.webp" alt="Aeosignal.Space Logo" class="footer-logo" loading="lazy" decoding="async">
+      <p class="footer-tagline">Future-Proof Your Website for AI Discovery.</p>
        <div class="gpt-slider">
         <img src="/images/gpt-logo.webp" alt="GPT Logo">
         <img src="/images/gemini-logo.webp" alt="Gemini Logo">
@@ -42,11 +42,49 @@
           <!-- LinkedIn SVG -->
           <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M20.45 20.45h-3.554v-5.568c0-1.327-.026-3.037-1.85-3.037-1.85 0-2.133 1.445-2.133 2.94v5.665H9.357V9h3.414v1.56h.05c.476-.9 1.637-1.85 3.37-1.85 3.603 0 4.268 2.372 4.268 5.455v6.285zM5.337 7.433a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM6.955 20.45H3.718V9h3.237v11.45zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.225.792 24 1.771 24h20.451C23.208 24 24 23.225 24 22.271V1.729C24 .774 23.208 0 22.225 0z"/></svg>
         </a>
-<form class="footer-newsletter" action="https://yourlist.com/subscribe" method="post">
-        <label for="footer-email">Get our AI GEO updates:</label>
-        <input type="email" id="footer-email" name="email" placeholder="you@example.com" required>
-        <button type="submit">Subscribe</button>
-      </form>
+<form id="newsletter-form">
+    <input type="email" id="newsletter-email" name="email" placeholder="Your email address" required>
+    <button type="submit">Subscribe</button>
+    <p id="newsletter-status"></p>
+</form>
+ </div>
+</section>
+<script src="https://unpkg.com/@supabase/supabase-js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const supabase = window.supabase.createClient(
+        'https://tbkqaqtetocdegskxyfz.supabase.co',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRia3FhcXRldG9jZGVnc2t4eWZ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA5MzUxMjMsImV4cCI6MjA2NjUxMTEyM30.jkuIEJ21n4iFuEaKxOQoss14wxZSwpituSfGtAc_vZE'
+    );
+
+    const form = document.getElementById('newsletter-form');
+    const status = document.getElementById('newsletter-status');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        status.textContent = "Subscribing...";
+        status.style.color = "var(--paragraph)";
+
+        const email = document.getElementById('newsletter-email').value.trim();
+
+        const { error } = await supabase.from('leads').insert([
+            { email, source: 'newsletter' }
+        ]);
+
+        if (error) {
+            console.error(error);
+            status.textContent = "❌ Subscription failed. Please try again.";
+            status.style.color = "#ff4d4d";
+        } else {
+            status.textContent = "✅ Subscribed successfully!";
+            status.style.color = "#00ffcc";
+            form.reset();
+        }
+    });
+});
+</script>
+
+
       
      
     </div>
