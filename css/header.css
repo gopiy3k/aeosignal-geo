@@ -27,10 +27,6 @@ header {
     display: none;
     cursor: pointer;
 }
-/* Hide toggle-mode button when menu is open on mobile */
-body.menu-open .toggle-mode-btn {
-    display: none !important;
-}
 
 
 .toggle-mode-btn {
@@ -58,7 +54,17 @@ body.menu-open .toggle-mode-btn {
     color: var(--accent-hover, #003ECC);
 }
 /* Mobile responsiveness */
-@media (max-width: 768px) {
+@media (max-width: 768px) 
+  .nav-links.mobile-active {
+    text-align: left;
+    padding-left: 20px;
+  }
+  .nav-links.mobile-active a,
+  .nav-links.mobile-active .dropdown-toggle {
+    display: block;
+    padding: 12px 0;
+  }
+}{
     .nav-links {
         display: none;
         flex-direction: column;
@@ -69,6 +75,24 @@ body.menu-open .toggle-mode-btn {
         background: var(--header-bg, #ffffff);
         padding: 20px;
     }
+/* Hide toggle-mode button when menu is open on mobile */
+body.menu-open .toggle-mode-btn {
+    display: none !important;
+}
+ .nav-links {
+    width: 50%;
+    max-width: 280px; /* or adjust as needed */
+    height: 100%;
+    background: var(--header-bg, #fff); /* ensure visible */
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    transform: translateX(-100%); /* hidden by default */
+  }
+  .nav-links.active {
+    transform: translateX(0); /* slide in */
+  }
+}
+
 
     .hamburger-menu {
         display: block;
