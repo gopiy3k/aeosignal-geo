@@ -27,6 +27,11 @@ header {
     display: none;
     cursor: pointer;
 }
+/* Hide toggle-mode button when menu is open on mobile */
+body.menu-open .toggle-mode-btn {
+    display: none !important;
+}
+
 
 .toggle-mode-btn {
     background: none;
