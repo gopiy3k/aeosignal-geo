@@ -70,6 +70,9 @@ header {
     background: var(--accent, #0056FF);
     color: var(--cta-text, #ffffff);
 }
+body.dark .dropdown-content a:hover {
+    color: var(--accent, #00FFFF);
+}
 
 /* Optional: improve touch target spacing */
 .dropdown-content a + a {
