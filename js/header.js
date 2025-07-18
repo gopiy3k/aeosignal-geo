@@ -23,7 +23,23 @@ document.addEventListener('DOMContentLoaded', function () {
     hamburgerClose.style.display = 'none';
     body.classList.remove('no-scroll');
   });
+// Dropdown toggle support for mobile
+const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
 
+dropdownToggles.forEach(toggle => {
+  toggle.addEventListener('click', function(e) {
+    e.preventDefault(); // prevent link behavior
+    const parentDropdown = this.parentElement;
+    parentDropdown.classList.toggle('open');
+
+    // Optional: close other dropdowns
+    dropdownToggles.forEach(otherToggle => {
+      if (otherToggle !== this) {
+        otherToggle.parentElement.classList.remove('open');
+      }
+    });
+  });
+});
   // Dropdown toggles (mobile)
   dropdownToggles.forEach(toggle => {
     toggle.addEventListener('click', function () {
