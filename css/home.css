@@ -143,6 +143,23 @@ p {
 .cta-button:hover {
     background: var(--accent-hover);
 }
+.cta-final-section h2 {
+    font-size: 2rem; /* desktop default */
+}
+
+.cta-final-section p {
+    font-size: 1.1rem; /* desktop default */
+}
+
+@media (max-width: 768px) {
+    .cta-final-section h2 {
+        font-size: 1.5rem; /* adjust as needed */
+    }
+
+    .cta-final-section p {
+        font-size: 1rem; /* adjust as needed */
+    }
+}
 
 .gpt-slider {
     position: relative;
