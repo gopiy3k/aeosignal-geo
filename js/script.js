@@ -117,19 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         //
 
-        // Update background image for the 'geo-section-visual' div
-        const geoSectionVisual = document.getElementById('geo-section-visual');
-        if (geoSectionVisual) {
-            geoSectionVisual.style.backgroundImage = `url('${isDark ? '/images/what-is-geo-dark.webp' : '/images/what-is-geo-light.webp'}')`;
-        }
-
         
-        // Audit page hero background (if applicable)
-        const auditHero = document.getElementById('audit');
-        if (auditHero) {
-            auditHero.style.backgroundImage = `url('${isDark ? '/images/hero-audit-dark.webp' : '/images/hero-audit-light.webp'}')`;
-        }
-        // --- END NEW/UPDATED LOGIC ---
     }
 
     // Initialize Dark Mode Preference on Page Load
