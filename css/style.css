@@ -377,48 +377,6 @@ body.dark .audit-item-card:hover {
     font-weight: bold;
     font-size: 1.2em;
 }
-/* FOOTER */
-footer {
-  background: var(--footer-bg-light);
-  color: var(--footer-text-light);
-  text-align: center;
-  padding: 40px 20px; font-size: 0.9rem;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-body.dark footer { background: var(--footer-bg-dark); color: var(--footer-text-dark); }
-footer a { color: var(--accent); text-decoration: none; margin: 0 8px; transition: color 0.3s ease; }
-footer a:hover { color: var(--accent-hover); }
-
-/* Common styling for content within sections */
-.section-content {
-    width: 100%;
-    max-width: 800px; /* Limit content width for readability */
-    margin: 0 auto;
-    text-align: left; /* Default text alignment for content */
-}
-.section-content h2 {
-    font-size: 2rem;
-    color: var(--section-heading);
-    margin-bottom: 20px;
-    text-align: center; /* Center section headings */
-}
-.section-content h2 .fas {
-    margin-right: 10px;
-    color: var(--accent);
-}
-.section-content h3 {
-    font-size: 1.5rem;
-    color: var(--section-heading);
-    margin-top: 30px;
-    margin-bottom: 15px;
-}
-.section-content p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--paragraph);
-    margin-bottom: 15px;
-}
-
 /* General list styling */
 .section-content ul {
     list-style: none; /* Remove default bullet */
