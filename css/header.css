@@ -53,45 +53,32 @@ header {
     color: var(--accent-hover, #003ECC);
 }
 
-/* ===== Mobile Styles ===== */
+
+/* Mobile responsiveness */
 @media (max-width: 768px) {
+    .nav-links {
+    width: 50%;
+    max-width: 280px; /* or adjust as needed */
+    height: 100%;
+    background: var(--header-bg, #fff); /* ensure visible */
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    transform: translateX(-100%); /* hidden by default */
+  }
+  .nav-links.active {
+    transform: translateX(0); /* slide in */
+  }
+}
+
+
     .hamburger-menu {
         display: block;
     }
 
-    .nav-links {
-        flex-direction: column;
-        position: fixed;
-        top: 0;
-        left: 0; /* slide from the left */
-        width: 50%; /* half-screen width */
-        max-width: 280px;
-        height: 100vh;
-        background: var(--header-bg, #ffffff);
-        padding: 60px 20px 20px 20px;
-        box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-        transform: translateX(-100%); /* hidden by default */
-        transition: transform 0.3s ease;
-        z-index: 9999;
-    }
-
     .nav-links.open {
-        transform: translateX(0);
+        display: flex;
     }
-
-    .nav-links a,
-    .nav-links .dropdown-toggle {
-        padding: 12px 20px;
-        text-align: left;
-        display: block;
-    }
-
-    .dropdown-toggle {
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    body.menu-open .toggle-mode-btn {
-        display: none !important;
-    }
+body.menu-open .toggle-mode-btn {
+    display: none !important;
+}
 }
