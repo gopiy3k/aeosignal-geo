@@ -18,82 +18,119 @@
 }
 
 
-#glossary-hero {
-    width: 100%;
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    padding: 100px 20px 60px;
-    text-align: center;
-}
-
-#glossary-hero .section-content {
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-#glossary-hero h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2.2rem;
-    color: var(--section-heading);
-}
-
-#glossary-hero p {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.1rem;
-    color: var(--paragraph);
-}
-
-.section-intro {
-    max-width: 800px;
-    padding: 40px 20px;
-    text-align: center;
-}
-
-/* Glossary Page - Improved Intro Section */
-
-.glossary-intro {
-    background: var(--header-bg, #f4f4f4);
-    color: var(--text);
-    padding: 60px 20px;
-    text-align: center;
-    border-radius: 12px;
-    max-width: 900px;
-    margin: 40px auto;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
-}
-
-.glossary-intro .intro-content {
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.glossary-intro h2 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.8rem;
-    color: var(--section-heading);
-    margin-bottom: 20px;
+ ===============================
+   HERO SECTION
+================================= */
+.hero {
+    height: 100vh; /* exact viewport height */
+    width: 100%; /* ensure full width */
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    gap: 10px;
+    align-items: center;
+    text-align: center;
+    padding: 0; /* remove conflicting padding */
+    position: relative;
+    overflow: hidden;
+    color: var(--text-on-dark);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+    background: linear-gradient(135deg, #d0eaff, #a0e7e5, #f0f0f0, #d0eaff);
+    background-size: 300% 300%;
+    animation: heroGradientShift 20s ease infinite;
 }
 
-.glossary-intro .intro-lead {
-    font-size: 1.2rem;
-    color: var(--accent);
-    font-weight: 600;
-    margin-bottom: 15px;
+body.dark .hero {
+    background: linear-gradient(135deg, #4e049b, #300369, #8d05e1, #110534, #e834e0);
+    background-size: 400% 400%;
+    animation: heroGradientShift 20s ease infinite;
 }
 
-.glossary-intro p {
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    color: var(--paragraph);
-    line-height: 1.6;
-    margin-bottom: 12px;
+@keyframes heroGradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.scroll-indicator {
+  font-size: 2rem;
+  margin-top: 20px;
+  color: var(--accent);
+  animation: bounce 1.5s infinite;
 }
 
+@keyframes bounce {
+  0%, 100% { transform: translateY(0);}
+  50% { transform: translateY(-8px);}
+}
+
+.section-intro-box {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.intro-box {
+  display: flex;
+  align-items: center;
+  background: var(--card-bg, #d0eaff);
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 1000px;
+  width: 100%;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.intro-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.intro-box-image {
+  flex: 0 0 250px;
+  margin-right: 20px;
+}
+
+.intro-box-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+.intro-box-content {
+  flex: 1;
+}
+
+.intro-box-content h2 {
+  font-size: 1.8rem;
+  color: var(--section-heading);
+  margin-bottom: 15px;
+}
+
+.intro-box-content p {
+  font-size: 1rem;
+  color: var(--paragraph);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .intro-box {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+  .intro-box-image {
+    margin: 0 0 15px 0;
+    flex: 0 0 auto;
+  }
+  .intro-box-content h2 {
+    font-size: 1.5rem;
+  }
+}
 .section-closing-cta {
     text-align: center;
     padding: 60px 20px;

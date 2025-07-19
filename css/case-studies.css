@@ -129,6 +129,62 @@ section-intro-box {
     font-size: 1.5rem;
   }
 }
+.case-studies-grid {
+    display: grid;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+    .case-studies-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .case-studies-grid {
+        grid-template-columns: 1fr; /* Single column for mobile */
+    }
+}
+
+.case-study-card {
+    background: var(--card-bg, #f9f9f9);
+    border: 1px solid var(--border-color, #ddd);
+    border-radius: 8px;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.case-study-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.case-study-thumb {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.case-study-card h3 {
+    font-size: 1.2rem;
+    color: var(--accent);
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.case-study-card p {
+    font-size: 0.95rem;
+    color: var(--paragraph);
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
 
 .case-studies-grid {
     display: grid;
