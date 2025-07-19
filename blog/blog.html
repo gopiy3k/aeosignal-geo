@@ -35,13 +35,7 @@ permalink: "/blog/"
 <link rel="stylesheet" href="/css/blog.css">
 <main class="blog-page">
 
-  <!-- ✅ Breadcrumbs -->
-  <nav aria-label="Breadcrumb" class="breadcrumbs">
-    <a href="/">Home</a> › 
-    <a href="/resources/">Resources</a> › 
-    <span>Blog</span>
-  </nav>
-
+  
 <section class="hero">
     <div class="section-content">
         <h1>The Blog: Your Edge in the AI Search Era</h1>
@@ -50,15 +44,20 @@ permalink: "/blog/"
     </div>
 </section>
 
-  <!-- ✅ Navigate the Future Section -->
- <section class="section section-left-aligned">
-    <img src="/images/blog-intro-light.webp" alt="Navigate the Future Illustration in Light Mode" class="light-mode-img">
-    <img src="/images/blog-intro-dark.webp" alt="Navigate the Future Illustration in Dark Mode" class="dark-mode-img">
-    <div class="section-content">
-    <h2>Navigate the Future of Search, Today</h2>
-    <p>Generative AI, Large Language Models, and evolving search engines are reshaping how businesses are discovered. Our blog is your essential hub to decode these shifts, master GEO, and drive real results in your targeted markets.</p>
-    <p>Whether you’re scaling a crypto project, growing a D2C brand, innovating in AI, or leading an SEO agency, our articles deliver clarity, actionable tactics, and strategic foresight to keep you ahead.</p>
-  </section>
+<!-- ✅ Navigate the Future Section (Box with image left on desktop) -->
+<section class="section section-intro-box">
+  <div class="intro-box">
+    <div class="intro-box-image">
+     
+      <img src="/images/blog-intro-dark.webp" alt="Navigate the Future Illustration in Dark Mode" class="dark-mode-img">
+    </div>
+    <div class="intro-box-content">
+      <h2>Navigate the Future of Search, Today</h2>
+      <p>Generative AI, Large Language Models, and evolving search engines are reshaping how businesses are discovered. Our blog is your essential hub to decode these shifts, master GEO, and drive real results in your targeted markets.</p>
+      <p>Whether you’re scaling a crypto project, growing a D2C brand, innovating in AI, or leading an SEO agency, our articles deliver clarity, actionable tactics, and strategic foresight to keep you ahead.</p>
+    </div>
+  </div>
+</section>
 
   <!-- ✅ What You’ll Discover Section -->
  <section class="section section-left-aligned">
@@ -71,28 +70,28 @@ permalink: "/blog/"
      <strong>Decoding AI Search & GEO</strong>
 
         <ul>
-          <li>How LLMs interpret your content</li>
-          <li>Advanced structured data tactics</li>
-          <li>AEO strategies for AI summaries</li>
-          <li>Future predictions & readiness</li>
+          <li> How LLMs interpret your content</li>
+          <li> Advanced structured data tactics</li>
+          <li> AEO strategies for AI summaries</li>
+          <li> Future predictions & readiness</li>
         </ul>
       </div>
       <div class="discover-card">
         <strong>Niche-Specific Strategies</strong>
         <ul>
-          <li>Crypto marketing in the AI era</li>
-          <li>AI platform positioning for growth</li>
-          <li>Scaling D2C with AI recommendations</li>
-          <li>Advanced GEO for agencies</li>
+          <li> Crypto marketing in the AI era</li>
+          <li> AI platform positioning for growth</li>
+          <li> Scaling D2C with AI recommendations</li>
+          <li> Advanced GEO for agencies</li>
         </ul>
       </div>
       <div class="discover-card">
         <strong>SEO & Digital Marketing for AI</strong>
         <ul>
-          <li>Human-friendly, AI-ready content</li>
-          <li>Technical SEO for AI crawling</li>
-          <li>Building E-E-A-T authority</li>
-          <li>Adapting to AI-driven search</li>
+          <li> Human-friendly, AI-ready content</li>
+          <li> Technical SEO for AI crawling</li>
+          <li> Building E-E-A-T authority</li>
+          <li> Adapting to AI-driven search</li>
         </ul>
       </div>
     </div>
@@ -100,6 +99,7 @@ permalink: "/blog/"
 
   <!-- ✅ Featured Articles Section -->
   <section class="section-featured-articles" id="articles">
+
     <h2>Featured Articles</h2>
     <div class="articles-grid">
       {% for post in collections.posts | reverse %}

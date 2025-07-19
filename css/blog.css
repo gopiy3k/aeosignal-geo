@@ -13,35 +13,22 @@
 /* ===============================
    HERO SECTION
 ================================= */
-/* ===== Global Hero Background ===== */
 .hero {
-    min-height: 100vh;
+    height: 100vh; /* exact viewport height */
+    width: 100%; /* ensure full width */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 100px 20px 60px;
+    padding: 0; /* remove conflicting padding */
     position: relative;
     overflow: hidden;
     color: var(--text-on-dark);
     text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-   background: linear-gradient(135deg, #d0eaff, #a0e7e5, #f0f0f0, #d0eaff);
-    background-size: 300% 300%;
-    animation: heroGradientShift 10s ease infinite;
-}
-.hero {
- position: relative;
-    overflow: hidden;
     background: linear-gradient(135deg, #d0eaff, #a0e7e5, #f0f0f0, #d0eaff);
     background-size: 300% 300%;
-    animation: heroGradientShift 10s ease infinite;
-    text-align: center;
-    padding: 80px 20px;
-
-}
-.hero-content > * {
-  animation: softLiftFade 6s ease-in-out infinite;
+    animation: heroGradientShift 20s ease infinite;
 }
 
 body.dark .hero {
@@ -49,25 +36,12 @@ body.dark .hero {
     background-size: 400% 400%;
     animation: heroGradientShift 20s ease infinite;
 }
-.breadcrumbs {
-  display: none;
-}
 
-.section-hero h1 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 2.5rem;
-  color: var(--section-heading);
-  margin-bottom: 20px;
+@keyframes heroGradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
-
-.section-hero p {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.2rem;
-  color: var(--paragraph);
-  max-width: 700px;
-  margin: 0 auto;
-}
-
 .scroll-indicator {
   font-size: 2rem;
   margin-top: 20px;
@@ -80,34 +54,76 @@ body.dark .hero {
   50% { transform: translateY(-8px);}
 }
 
-/* ===============================
-   INTRO SECTION
-================================= */
-.section-intro {
-  padding: 60px 20px;
-  max-width: 800px;
-  text-align: center;
+/* === Navigate the Future Section with Image Left === */
+.section-intro-box {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
 }
 
-.section-intro h2 {
-  font-size: 2rem;
+.intro-box {
+  display: flex;
+  align-items: center;
+  background: var(--card-bg, #d0eaff);
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 1000px;
+  width: 100%;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.intro-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.intro-box-image {
+  flex: 0 0 250px;
+  margin-right: 20px;
+}
+
+.intro-box-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+.intro-box-content {
+  flex: 1;
+}
+
+.intro-box-content h2 {
+  font-size: 1.8rem;
   color: var(--section-heading);
-  margin-bottom: 20px;
-}
-
-.section-intro p {
-  font-size: 1.1rem;
-  color: var(--paragraph);
-  line-height: 1.6;
   margin-bottom: 15px;
 }
 
-
-.section-intro, .section-discover {
-  padding: 2rem 1rem;
-  text-align: center;
+.intro-box-content p {
+  font-size: 1rem;
+  color: var(--paragraph);
+  line-height: 1.6;
+  margin-bottom: 10px;
 }
 
+@media (max-width: 768px) {
+  .intro-box {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+  .intro-box-image {
+    margin: 0 0 15px 0;
+    flex: 0 0 auto;
+  }
+  .intro-box-content h2 {
+    font-size: 1.5rem;
+  }
+}
 /* ===============================
    DISCOVER SECTION
 ================================= */
@@ -135,7 +151,7 @@ body.dark .hero {
 }
 
 .discover-card {
-  background: var(--card-bg, #f9f9f9);
+  background: var(--card-bg, #d0eaff);
   border: 1px solid var(--border-color, #ddd);
   border-radius: 8px;
   padding: 25px;
@@ -155,14 +171,9 @@ body.dark .hero {
   margin-bottom: 15px;
 }
 
-.discover-card ul {
-  padding-left: 20px;
-  list-style: none;
-}
-
 .discover-card ul li {
   position: relative;
-  padding-left: 20px;
+  padding-left: 28px; /* increased for better spacing */
   margin-bottom: 10px;
   color: var(--paragraph);
   font-size: 0.95rem;
@@ -170,13 +181,14 @@ body.dark .hero {
 
 .discover-card ul li::before {
   font-family: "Font Awesome 6 Free";
-  font-weight: 900; /* for solid icons */
+  font-weight: 900;
   content: "\f005"; /* Unicode for solid star */
   position: absolute;
   left: 0;
   color: var(--accent);
+  font-size: 0.9rem; /* ensure consistent sizing */
+  line-height: 1; /* vertical centering */
 }
-
 
 /* ===============================
    FEATURED ARTICLES SECTION
@@ -206,7 +218,7 @@ body.dark .hero {
 }
 
 .article-card {
-  background: var(--card-bg, #f9f9f9);
+  background: var(--card-bg, #d0eaff);
   border: 1px solid var(--border-color, #ddd);
   border-radius: 8px;
   overflow: hidden;
@@ -257,7 +269,24 @@ body.dark .hero {
 .read-more:hover {
   color: var(--accent-hover);
 }
+.article-card a {
+  text-decoration: none;
+  color: inherit;
+}
 
+.article-card a:hover {
+  text-decoration: none;
+}
+
+.article-card a h3,
+.article-card a p {
+  text-decoration: none; /* Remove underline on these elements */
+}
+
+.article-card a:hover h3,
+.article-card a:hover p {
+  text-decoration: none; /* Ensure hover also does not add underline */
+}
 /* ===============================
    CLOSING CTA SECTION
 ================================= */
