@@ -131,6 +131,27 @@ body.dark .hero {
     font-size: 1.5rem;
   }
 }
+.intro-box ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 15px;
+}
+
+.intro-box ul li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 8px;
+    color: var(--text);
+}
+
+.intro-box ul li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: bold;
+}
+
 .section-closing-cta {
     text-align: center;
     padding: 60px 20px;

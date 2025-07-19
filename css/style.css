@@ -300,6 +300,77 @@ body.dark .hero {
 }
 .cta-button:hover { background: var(--accent-hover); }
 
+.section-intro-box {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.intro-box {
+  display: flex;
+  align-items: center;
+  background: var(--card-bg, #d0eaff);
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 1000px;
+  width: 100%;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.intro-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.intro-box-image {
+  flex: 0 0 250px;
+  margin-right: 20px;
+}
+
+.intro-box-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+.intro-box-content {
+  flex: 1;
+}
+
+.intro-box-content h2 {
+  font-size: 1.8rem;
+  color: var(--section-heading);
+  margin-bottom: 15px;
+}
+
+.intro-box-content p {
+  font-size: 1rem;
+  color: var(--paragraph);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .intro-box {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+  .intro-box-image {
+    margin: 0 0 15px 0;
+    flex: 0 0 auto;
+  }
+  .intro-box-content h2 {
+    font-size: 1.5rem;
+  }
+}
+
+
 /* GENERIC SECTION STYLING */
 .section {
   display: flex;
