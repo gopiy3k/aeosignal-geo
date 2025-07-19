@@ -13,38 +13,41 @@
 /* ===============================
    HERO SECTION
 ================================= */
-.section-hero {
-  background: var(--header-bg);
-  color: var(--text);
-  text-align: center;
-  padding: 20px 60px; /* or adjust as needed */
+/* ===== Global Hero Background ===== */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 100px 20px 60px;
+    position: relative;
+    overflow: hidden;
+    color: var(--text-on-dark);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+   background: linear-gradient(135deg, #d0eaff, #a0e7e5, #f0f0f0, #d0eaff);
+    background-size: 300% 300%;
+    animation: heroGradientShift 10s ease infinite;
+}
+.hero {
+ position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #d0eaff, #a0e7e5, #f0f0f0, #d0eaff);
+    background-size: 300% 300%;
+    animation: heroGradientShift 10s ease infinite;
+    text-align: center;
+    padding: 80px 20px;
+
+}
+.hero-content > * {
+  animation: softLiftFade 6s ease-in-out infinite;
 }
 
-#blog-hero-section {
-  width: 100%;
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  padding: 120px 20px 80px;
-  text-align: center;
-  max-height: 600px; /* optional cap */
-  overflow: hidden; /* ensure image does not overflow container */
-}
-
-@media (max-width: 768px) {
-  #blog-hero-section {
-    padding: 80px 20px 60px; /* reduce padding on mobile */
-  }
-}
-#blog-hero-section .section-content {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-
-body.dark .section-hero {
-  background: var(--header-bg);
-  color: var(--text-on-dark);
+body.dark .hero {
+    background: linear-gradient(135deg, #4e049b, #300369, #8d05e1, #110534, #e834e0);
+    background-size: 400% 400%;
+    animation: heroGradientShift 20s ease infinite;
 }
 .breadcrumbs {
   display: none;
