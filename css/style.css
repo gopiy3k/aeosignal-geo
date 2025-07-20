@@ -183,21 +183,33 @@ body.dark .dropdown-content a:hover { background: var(--dropdown-hover-bg-dark);
   right: 20px;
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+}
+
 .hero {
-    height: 100svh;
+    height: 100vh; /* exact viewport height */
+    width: 100%; /* ensure full width */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 20px;
+    padding: 0; /* remove conflicting padding */
     position: relative;
     overflow: hidden;
     color: var(--text-on-dark);
     text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
     background: linear-gradient(135deg, #d0eaff, #a0e7e5, #f0f0f0, #d0eaff);
     background-size: 300% 300%;
-    animation: heroGradientShift 10s ease infinite;
+    animation: heroGradientShift 20s ease infinite;
+}
+.hero-content {
+    max-width: 700px;
+    padding: 20px; /* apply padding here */
 }
 
 body.dark .hero {

@@ -71,12 +71,15 @@ body.dark .hero .container {
   animation: softLiftFade 6s ease-in-out infinite;
 }
 html, body {
-    height: 100%;
     margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
 }
 
+
 .hero {
-    height: 100vh;
+    min-height: 100svh;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
