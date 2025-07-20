@@ -71,7 +71,7 @@ body.dark .hero .container {
   animation: softLiftFade 6s ease-in-out infinite;
 }
 .hero {
-   min-height: calc(100vh - 80px); /* adjust if your header is taller/shorter */
+   height: 100svh;
     display: flex;
     flex-direction: column;
     justify-content: center;
