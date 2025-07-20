@@ -18,18 +18,31 @@ body.dark {
     align-items: center;
 }
 
-#why-us-hero {
-    width: 100%;
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    padding: 100px 20px 60px;
-    text-align: center;
+html, body {
+    height: 100%;
+    margin: 0;
 }
 
-#why-us-hero .section-content {
+.hero {
+    height: 100vh; /* exact viewport height */
+    width: 100%; /* ensure full width */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0; /* remove conflicting padding */
+    position: relative;
+    overflow: hidden;
+    color: var(--text-on-dark);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+    background: linear-gradient(135deg, #d0eaff, #a0e7e5, #f0f0f0, #d0eaff);
+    background-size: 300% 300%;
+    animation: heroGradientShift 20s ease infinite;
+}
+.hero-content {
     max-width: 700px;
-    margin: 0 auto;
+    padding: 20px; /* apply padding here */
 }
 
 #why-us-hero h1 {

@@ -21,6 +21,11 @@
  ===============================
    HERO SECTION
 ================================= */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
 .hero {
     height: 100vh; /* exact viewport height */
     width: 100%; /* ensure full width */
@@ -38,6 +43,11 @@
     background-size: 300% 300%;
     animation: heroGradientShift 20s ease infinite;
 }
+.hero-content {
+    max-width: 700px;
+    padding: 20px; /* apply padding here */
+}
+
 
 body.dark .hero {
     background: linear-gradient(135deg, #4e049b, #300369, #8d05e1, #110534, #e834e0);
