@@ -9,6 +9,15 @@ header {
     position: sticky;
     top: 0;
     z-index: 999;
+position: fixed;       /* switch from sticky to fixed */
+    top: 0;                /* ensure pinned to top */
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    background: var(--header-bg, #ffffff); /* ensure background is opaque */
+   }
+body {
+    padding-top: 60px; /* adjust to your header's exact height */
 }
 
 #logo-img {

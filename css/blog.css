@@ -208,6 +208,7 @@ body.dark .hero {
   padding: 60px 20px;
   max-width: 1200px;
   width: 100%;
+text-align: center;
 }
 
 .section-featured-articles h2 {
@@ -345,4 +346,211 @@ body.dark .hero {
 .fade-in.visible {
   opacity: 1;
   transform: translateY(0);
+/* ===============================
+   BLOG ARTICLE PAGE STRUCTURE
+   (for individual .md posts)
+================================= */
+
+.blog-post-content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  line-height: 1.7;
+  font-family: 'Inter', sans-serif;
+  color: var(--paragraph, #222);
+}
+
+.blog-post-content h1,
+.blog-post-content h2,
+.blog-post-content h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  color: var(--section-heading, #111);
+  line-height: 1.3;
+  margin: 2rem 0 1rem 0;
+  text-align: left;
+}
+
+.blog-post-content h1 {
+  font-size: 2rem;
+}
+
+.blog-post-content h2 {
+  font-size: 1.6rem;
+}
+
+.blog-post-content h3 {
+  font-size: 1.3rem;
+}
+
+.blog-post-content p {
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+}
+
+.blog-post-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  margin: 1.5rem auto;
+}
+
+.blog-post-content ul,
+.blog-post-content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.blog-post-content li {
+  margin-bottom: 0.5rem;
+}
+
+.blog-post-content li::marker {
+  color: var(--accent, #e9436f);
+}
+
+.blog-post-content a {
+  color: var(--accent, #e9436f);
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+
+.blog-post-content a:hover {
+  color: var(--accent-hover, #c43159);
+}
+
+.blog-post-content blockquote {
+  border-left: 4px solid var(--accent, #e9436f);
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  color: #555;
+  font-style: italic;
+  background: rgba(0,0,0,0.03);
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .blog-post-content h1 {
+    font-size: 1.6rem;
+  }
+  .blog-post-content h2 {
+    font-size: 1.4rem;
+  }
+  .blog-post-content h3 {
+    font-size: 1.2rem;
+  }
+  .blog-post-content p {
+    font-size: 1rem;
+  }
+}
+/* ===============================
+   SINGLE BLOG POST STRUCTURE
+   .blog-article-wrapper and inside
+================================= */
+
+.blog-article-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 60px 20px;
+  background: var(--page-bg, #f9f9f9);
+}
+
+.blog-article {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.05);
+  max-width: 800px;
+  width: 100%;
+  padding: 40px;
+}
+
+.blog-article-header h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.2rem;
+  color: var(--section-heading, #111);
+  margin-bottom: 10px;
+}
+
+.blog-article-meta {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.blog-article-excerpt {
+  font-size: 1.2rem;
+  color: #444;
+  margin-bottom: 30px;
+  font-style: italic;
+}
+
+.blog-article-content {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
+}
+
+.blog-article-content h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.8rem;
+  margin: 2rem 0 1rem;
+  color: var(--section-heading, #111);
+}
+
+.blog-article-content h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.4rem;
+  margin: 1.5rem 0 1rem;
+  color: var(--section-heading, #111);
+}
+
+.blog-article-content p {
+  margin-bottom: 1rem;
+}
+
+.blog-article-content img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  display: block;
+}
+
+.blog-article-content ul,
+.blog-article-content ol {
+  margin: 1rem 0 1rem 2rem;
+}
+
+.blog-article-content blockquote {
+  border-left: 4px solid var(--accent, #e9436f);
+  padding-left: 1rem;
+  margin: 2rem 0;
+  font-style: italic;
+  background: rgba(0,0,0,0.03);
+  border-radius: 4px;
+}
+
+.blog-article-content a {
+  color: var(--accent, #e9436f);
+  text-decoration: underline;
+}
+
+.blog-article-content a:hover {
+  color: var(--accent-hover, #c43159);
+}
+
+@media (max-width: 768px) {
+  .blog-article {
+    padding: 30px 20px;
+  }
+  .blog-article-header h1 {
+    font-size: 1.8rem;
+  }
+  .blog-article-content h2 {
+    font-size: 1.5rem;
+  }
+  .blog-article-content h3 {
+    font-size: 1.2rem;
+  }
 }

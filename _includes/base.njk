@@ -4,53 +4,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ title or "Aeosignal.Space" }}</title> {# ✅ 4. SEO Essentials (Meta title) #}
-  <meta name="description" content="{{ description or 'Future-Proof Your Website with Generative Engine Optimization (GEO).' }}"> {# ✅ 4. SEO Essentials (Meta description) #}
+  <title>{{ title or "Aeosignal.Space" }}</title>
+  <meta name="description" content="{{ description or 'Future-Proof Your Website with Generative Engine Optimization (GEO).' }}">
 
-  {# ✅ 4. SEO Essentials (Canonical URL) #}
   <link rel="canonical" href="{{ canonicalUrl or page.url | url | absoluteUrl(site.url) }}">
 
-  {# ✅ 4. SEO Essentials (OpenGraph Tags for Social Media Sharing) #}
   <meta property="og:title" content="{{ title or 'Aeosignal.Space' }}">
   <meta property="og:description" content="{{ description or 'Future-Proof Your Website with Generative Engine Optimization (GEO).' }}">
   <meta property="og:url" content="{{ page.url | url | absoluteUrl(site.url) }}">
   <meta property="og:image" content="{{ ogImage or '/images/hero-light.webp' }}">
   <meta property="og:type" content="{{ ogType or 'website' }}">
 
-  {# ✅ 4. SEO Essentials (Twitter Card Tags) #}
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ title or 'Aeosignal.Space' }}">
   <meta name="twitter:description" content="{{ description or 'Future-Proof Your Website with Generative Engine Optimization (GEO).' }}">
   <meta name="twitter:image" content="{{ ogImage or '/images/hero-light.webp' }}">
-  {# <meta name="twitter:creator" content="@YourTwitterHandle"> #}
 
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preload" href="/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="/css/style.css"></noscript><link rel="stylesheet" href="/css/footer.css" />
+  <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
+  <link rel="stylesheet" href="/css/footer.css" />
 
+  <link rel="alternate" type="application/rss+xml" title="Aeosignal.Space Blog" href="https://aeosignal.space/feed.xml">
 
-
-<link rel="alternate" type="application/rss+xml" title="Aeosignal.Space Blog" href="https://aeosignal.space/feed.xml">
-
-  {# Font Awesome Kit - ✅ 3. Use font awesome for emojis #}
   <script src="https://kit.fontawesome.com/19bfeb220d.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-
-
-
-  {% include "header.html" %} {# ✅ 1. Structure & Layout (Consistent header) #}
+  {% include "header.html" %}
 
   <main>
-    {{ content | safe }} {# ✅ 4. SEO Essentials (Accessible semantic HTML) #}
+    {{ content | safe }}
   </main>
 
+  {% include "footer.html" %}
 
- {% include "footer.html" %}
-
-
-  <script src="/js/script.js" defer></script> {# ✅ 6. Performance & Technical Health (Fast load times - defer) #}
-
+  <script src="/js/script.js" defer></script>
 </body>
 </html>

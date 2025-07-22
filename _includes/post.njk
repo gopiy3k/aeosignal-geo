@@ -1,0 +1,25 @@
+{% extends "base.njk" %}
+
+{% block head %}
+  <link rel="stylesheet" href="/css/post.css">
+{% endblock %}
+
+{% block content %}
+<main class="blog-article-wrapper">
+  <article class="blog-article">
+    <header class="blog-article-header">
+      <h1>{{ title }}</h1>
+      {% if page.date %}
+      <p class="blog-article-meta">{{ page.date | date("MMMM D, YYYY") }}</p>
+      {% endif %}
+      {% if excerpt %}
+      <p class="blog-article-excerpt">{{ excerpt }}</p>
+      {% endif %}
+    </header>
+
+    <div class="blog-article-content">
+      {{ content | safe }}
+    </div>
+  </article>
+</main>
+{% endblock %}

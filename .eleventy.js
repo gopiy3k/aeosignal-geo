@@ -83,7 +83,7 @@ eleventyConfig.addNunjucksFilter("split", function(str, separator) {
 
     // --- Collections ---
     eleventyConfig.addCollection("posts", function(collection) {
-        return collection.getFilteredByGlob("./blog/*.md");
+        return collection.getFilteredByGlob("./blog/*.html");
     });
 
     // --- Directory and Template Config ---

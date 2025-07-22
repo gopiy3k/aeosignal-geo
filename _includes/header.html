@@ -1,16 +1,15 @@
 <header>
   <a href="/">
-  <picture>
-    <source srcset="/images/logo-light.webp" type="image/webp">
-    <img src="/images/logo-light.webp"
-         width="180" height="49"
-         alt="Aeosignal.Space Logo"
-         loading="lazy"
-         decoding="async">
-  </picture>
-<link rel="stylesheet" href="/css/header.css" />
+    <picture>
+      <source srcset="/images/logo-light.webp" type="image/webp">
+      <img src="/images/logo-light.webp"
+           width="180" height="49"
+           alt="Aeosignal.Space Logo"
+           loading="lazy"
+           decoding="async">
+    </picture>
+  </a> {# Removed the <link> tag from here #}
 
-</a>
   <div class="header-right-controls">
     <button class="toggle-mode-btn" id="toggleModeBtnHeader" aria-label="Toggle dark mode">
       <i class="fas fa-adjust"></i>
@@ -24,7 +23,7 @@
   </div>
 
   <nav class="nav-links" id="navLinks">
-        <div class="dropdown">
+    <div class="dropdown">
       <button class="dropdown-toggle" aria-expanded="false" aria-controls="services-menu">
         Features <span class="dropdown-arrow">▼</span>
       </button>
@@ -46,13 +45,10 @@
         <a href="/resources/case-studies">Case Studies</a>
         <a href="/resources/geo-academy">GEO Academy</a>
         <a href="/glossary">Glossary</a>
-        
       </div>
     </div>
-        <button class="toggle-mode-btn" id="toggleModeBtnNav" aria-label="Toggle dark mode">
+    <button class="toggle-mode-btn" id="toggleModeBtnNav" aria-label="Toggle dark mode">
       Switch to Dark Mode
     </button>
   </nav>
 </header>
-
-
