@@ -83,7 +83,10 @@ body.dark .hero {
   background-size: 400% 400%;
   animation: heroGradientShift 20s ease infinite;
 }
-
+.hero-content {
+  width: 100%;
+  text-align: center;
+}
 .hero-content h1 {
   font-size: 2.2rem;
   margin-bottom: 0.5rem;
