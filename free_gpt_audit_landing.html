@@ -25,7 +25,7 @@ ogDescription: Check if your website is GPT accessible and ready for AI discover
       <input type="text" id="name" name="name" placeholder="Your Name" required>
       <input type="email" id="email" name="email" placeholder="Your Email" required>
       <input type="text" id="website" name="website" placeholder="Your Website" required>
-      <button type="submit">Get Your Free Audit</button>
+      <button type="submit">Get Your Free Audit!</button>
     </form>
     <p id="status-message"></p>
   </section>
@@ -116,12 +116,13 @@ ogDescription: Check if your website is GPT accessible and ready for AI discover
       // 3. Send the email via Supabase Function
        try {
     const { data, error: functionError } = await supabase.functions.invoke('resend-email', {
-      body: {
-        to: email,
-        subject: subject,
-        html: emailHtml
-      }
-    });
+  body: JSON.stringify({
+    to: email,
+    subject: subject,
+    html: emailHtml
+  }),
+  headers: { 'Content-Type': 'application/json' },
+});
 
     if (functionError) {
       console.error(functionError);
