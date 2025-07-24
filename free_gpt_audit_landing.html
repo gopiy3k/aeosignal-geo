@@ -18,44 +18,109 @@ ogDescription: Check if your website is GPT accessible and ready for AI discover
   }
   </script>
 
-  <section class="hero" id="audit">
+ <section class="hero" id="audit">
     <h1>Is Your Website GPT Accessible?</h1>
     <p>Get a free GPT Accessibility Audit to see if your website is discoverable in ChatGPT, Gemini, Perplexity, and other AI engines.</p>
     <form id="audit-form">
-      <input type="text" id="name" placeholder="Your Name" required>
-      <input type="email" id="email" placeholder="Your Email" required>
-      <input type="text" id="website" placeholder="Your Website URL" required>
-      <button type="submit">🔍 Claim Your Free GPT Audit</button>
+      <input type="text" id="name" name="name" placeholder="Your Name" required>
+      <input type="email" id="email" name="email" placeholder="Your Email" required>
+      <input type="text" id="website" name="website" placeholder="Your Website" required>
+      <button type="submit">Request Free Audit</button>
     </form>
     <p id="status-message"></p>
   </section>
 
+  <!-- Supabase Client -->
   <script src="https://unpkg.com/@supabase/supabase-js"></script>
   <script>
   window.addEventListener('load', async () => {
-    // Using the exact Supabase credentials from your uploaded file
     const supabase = window.supabase.createClient(
       'https://tbkqaqtetocdegskxyfz.supabase.co',
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRia3FhcXRldG9jZGVnc2t4eWZ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA5MzUxMjMsImV4cCI6MjA2NjUxMTEyM30.jkuIEJ21n4iFuEaKxOQoss14wxZSwpituSfGtAc_vZE'
     );
+
     const form = document.getElementById('audit-form');
     const statusMessage = document.getElementById('status-message');
+
+    // This function runs ONLY when the form is submitted
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      const button = form.querySelector('button');
+      button.disabled = true; // Disable button to prevent multiple submissions
+      statusMessage.textContent = 'Submitting...';
+      statusMessage.style.color = '#333';
+
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const website = document.getElementById('website').value.trim();
+
+      // 1. Save the lead to the database
       const { error } = await supabase.from('leads').insert([{ name, email, website, source: 'gpt_audit' }]);
+
       if (error) {
         console.error(error);
         statusMessage.textContent = '❌ Submission failed. Please try again.';
         statusMessage.style.color = '#ff4d4d';
-      } else {
-        statusMessage.textContent = '✅ Thank you! Your audit request has been submitted.';
-        statusMessage.style.color = '#00cc99';
-        form.reset();
+        button.disabled = false; // Re-enable the button on failure
+        return;
       }
-    });
+
+      // --- All the code below is now INSIDE the event listener ---
+
+      // 2. Prepare the confirmation email
+      const emailHtml = `
+      <!DOCTYPE html>
+      <html>
+        <body style="font-family: sans-serif; color: #333; line-height: 1.5; margin: 0; padding: 0;">
+          <table width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tr><td align="center"><table width="600" cellpadding="20" cellspacing="0" border="0"><tr><td>
+              <h2 style="color: #000; font-size: 22px; margin-top: 0;">Your Free Audit is Underway!</h2>
+              <p>Hi ${name || 'there'},</p>
+              <p>Thank you for requesting your <strong>Free GPT Accessibility Audit</strong>!</p>
+              <p>We’re reviewing your website for hidden bottlenecks, GPT readiness gaps, and instant quick wins.</p>
+              <p><strong>What happens next:</strong></p>
+              <ul>
+                <li>✅ Audit ready in <strong>2 business days</strong>.</li>
+                <li>✅ You will receive an actionable report.</li>
+                <li>✅ You can reply anytime for guidance.</li>
+              </ul>
+              <p>Talk soon,<br>Zeno<br>Customer Success Team | <a href="https://aeosignal.space/" style="color: #1a73e8;">AEOsignal</a></p>
+            </td></tr></table></td></tr>
+          </table>
+        </body>
+      </html>`;
+
+      const subject = "Your Free GPT Accessibility Audit is Underway!";
+
+      // 3. Send the email via Supabase Function
+try {
+    const { error: functionError } = await supabase.functions.invoke('resend-email', {
+  body: JSON.stringify({
+    to: email,
+    subject: 'Your Free GPT Accessibility Audit is in Progress',
+    html: emailHtml
+  }),
+  headers: { 'Content-Type': 'application/json' }
+});
+
+    if (functionError) {
+        throw functionError; // Pass the error to the catch block
+    }
+
+    statusMessage.textContent = '✅ Thank you! Your audit request has been submitted.';
+    statusMessage.style.color = '#00cc99';
+    form.reset();
+
+} catch (err) {
+    console.error('Error sending confirmation email:', err);
+    statusMessage.textContent = '✅ Submitted, but the confirmation email failed to send.';
+    statusMessage.style.color = '#ffaa00';
+} finally {
+    button.disabled = false; // Re-enable button in all cases
+}
+    }); // <-- The addEventListener correctly wraps everything now
   });
-  </script>
+</script>
+  <!-- Keep your dark mode toggle, Android width fix, fade-in, menu/accordion handling JS as included on your site -->
+
 </main>
