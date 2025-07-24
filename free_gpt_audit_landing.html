@@ -25,7 +25,7 @@ ogDescription: Check if your website is GPT accessible and ready for AI discover
       <input type="text" id="name" name="name" placeholder="Your Name" required>
       <input type="email" id="email" name="email" placeholder="Your Email" required>
       <input type="text" id="website" name="website" placeholder="Your Website" required>
-      <button type="submit">Get Your Free Audit</button>
+      <button type="submit">Get Your Free Audit!</button>
     </form>
     <p id="status-message"></p>
   </section>
@@ -111,41 +111,116 @@ ogDescription: Check if your website is GPT accessible and ready for AI discover
   </body>
       </html>`;
 
-      const subject = "Your Free GPT Accessibility Audit is Underway!";
+      try
+ {
+  
+const
+ { data, 
+error
+: functionError } = 
+await
+ supabase.functions.invoke(
+'resend-email'
+, {
+    
+body
+: 
+JSON
+.stringify({
+      
+to
+: email,
+      
+subject
+: subject,
+      
+html
+: emailHtml
+    }),
+    
+headers
+: {
+      
+'Content-Type'
+: 
+'application/json'
 
-      // 3. Send the email via Supabase Function
-       try {
-    const { data, error: functionError } = await supabase.functions.invoke('resend-email', {
-  body: JSON.stringify({
-    to: email,
-    subject: subject,
-    html: emailHtml
-  }),
-  headers: {
-    'Content-Type': 'application/json'
-  }
-});
-
-    if (functionError) {
-      console.error(functionError);
-      statusMessage.textContent = '✅ Submitted, but the confirmation email failed to send.';
-      statusMessage.style.color = '#ffaa00';
-    } else {
-      statusMessage.textContent = '✅ Thank you! Your audit request has been submitted.';
-      statusMessage.style.color = '#00cc99';
-      form.reset();
     }
-
-  } catch (err) {
-    console.error('Error sending confirmation email:', err);
-    statusMessage.textContent = '✅ Submitted, but the confirmation email failed to send.';
-    statusMessage.style.color = '#ffaa00';
-  } finally {
-    button.disabled = false;
-  }
-}); // <-- The addEventListener correctly wraps everything now
   });
-</script>
+  
+console
+.log(
+'Full Function Response:'
+, { data, functionError });
+  
+if
+ (functionError) {
+    
+console
+.error(
+'Function Invocation Error:'
+, functionError);
+    statusMessage.textContent = 
+'✅ Submitted, but the confirmation email failed to send.'
+;
+    statusMessage.style.color = 
+'#ffaa00'
+;
+  } 
+else
+ {
+    statusMessage.textContent = 
+'✅ Thank you! Your audit request has been submitted.'
+;
+    statusMessage.style.color = 
+'#00cc99'
+;
+    form.reset();
+  }
+} 
+catch
+ (err) {
+  
+console
+.error(
+'Comprehensive Error:'
+, {
+    
+name
+: err.name,
+    
+message
+: err.message,
+    
+stack
+: err.stack,
+    
+// If it's a response error, log more details
+
+    ...(err.response && { 
+      
+responseStatus
+: err.response.status, 
+      
+responseBody
+: 
+await
+ err.response.text() 
+    })
+  });
+  statusMessage.textContent = 
+'✅ Submitted, but the confirmation email failed to send.'
+;
+  statusMessage.style.color = 
+'#ffaa00'
+;
+} 
+finally
+ {
+  button.disabled = 
+false
+;
+}
   <!-- Keep your dark mode toggle, Android width fix, fade-in, menu/accordion handling JS as included on your site -->
 
 </main>
