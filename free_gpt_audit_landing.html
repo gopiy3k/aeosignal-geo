@@ -64,6 +64,37 @@ window.addEventListener('load', async () => {
       button.disabled = false;
       return;
     }
+// Prepare notification email for yourself
+const notifySubject = "🚨 New Audit Lead - Aeosignal";
+const notifyHtml = `
+  <p>You have received a new contact lead on Aeosignal:</p>
+  <ul>
+    <li><strong>Name:</strong> ${name}</li>
+    <li><strong>Email:</strong> ${email}</li>
+    <li><strong>Message:</strong> ${website}</li>
+    </ul>
+  <p>View in Supabase dashboard for full details.</p>
+`;
+
+try {
+  const { data, error: notifyError } = await supabase.functions.invoke('resend-email', {
+    body: {
+      to: 'contact@aeosignal.space',
+      subject: notifySubject,
+      html: notifyHtml
+    }
+  });
+
+  if (notifyError) {
+    console.error('Notification email send failed:', notifyError);
+  } else {
+    console.log('Notification email sent successfully:', data);
+  }
+} catch (err) {
+  console.error('Error sending notification email:', err);
+}
+
+
 
     // 2️⃣ Prepare the email
     const subject = "Your Free GPT Accessibility Audit is Underway!";
@@ -106,7 +137,7 @@ window.addEventListener('load', async () => {
       } else {
         console.log('Email Function Success:', data);
         statusMessage.textContent = '✅ Thank you! Your audit request has been submitted.';
-        statusMessage.style.color = '#00cc99';
+        statusMessage.style.color = '#007bff';
         form.reset();
       }
     } catch (err) {
@@ -116,6 +147,7 @@ window.addEventListener('load', async () => {
     } finally {
       button.disabled = false;
     }
+
   });
 });
 </script>

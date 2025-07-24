@@ -54,10 +54,41 @@ document.addEventListener('DOMContentLoaded', () => {
             status.textContent = "❌ Submission failed. Please try again.";
             status.style.color = "#ff4d4d";
         } else {
-            status.textContent = "✅ Message sent successfully!";
-            status.style.color = "#00ffcc";
+            status.textContent = "✅ Thank you, we will get back shortly!";
+            status.style.color = "#1F4287";
             form.reset();
         }
+// Prepare notification email for yourself
+const notifySubject = "🚨 New Contact Lead - Aeosignal";
+const notifyHtml = `
+  <p>You have received a new contact lead on Aeosignal:</p>
+  <ul>
+    <li><strong>Name:</strong> ${name}</li>
+    <li><strong>Email:</strong> ${email}</li>
+    <li><strong>Message:</strong> ${message}</li>
+    <li><strong>Website:</strong> ${website || 'N/A'}</li>
+  </ul>
+  <p>View in Supabase dashboard for full details.</p>
+`;
+
+try {
+  const { data, error: notifyError } = await supabase.functions.invoke('resend-email', {
+    body: {
+      to: 'contact@aeosignal.space',
+      subject: notifySubject,
+      html: notifyHtml
+    }
+  });
+
+  if (notifyError) {
+    console.error('Notification email send failed:', notifyError);
+  } else {
+    console.log('Notification email sent successfully:', data);
+  }
+} catch (err) {
+  console.error('Error sending notification email:', err);
+}
+
     });
 });
 </script>
