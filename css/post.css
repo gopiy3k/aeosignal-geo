@@ -111,6 +111,79 @@ body.dark .hero {
 .cta-button:hover {
   background: var(--accent-hover);
 }
+.scroll-indicator {
+  font-size: 2rem;
+  margin-top: 20px;
+  color: var(--accent);
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0);}
+  50% { transform: translateY(-8px);}
+}
+
+
+.article-sidebar {
+    position: sticky;
+    top: 80px;
+    max-width: 220px;
+    padding: 1rem;
+    font-size: 0.9rem;
+}
+
+.share-box,
+.author-box,
+.toc-box {
+    margin-bottom: 1.5rem;
+}
+
+.share-box h4,
+.toc-box h4 {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.share-box a,
+.share-box i {
+    display: inline-block;
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+    color: #555;
+    transition: color 0.3s;
+}
+
+.share-box a:hover i {
+    color: #0077ff;
+}
+
+.author-box {
+    text-align: center;
+}
+
+.author-photo {
+    width: 60px;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+}
+
+.toc-box ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.toc-box li {
+    margin-bottom: 0.5rem;
+}
+
+.toc-box a {
+    color: #333;
+    text-decoration: none;
+}
+
+.toc-box a:hover {
+    text-decoration: underline;
+}
 
 /* ==========================
    INTRO SECTION

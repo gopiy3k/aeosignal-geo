@@ -260,3 +260,74 @@ body.dark .hero {
     font-weight: 600;
     margin-top: 10px;
 }
+
+.cta-final-section {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #d0eaff, #a0e7e5, #f0f0f0, #d0eaff);
+    background-size: 300% 300%;
+    animation: heroGradientShift 10s ease infinite;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+body.dark .cta-final-section {
+    background: linear-gradient(135deg, #4e049b, #300369, #8d05e1, #110534, #e834e0);
+    background-size: 400% 400%;
+    animation: heroGradientShift 10s ease infinite;
+}
+
+@keyframes heroGradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.cta-final-section .cta-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    opacity: 0.05;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    user-select: none;
+}
+
+.cta-final-section h2 {
+    font-size: 2rem;
+    color: var(--accent);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.cta-final-section p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    position: relative;
+    z-index: 1;
+    color: #1f2937; /* dark text for readability on light bg */
+}
+
+body.dark .cta-final-section p {
+    color: #ffffff; /* white text for readability on dark bg */
+}
+
+.cta-final-section .cta-button {
+    background: var(--accent, #0056FF); /* use your accent color as background */
+    color: var(--cta-text, #ffffff); /* white text */
+    padding: 14px 28px;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+    position: relative;
+    z-index: 1;
+}
+
+.cta-final-section .cta-button:hover {
+    background: var(--accent-hover, #003ECC); /* darker brand shade on hover */
+    color: var(--cta-text, #ffffff); /* keep text white on hover */
+}

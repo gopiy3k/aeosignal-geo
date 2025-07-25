@@ -4,29 +4,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ title or "Aeosignal.Space" }}</title>
-  <meta name="description" content="{{ description or 'Future-Proof Your Website with Generative Engine Optimization (GEO).' }}">
+
+  <title>{{ title or "AI SEO & GEO Optimization | Aeosignal.Space" }}</title>
+  <meta name="description" content="{{ description or 'Boost your website visibility using AI SEO and Generative Engine Optimization (GEO) to appear on ChatGPT, Perplexity, and Gemini with structured, AI-ready content.' }}">
 
   <link rel="canonical" href="{{ canonicalUrl or page.url | url | absoluteUrl(site.url) }}">
 
-  <meta property="og:title" content="{{ title or 'Aeosignal.Space' }}">
-  <meta property="og:description" content="{{ description or 'Future-Proof Your Website with Generative Engine Optimization (GEO).' }}">
+  <!-- OpenGraph Meta -->
+  <meta property="og:title" content="{{ title or 'AI SEO & GEO Optimization | Aeosignal.Space' }}">
+  <meta property="og:description" content="{{ description or 'Boost your website visibility using AI SEO and Generative Engine Optimization (GEO) to appear on ChatGPT, Perplexity, and Gemini with structured, AI-ready content.' }}">
+  <meta property="og:type" content="website">
   <meta property="og:url" content="{{ page.url | url | absoluteUrl(site.url) }}">
-  <meta property="og:image" content="{{ ogImage or '/images/hero-light.webp' }}">
-  <meta property="og:type" content="{{ ogType or 'website' }}">
+  <meta property="og:image" content="{{ ogImage or '/images/og-ai-seo-geo.webp' }}">
+  <meta property="og:site_name" content="Aeosignal.Space">
 
+  <!-- Twitter Card Meta -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ title or 'Aeosignal.Space' }}">
-  <meta name="twitter:description" content="{{ description or 'Future-Proof Your Website with Generative Engine Optimization (GEO).' }}">
-  <meta name="twitter:image" content="{{ ogImage or '/images/hero-light.webp' }}">
+  <meta name="twitter:title" content="{{ title or 'AI SEO & GEO Optimization | Aeosignal.Space' }}">
+  <meta name="twitter:description" content="{{ description or 'Boost your website visibility using AI SEO and Generative Engine Optimization (GEO) to appear on ChatGPT, Perplexity, and Gemini with structured, AI-ready content.' }}">
+  <meta name="twitter:image" content="{{ ogImage or '/images/og-ai-seo-geo.webp' }}">
+  <meta name="twitter:site" content="@aeosignal">
 
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="preload" href="/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<link rel="preload" href="/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
   <link rel="stylesheet" href="/css/footer.css" />
 
+  <!-- RSS Feed -->
   <link rel="alternate" type="application/rss+xml" title="Aeosignal.Space Blog" href="https://aeosignal.space/feed.xml">
 
+  <!-- FontAwesome -->
   <script src="https://kit.fontawesome.com/19bfeb220d.js" crossorigin="anonymous"></script>
 </head>
 
