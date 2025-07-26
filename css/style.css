@@ -225,10 +225,13 @@ body.dark .hero {
     animation: heroGradientShift 10s ease infinite;
     text-align: center;
     padding: 80px 20px;
+box-sizing: border-box;
 
 }
 .hero-content > * {
   animation: softLiftFade 6s ease-in-out infinite;
+ padding: 0 20px; /* Ensure inner padding for content */
+  box-sizing: border-box;
 }
 
 body.dark .hero {
@@ -281,6 +284,7 @@ body.dark .hero {
   line-height: 1.2;
   margin-bottom: 0.5em;
   color: var(--section-heading); /* CORRECTED: Now uses --section-heading */
+overflow-wrap: break-word;
 }
 
 .hero p,
@@ -292,6 +296,7 @@ body.dark .hero {
   max-width: 700px;
   margin: 0 auto 1.5em auto;
   color: var(--paragraph); /* CORRECTED: Now uses --paragraph */
+overflow-wrap: break-word;
 }
 
 /* General .hero-subpage container styling (excluding h1/p which are now grouped above) */

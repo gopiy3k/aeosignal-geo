@@ -152,8 +152,7 @@ body.dark footer a:hover {
     padding: 10px 12px;
     border-radius: 50%;
     cursor: pointer;
-    display: none;
-    font-size: 1.2rem;
+       font-size: 1.2rem;
 }
 
 .footer-disclaimer {

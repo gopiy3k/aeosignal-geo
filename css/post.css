@@ -185,6 +185,14 @@ body.dark .hero {
     text-decoration: underline;
 }
 
+@media (max-width: 600px) { /* Adjust breakpoint as needed */
+  .hero-content h1 {
+    font-size: 1.5rem; /* Smaller size for mobile */
+  }
+  .hero-content p {
+    font-size: 1rem; /* Smaller size for mobile */
+  }
+}
 /* ==========================
    INTRO SECTION
 ========================== */
