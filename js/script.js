@@ -278,10 +278,19 @@ document.addEventListener('DOMContentLoaded', function() {
     if (backToTopButton) {
         const toggleBackToTopButton = () => {
             if (window.scrollY > 300) {
-        backToTopButton.classList.add('show');
-    } else {
-        backToTopButton.classList.remove('show');
-    }
+                backToTopButton.style.display = 'block'; // Ensure it's displayed for transition
+                setTimeout(() => { // Small delay to allow display:block to render before transition
+                    backToTopButton.classList.add('show');
+                }, 10);
+            } else {
+                backToTopButton.classList.remove('show');
+                // Hide completely after transition if not needed
+                setTimeout(() => {
+                    if (!backToTopButton.classList.contains('show')) { // Only hide if it's truly not shown
+                         backToTopButton.style.display = 'none';
+                    }
+                }, 300); // Match this with your CSS transition duration
+            }
         };
 
         window.addEventListener('scroll', toggleBackToTopButton);
@@ -289,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // Initial check
+        // Initial check on load
         toggleBackToTopButton();
     }
 });
