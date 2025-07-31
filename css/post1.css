@@ -25,7 +25,7 @@
 body.dark {
   --accent: #00FFFF;
   --accent-hover: #00cccc;
-  --card-bg: #1A1038;
+  --card-bg: #0e011b;
   --background: #0e011b;
   --section-bg: #0e011b;
   --border-color: #444;
@@ -130,6 +130,7 @@ html.light-mode .post1-subhead {
 
 body.dark .bottom-line-box {
   box-shadow: 0 0 24px var(--accent);
+  background: var(--card-bg);
 }
 
 .bottom-line-header {
@@ -312,9 +313,10 @@ body.dark .bottom-line-box {
 
 .chapter-intro {
 
-  font-size: 1.25rem;
+  font-size: 1rem;
   line-height: 1.6;
   font-weight: 500;
+font-style: italic;
   margin-bottom: 1.25rem;
 }
 
@@ -355,4 +357,96 @@ body.dark .pull-quote {
   
   line-height: 1.6;
   padding: 1rem 1.5rem;
+}
+
+.visual-insert {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.before-after-image {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.before-after-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease;
+}
+
+.before-after-image img:hover {
+  transform: scale(1.015);
+}
+
+.before-after-image figcaption {
+  font-size: 0.95rem;
+  color: var(--text-secondary, #666);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+.summary-title {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.summary-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: white;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.summary-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-top: 0.25rem;
+}
+
+.summary-text {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+body.dark .summary-item {
+  background: var(--card-bg-dark, #1a1a1a);
+}
+
+.chapter-summary {
+  margin-top: 3rem;
+  padding: 2rem 1.5rem;
+ background-color: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.spaced-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1.5rem;
+}
+
+.spaced-list li {
+  margin-bottom: 2rem;
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.spaced-list strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
 }
