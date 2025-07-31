@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.getElementById('navLinks');
     const toggleBtnHeader = document.getElementById('toggleModeBtnHeader'); // Button in header-right-controls
     const toggleBtnNav = document.getElementById('toggleModeBtnNav');     // Button inside nav-links
-    const backToTopButton = document.getElementById('backToTop'); // <--- Moved here
+    const backToTopButton = document.getElementById('backToTop');
 
     // Helper to check if it's a mobile view
     const isMobileView = () => window.innerWidth <= 768;
@@ -13,15 +13,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Workaround for Android/Redmi width issue (START) ---
     function setFullWidthForBodyAndHtml() {
         const viewportWidth = window.innerWidth;
-        // Use document.documentElement for html and document.body for body
         document.documentElement.style.width = `${viewportWidth}px`;
         document.body.style.width = `${viewportWidth}px`;
-
-        // Optional: Log to console for debugging on device
-        console.log(`Forced html/body width to: ${viewportWidth}px`);
+        // console.log(`Forced html/body width to: ${viewportWidth}px`); // Commented out for cleaner console
     }
-
-    // Call on initial load
     setFullWidthForBodyAndHtml();
     // --- Workaround for Android/Redmi width issue (END) ---
 
@@ -30,38 +25,47 @@ document.addEventListener('DOMContentLoaded', function() {
         navLinks.classList.add('open');
         if (hamburgerMenu) hamburgerMenu.style.display = 'none';
         if (hamburgerClose) hamburgerClose.style.display = 'block';
-        document.documentElement.style.overflow = 'hidden'; // Prevents scrolling on the root
+        document.documentElement.style.overflow = 'hidden';
         if (hamburgerMenu) hamburgerMenu.setAttribute('aria-expanded', 'true');
         if (hamburgerClose) hamburgerClose.setAttribute('aria-expanded', 'true');
+
+        // FIX: Hide the mobile dark mode toggle button when menu is open
+        if (toggleBtnHeader && isMobileView()) { // Only hide on mobile view
+            toggleBtnHeader.style.display = 'none';
+        }
     }
 
     // Close Menu
     function closeMenu() {
         navLinks.classList.remove('open');
         if (hamburgerMenu) hamburgerMenu.style.display = 'block';
-        if (hamburgerClose) hamburgerMenu.style.display = 'none';
-        document.documentElement.style.overflow = ''; // Allow scrolling on the root
+        if (hamburgerClose) hamburgerClose.style.display = 'none'; // Corrected: should hide hamburgerClose
+        document.documentElement.style.overflow = '';
         document.querySelectorAll('.dropdown.open').forEach(d => {
             d.classList.remove('open');
             const dropdownToggle = d.querySelector('.dropdown-toggle');
             if (dropdownToggle) dropdownToggle.setAttribute('aria-expanded', 'false');
         });
         if (hamburgerMenu) hamburgerMenu.setAttribute('aria-expanded', 'false');
-        if (hamburgerClose) hamburgerClose.setAttribute('aria-expanded', 'false');
+        if (hamburgerClose) hamburgerClose.setAttribute('aria-expanded', 'false'); // Corrected: should hide hamburgerClose
+
+        // FIX: Show the mobile dark mode toggle button when menu is closed
+        // Only show if it's mobile view and the menu is closed
+        if (toggleBtnHeader && isMobileView()) {
+             toggleBtnHeader.style.display = 'block';
+        }
     }
 
     // Update Images (Logo and Section Images) Based on Mode
     function updateImages() {
         const isDark = document.body.classList.contains('dark');
 
-        // Update main logo
         const logo = document.getElementById('logo-img');
         if (logo) {
             logo.src = isDark ? '/images/logo-dark.webp' : '/images/logo-light.webp';
             logo.alt = isDark ? 'Aeosignal.Space Logo Dark Mode' : 'Aeosignal.Space Logo Light Mode';
         }
 
-        // Update regular section images
         const sectionImages = [
             { id: 'why-geo-img', light: '/images/why-geo-light.webp', dark: '/images/why-geo-dark.webp', altLight: 'Illustration showing AI concepts for GEO (Light Mode)', altDark: 'Illustration showing AI concepts for GEO (Dark Mode)' },
             { id: 'what-img', light: '/images/what-we-do-light.webp', dark: '/images/what-we-do-dark.webp', altLight: 'Illustration of services offered for GEO (Light Mode)', altDark: 'Illustration of services offered for GEO (Dark Mode)' },
@@ -77,7 +81,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Handle all elements with data-light-bg/data-dark-bg attributes
         document.querySelectorAll('[data-light-bg][data-dark-bg]').forEach(element => {
             const lightBg = element.getAttribute('data-light-bg');
             const darkBg = element.getAttribute('data-dark-bg');
@@ -86,7 +89,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Update theme-aware images (from the second DOMContentLoaded block)
         const themeAwareImages = document.querySelectorAll('.theme-aware-image');
         themeAwareImages.forEach(img => {
             if (isDark) {
@@ -102,27 +104,21 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.toggle('dark');
         const isDark = document.body.classList.contains('dark');
 
-        // Define content for the desktop (text) button
         const desktopBtnText = isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+        const mobileIconHtml = '<i class="fas fa-adjust"></i>';
 
-        // Define content for the mobile (icon) button
-        const mobileIconHtml = '<i class="fas fa-adjust"></i>'; // Your Font Awesome icon HTML
-
-        // Update the desktop toggle button (toggleBtnNav)
         if (toggleBtnNav) {
-            toggleBtnNav.textContent = desktopBtnText; // Keeps text for desktop button
+            toggleBtnNav.textContent = desktopBtnText;
             toggleBtnNav.setAttribute('aria-label', desktopBtnText);
         }
 
-        // Update the mobile toggle button (toggleBtnHeader)
         if (toggleBtnHeader) {
-            toggleBtnHeader.innerHTML = mobileIconHtml; // Uses innerHTML for the icon
-            // Use a descriptive aria-label for accessibility, even with an icon
+            toggleBtnHeader.innerHTML = mobileIconHtml;
             toggleBtnHeader.setAttribute('aria-label', desktopBtnText);
         }
 
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        updateImages(); // Call updateImages when theme changes
+        updateImages();
     }
 
     // Initialize Dark Mode Preference on Page Load
@@ -137,18 +133,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const btnNav = document.getElementById('toggleModeBtnNav');
 
         const desktopBtnInitialText = isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode';
-        const mobileIconInitialHtml = '<i class="fas fa-adjust"></i>'; // The icon
+        const mobileIconInitialHtml = '<i class="fas fa-adjust"></i>';
 
         if (btnHeader) {
-            btnHeader.innerHTML = mobileIconInitialHtml; // Sets the icon for mobile button
+            btnHeader.innerHTML = mobileIconInitialHtml;
             btnHeader.setAttribute('aria-label', desktopBtnInitialText);
         }
         if (btnNav) {
-            btnNav.textContent = desktopBtnInitialText; // Sets the text for desktop button
+            btnNav.textContent = desktopBtnInitialText;
             btnNav.setAttribute('aria-label', desktopBtnInitialText);
         }
 
-        updateImages(); // Call updateImages on initial load to set correct images
+        updateImages();
     }
 
     // --- EVENT LISTENERS ---
@@ -177,8 +173,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Dropdown Toggle for Mobile (Click functionality)
     document.querySelectorAll('.dropdown-toggle').forEach(button => {
         button.addEventListener('click', function(event) {
-            // Only activate JS dropdown toggle on mobile views
-            // and if the nav menu is open (for mobile-specific dropdown behavior)
             if (isMobileView() && navLinks.classList.contains('open')) {
                 event.preventDefault();
                 const parentDropdown = this.closest('.dropdown');
@@ -206,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Close mobile menu when a navigation link is clicked (excluding dropdown parents)
     navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
-            if (!link.closest('.dropdown-content')) { // Ensure it's not a dropdown item
+            if (!link.closest('.dropdown-content')) {
                 if (isMobileView() && navLinks.classList.contains('open')) {
                     closeMenu();
                 }
@@ -221,15 +215,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 closeMenu();
             }
         }
-        // Ensure width is reapplied on resize/orientation change
         setFullWidthForBodyAndHtml();
     });
 
-    // Run initialization
     initializeMode();
 
-
-    // --- Intersection Observer for Fade-in/Fade-lift Effects (AEOSIGNAL.SPACE) ---
+    // --- Intersection Observer for Fade-in/Fade-lift Effects ---
     const faders = document.querySelectorAll('.fade-in, .fade-lift, .feature-card, .trust-section, .highlight-banner');
 
     if ('IntersectionObserver' in window) {
@@ -251,8 +242,6 @@ document.addEventListener('DOMContentLoaded', function() {
             appearOnScroll.observe(fader);
         });
 
-        // ✅ Fix for above-the-fold elements on load
-        // This ensures elements already in view when the page loads are made visible
         faders.forEach(fader => {
             const rect = fader.getBoundingClientRect();
             if (rect.top < window.innerHeight && rect.bottom >= 0) {
@@ -261,7 +250,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
     } else {
-        // Fallback: Show all if IntersectionObserver is unsupported
         faders.forEach(fader => fader.classList.add('visible'));
     }
 
@@ -286,33 +274,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // --- Back to Top Button Logic (Rewritten) ---
-    // backToTopButton is already defined at the top of the DOMContentLoaded scope
-
-    if (backToTopButton) { // Ensure the button exists in the HTML
-        // Function to handle scroll visibility
+    // --- Back to Top Button Logic ---
+    if (backToTopButton) {
         const toggleBackToTopButton = () => {
-            if (window.scrollY > 300) { // Button appears after scrolling 300px down
-                backToTopButton.style.display = 'block'; // Make visible
-                backToTopButton.style.opacity = '1'; // Ensure full opacity for transition
+            if (window.scrollY > 300) {
+                backToTopButton.style.display = 'block';
+                backToTopButton.style.opacity = '1';
             } else {
-                backToTopButton.style.display = 'none'; // Hide
-                backToTopButton.style.opacity = '0'; // Ensure zero opacity for transition
+                backToTopButton.style.display = 'none';
+                backToTopButton.style.opacity = '0';
             }
         };
 
-        // Add event listener for scrolling
         window.addEventListener('scroll', toggleBackToTopButton);
-
-        // Add event listener for clicking the button
         backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth' // Smooth scroll to the top
-            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // Initial check in case the page loads already scrolled down (e.g., from a deep link)
+        // Initial check
         toggleBackToTopButton();
     }
-}); // <--- THIS IS THE CORRECT CLOSING FOR THE MAIN DOMContentLoaded LISTENER
+});
