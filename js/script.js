@@ -279,10 +279,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const toggleBackToTopButton = () => {
             if (window.scrollY > 300) {
                 backToTopButton.style.display = 'block';
-                backToTopButton.style.opacity = '1';
-            } else {
+              } else {
                 backToTopButton.style.display = 'none';
-                backToTopButton.style.opacity = '0';
+              
             }
         };
 
