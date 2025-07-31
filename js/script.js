@@ -278,11 +278,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (backToTopButton) {
         const toggleBackToTopButton = () => {
             if (window.scrollY > 300) {
-                backToTopButton.style.display = 'block';
-              } else {
-                backToTopButton.style.display = 'none';
-              
-            }
+        backToTopButton.classList.add('show');
+    } else {
+        backToTopButton.classList.remove('show');
+    }
         };
 
         window.addEventListener('scroll', toggleBackToTopButton);

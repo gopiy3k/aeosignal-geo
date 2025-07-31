@@ -142,18 +142,28 @@ body.dark footer a:hover {
 .site-footer {
   overflow-x: auto;
 }
-#backToTop {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: var(--accent);
-    color: var(--cta-text, #fff);
-    border: none;
-    padding: 10px 12px;
-    border-radius: 50%;
-    cursor: pointer;
-       font-size: 1.2rem;
-z-index: 9999;
+#backToTop { 
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    background: var(--accent); 
+    color: var(--cta-text, #fff); 
+    border: none; 
+    padding: 10px 12px; 
+    border-radius: 50%; 
+    cursor: pointer; 
+    font-size: 1.2rem; 
+    z-index: 9999; 
+    opacity: 0; 
+    visibility: hidden; 
+    transform: translateY(20px); 
+    transition: all 0.3s ease; 
+} 
+
+#backToTop.show { 
+    opacity: 1; 
+    visibility: visible; 
+    transform: translateY(0); 
 }
 
 .footer-disclaimer {
