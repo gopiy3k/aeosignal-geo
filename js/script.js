@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.getElementById('navLinks');
     const toggleBtnHeader = document.getElementById('toggleModeBtnHeader'); // Button in header-right-controls
     const toggleBtnNav = document.getElementById('toggleModeBtnNav');     // Button inside nav-links
-    const backToTopButton = document.getElementById('backToTop');
 
     // Helper to check if it's a mobile view
     const isMobileView = () => window.innerWidth <= 768;
@@ -13,11 +12,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Workaround for Android/Redmi width issue (START) ---
     function setFullWidthForBodyAndHtml() {
         const viewportWidth = window.innerWidth;
+        // Use document.documentElement for html and document.body for body
         document.documentElement.style.width = `${viewportWidth}px`;
         document.body.style.width = `${viewportWidth}px`;
-        // console.log(`Forced html/body width to: ${viewportWidth}px`); // Commented out for cleaner console
+
+        // Optional: Log to console for debugging on device
+        console.log(`Forced html/body width to: ${viewportWidth}px`);
     }
+
+    // Call on initial load
     setFullWidthForBodyAndHtml();
+
     // --- Workaround for Android/Redmi width issue (END) ---
 
     // Open Menu
@@ -25,47 +30,66 @@ document.addEventListener('DOMContentLoaded', function() {
         navLinks.classList.add('open');
         if (hamburgerMenu) hamburgerMenu.style.display = 'none';
         if (hamburgerClose) hamburgerClose.style.display = 'block';
-        document.documentElement.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden'; // Prevents scrolling on the root
         if (hamburgerMenu) hamburgerMenu.setAttribute('aria-expanded', 'true');
         if (hamburgerClose) hamburgerClose.setAttribute('aria-expanded', 'true');
-
-        // FIX: Hide the mobile dark mode toggle button when menu is open
-        if (toggleBtnHeader && isMobileView()) { // Only hide on mobile view
-            toggleBtnHeader.style.display = 'none';
-        }
     }
 
     // Close Menu
     function closeMenu() {
         navLinks.classList.remove('open');
         if (hamburgerMenu) hamburgerMenu.style.display = 'block';
-        if (hamburgerClose) hamburgerClose.style.display = 'none'; // Corrected: should hide hamburgerClose
-        document.documentElement.style.overflow = '';
+        if (hamburgerClose) hamburgerClose.style.display = 'none';
+        document.documentElement.style.overflow = ''; // Allow scrolling on the root
         document.querySelectorAll('.dropdown.open').forEach(d => {
             d.classList.remove('open');
             const dropdownToggle = d.querySelector('.dropdown-toggle');
             if (dropdownToggle) dropdownToggle.setAttribute('aria-expanded', 'false');
         });
         if (hamburgerMenu) hamburgerMenu.setAttribute('aria-expanded', 'false');
-        if (hamburgerClose) hamburgerClose.setAttribute('aria-expanded', 'false'); // Corrected: should hide hamburgerClose
+        if (hamburgerClose) hamburgerClose.setAttribute('aria-expanded', 'false');
+    }
 
-        // FIX: Show the mobile dark mode toggle button when menu is closed
-        // Only show if it's mobile view and the menu is closed
-        if (toggleBtnHeader && isMobileView()) {
-             toggleBtnHeader.style.display = 'block';
+    // Toggle Dark Mode
+    function toggleMode() {
+        document.body.classList.toggle('dark');
+        const isDark = document.body.classList.contains('dark');
+
+        // Define content for the desktop (text) button
+        const desktopBtnText = isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+
+        // Define content for the mobile (icon) button
+        const mobileIconHtml = '<i class="fas fa-adjust"></i>'; // Your Font Awesome icon HTML
+
+        // Update the desktop toggle button (toggleBtnNav)
+        if (toggleBtnNav) {
+            toggleBtnNav.textContent = desktopBtnText; // Keeps text for desktop button
+            toggleBtnNav.setAttribute('aria-label', desktopBtnText);
         }
+
+        // Update the mobile toggle button (toggleBtnHeader)
+        if (toggleBtnHeader) {
+            toggleBtnHeader.innerHTML = mobileIconHtml; // Uses innerHTML for the icon
+            // Use a descriptive aria-label for accessibility, even with an icon
+            toggleBtnHeader.setAttribute('aria-label', desktopBtnText);
+        }
+
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        updateImages();
     }
 
     // Update Images (Logo and Section Images) Based on Mode
     function updateImages() {
         const isDark = document.body.classList.contains('dark');
 
+        // Update main logo
         const logo = document.getElementById('logo-img');
         if (logo) {
             logo.src = isDark ? '/images/logo-dark.webp' : '/images/logo-light.webp';
             logo.alt = isDark ? 'Aeosignal.Space Logo Dark Mode' : 'Aeosignal.Space Logo Light Mode';
         }
 
+        // Update regular section images (KEEP THIS BLOCK as it handles other images)
         const sectionImages = [
             { id: 'why-geo-img', light: '/images/why-geo-light.webp', dark: '/images/why-geo-dark.webp', altLight: 'Illustration showing AI concepts for GEO (Light Mode)', altDark: 'Illustration showing AI concepts for GEO (Dark Mode)' },
             { id: 'what-img', light: '/images/what-we-do-light.webp', dark: '/images/what-we-do-dark.webp', altLight: 'Illustration of services offered for GEO (Light Mode)', altDark: 'Illustration of services offered for GEO (Dark Mode)' },
@@ -81,6 +105,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        // --- NEW/UPDATED LOGIC FOR BACKGROUND IMAGES ---
+
+        // Handle all elements with data-light-bg/data-dark-bg attributes
         document.querySelectorAll('[data-light-bg][data-dark-bg]').forEach(element => {
             const lightBg = element.getAttribute('data-light-bg');
             const darkBg = element.getAttribute('data-dark-bg');
@@ -88,37 +115,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 element.style.backgroundImage = `url('${isDark ? darkBg : lightBg}')`;
             }
         });
+        //
 
-        const themeAwareImages = document.querySelectorAll('.theme-aware-image');
-        themeAwareImages.forEach(img => {
-            if (isDark) {
-                img.src = img.dataset.srcDark;
-            } else {
-                img.src = img.dataset.srcLight;
-            }
-        });
-    }
-
-    // Toggle Dark Mode
-    function toggleMode() {
-        document.body.classList.toggle('dark');
-        const isDark = document.body.classList.contains('dark');
-
-        const desktopBtnText = isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode';
-        const mobileIconHtml = '<i class="fas fa-adjust"></i>';
-
-        if (toggleBtnNav) {
-            toggleBtnNav.textContent = desktopBtnText;
-            toggleBtnNav.setAttribute('aria-label', desktopBtnText);
-        }
-
-        if (toggleBtnHeader) {
-            toggleBtnHeader.innerHTML = mobileIconHtml;
-            toggleBtnHeader.setAttribute('aria-label', desktopBtnText);
-        }
-
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        updateImages();
+        
     }
 
     // Initialize Dark Mode Preference on Page Load
@@ -133,21 +132,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const btnNav = document.getElementById('toggleModeBtnNav');
 
         const desktopBtnInitialText = isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode';
-        const mobileIconInitialHtml = '<i class="fas fa-adjust"></i>';
+        const mobileIconInitialHtml = '<i class="fas fa-adjust"></i>'; // The icon
 
         if (btnHeader) {
-            btnHeader.innerHTML = mobileIconInitialHtml;
+            btnHeader.innerHTML = mobileIconInitialHtml; // Sets the icon for mobile button
             btnHeader.setAttribute('aria-label', desktopBtnInitialText);
         }
         if (btnNav) {
-            btnNav.textContent = desktopBtnInitialText;
+            btnNav.textContent = desktopBtnInitialText; // Sets the text for desktop button
             btnNav.setAttribute('aria-label', desktopBtnInitialText);
         }
 
-        updateImages();
+        updateImages(); // Call updateImages on initial load to set correct images
     }
 
-    // --- EVENT LISTENERS ---
+    // Event Listeners
     if (hamburgerMenu) hamburgerMenu.addEventListener('click', openMenu);
     if (hamburgerClose) hamburgerClose.addEventListener('click', closeMenu);
 
@@ -173,6 +172,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Dropdown Toggle for Mobile (Click functionality)
     document.querySelectorAll('.dropdown-toggle').forEach(button => {
         button.addEventListener('click', function(event) {
+            // Only activate JS dropdown toggle on mobile views
+            // and if the nav menu is open (for mobile-specific dropdown behavior)
             if (isMobileView() && navLinks.classList.contains('open')) {
                 event.preventDefault();
                 const parentDropdown = this.closest('.dropdown');
@@ -200,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Close mobile menu when a navigation link is clicked (excluding dropdown parents)
     navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
-            if (!link.closest('.dropdown-content')) {
+            if (!link.closest('.dropdown-content')) { // Ensure it's not a dropdown item
                 if (isMobileView() && navLinks.classList.contains('open')) {
                     closeMenu();
                 }
@@ -215,12 +216,45 @@ document.addEventListener('DOMContentLoaded', function() {
                 closeMenu();
             }
         }
+        // Ensure width is reapplied on resize/orientation change
         setFullWidthForBodyAndHtml();
     });
 
+    // Run initialization
     initializeMode();
+});
 
-    // --- Intersection Observer for Fade-in/Fade-lift Effects ---
+// This is a separate DOMContentLoaded block for theme-aware images.
+// It's fine to keep it separate as it's self-contained and not directly impacting main layout.
+document.addEventListener('DOMContentLoaded', () => {
+    const body = document.body;
+    const themeAwareImages = document.querySelectorAll('.theme-aware-image');
+
+    // Function to update image sources based on current theme
+    function updateThemeImages() {
+        const isDarkMode = body.classList.contains('dark');
+        themeAwareImages.forEach(img => {
+            if (isDarkMode) {
+                img.src = img.dataset.srcDark;
+            } else {
+                img.src = img.dataset.srcLight;
+            }
+        });
+    }
+
+    // Initial update when the page loads
+    updateThemeImages();
+
+    // Observe changes to the body's class list
+    const observer = new MutationObserver((mutationsList) => {
+        for (const mutation of mutationsList) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                updateThemeImages();
+            }
+        }
+    });
+// Fade-in on scroll for AEOSIGNAL.SPACE
+document.addEventListener("DOMContentLoaded", () => {
     const faders = document.querySelectorAll('.fade-in, .fade-lift, .feature-card, .trust-section, .highlight-banner');
 
     if ('IntersectionObserver' in window) {
@@ -241,7 +275,7 @@ document.addEventListener('DOMContentLoaded', function() {
         faders.forEach(fader => {
             appearOnScroll.observe(fader);
         });
-
+  // ✅ Fix for above-the-fold elements on load
         faders.forEach(fader => {
             const rect = fader.getBoundingClientRect();
             if (rect.top < window.innerHeight && rect.bottom >= 0) {
@@ -250,55 +284,43 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
     } else {
+        // Fallback: Show all if IntersectionObserver is unsupported
         faders.forEach(fader => fader.classList.add('visible'));
     }
+});// Accordion Toggle for glossary
+const accordionToggles = document.querySelectorAll('.accordion-toggle');
 
-    // --- Accordion Toggle for glossary ---
-    const accordionToggles = document.querySelectorAll('.accordion-toggle');
+accordionToggles.forEach(toggle => {
+    toggle.addEventListener('click', function () {
+        const content = this.nextElementSibling;
+        const icon = this.querySelector('.toggle-icon');
 
-    accordionToggles.forEach(toggle => {
-        toggle.addEventListener('click', function () {
-            const content = this.nextElementSibling;
-            const icon = this.querySelector('.toggle-icon');
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
 
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', !isExpanded);
-
-            if (isExpanded) {
-                content.hidden = true;
-                if (icon) icon.classList.remove('rotate');
-            } else {
-                content.hidden = false;
-                if (icon) icon.classList.add('rotate');
-            }
-        });
+        if (isExpanded) {
+            content.hidden = true;
+            if (icon) icon.classList.remove('rotate');
+        } else {
+            content.hidden = false;
+            if (icon) icon.classList.add('rotate');
+        }
     });
+});
+const backToTop = document.getElementById('backToTop');
 
-    // --- Back to Top Button Logic ---
-    if (backToTopButton) {
-        const toggleBackToTopButton = () => {
-            if (window.scrollY > 300) {
-                backToTopButton.style.display = 'block'; // Ensure it's displayed for transition
-                setTimeout(() => { // Small delay to allow display:block to render before transition
-                    backToTopButton.classList.add('show');
-                }, 10);
-            } else {
-                backToTopButton.classList.remove('show');
-                // Hide completely after transition if not needed
-                setTimeout(() => {
-                    if (!backToTopButton.classList.contains('show')) { // Only hide if it's truly not shown
-                         backToTopButton.style.display = 'none';
-                    }
-                }, 300); // Match this with your CSS transition duration
-            }
-        };
-
-        window.addEventListener('scroll', toggleBackToTopButton);
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // Initial check on load
-        toggleBackToTopButton();
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        backToTop.style.display = 'block';
+    } else {
+        backToTop.style.display = 'none';
     }
+});
+
+backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+    // Start observing the body for attribute changes
+    observer.observe(body, { attributes: true });
 });

@@ -1,68 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The SEO Playbook Is a History Book - The New World</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <style>
-        /* Using a more robust font like Inter for better impact */
-        body {
-            font-family: 'Inter', sans-serif;
-        }
+---
+layout: base.njk
+title: "SEO is a History Book. Welcome to the GEO Era."
+excerpt: "Your SEO playbook just became obsolete. This no-bull guide lays out how to adapt to Generative Engine Optimization (GEO)—the future of search, content, and digital strategy."
+featuredImage: "/images/blog/seo-broken.webp"
+canonical: "https://aeosignal.space/blog/your-seo-playbook-is-a-history-book/"
 
-        /* A subtle background texture to add depth and avoid a flat black look */
-        .textured-bg {
-            background-color: #0c0a09; /* stone-950 */
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231c1917' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-    </style>
-</head>
-<body class="textured-bg">
+---
+<link rel="stylesheet" href="/css/post1.css">
 
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
-        
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <div class="w-[800px] h-[800px] bg-cyan-500/10 rounded-full blur-[200px]"></div>
-        </div>
 
-        <div class="absolute -top-1/4 left-1/2 w-1/2 h-[2px] -translate-x-1/2 -rotate-45 bg-gradient-to-l from-cyan-400/50 via-cyan-400/20 to-transparent"></div>
-        <div class="absolute -bottom-1/4 right-1/2 w-1/2 h-[2px] translate-x-1/2 -rotate-45 bg-gradient-to-r from-cyan-400/50 via-cyan-400/20 to-transparent"></div>
+<section class="post1-hero">
+  <div class="post1-hero-content">
+    <div class="post1-meta">
+      <img src="/images/blog/gopi.webp" alt="Gopinath Sureshkumar" class="post1-author-avatar">
+      <span class="post1-author">By Gopinath Sureshkumar · July 31, 2025</span>
+    </div>
+    <h1 class="post1-title">Your SEO Playbook Is a History Book. Welcome to the New World.</h1>
+    <p class="post1-subhead">You know the feeling. Here’s what comes next.</p>
+    <!-- Optional: Sketch or visual -->
+    <div class="post1-hero-visual">
+      <img src="/images/blog/seo-broken.webp" alt="Fractured Search Visual">
+    </div>
+  </div>
+</section>
 
-        <div class="relative z-10 container mx-auto px-6 py-24 text-center">
-            
-            <h1 class="font-black text-4xl md:text-6xl lg:text-7xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-gray-50 to-gray-400 leading-tight mb-6">
-                Your SEO Playbook Is a History Book.
-            </h1>
-            
-            <p class="text-xl md:text-2xl font-semibold text-cyan-400 mb-12">
-                Welcome to the New World.
-            </p>
+<div class="blog-layout">
+  <aside class="toc-container" aria-label="Table of Contents">
+    <h2 class="toc-heading">Explore This Guide</h2>
+    <button class="toc-toggle" aria-expanded="false">Chapters</button>
+    <ul class="toc-list"></ul>
+  </aside>
+  <main class="blog-content">
 
-            <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-300 leading-relaxed">
-                You know the feeling. The quiet dread when you check your analytics and see the slow, downward slope. You tell yourself it’s a blip. But deep down, you know something is fundamentally wrong. The ground isn't just shifting. <br class="hidden md:block"> A chasm is opening up, and your old map is useless.
-            </p>
+<section class="bottom-line-callout fade-in">
+  <div class="bottom-line-box">
+    <div class="bottom-line-header">
+      <span class="bottom-line-label">The Bottom Line</span>
+      <button class="copy-btn" title="Copy Summary" onclick="copyBottomLine()">📋</button>
+    </div>
+    <p><strong>Generative engines don’t crawl.<br>
+    They think.<br>
+    If your content isn’t feeding that thought, you’re invisible.</strong></p>
+  </div>
+</section>
+<!-- Section 4: Chapter Sections (Content Core) -->
+<section class="chapter-core">
 
-        </div>
+  <section class="chapter-section" id="chapter-1">
+    <div class="chapter-label">The Problem</div>
+    <h2 class="chapter-heading" id="chapter-1-title">
+      <span class="chapter-number">01</span> SEO’s Broken Compass
+    </h2>
 
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20">
-            <a href="#content-start" class="inline-block text-gray-500 hover:text-gray-300 transition-colors duration-300">
-                <div class="flex flex-col items-center space-y-2">
-                    <span class="text-sm font-semibold tracking-widest uppercase">Begin Briefing</span>
-                    <svg class="w-6 h-6 animate-bounce" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5" />
-                    </svg>
-                </div>
-            </a>
-        </div>
-        
-    </section>
+    <p class="chapter-intro">
+      For years, we optimized for machines. Keywords. Backlinks. Crawlers. But machines evolved.
+    </p>
 
-    <div id="content-start">
-        </div>
+    <p>Now, they read, reason, and rank based on relevance—not just signals. The old playbook? It’s obsolete.</p>
 
-</body>
-</html>
+    <h3 class="chapter-subheading">Why did SEO stop working?</h3>
+    <p>Because we trained it to chase structure, not sense. Generative engines, on the other hand, demand understanding.</p>
+
+   <div class="pull-quote-wrapper">
+  <blockquote class="pull-quote">
+    “Your next ranking signal isn’t a backlink. It’s how well your content teaches the AI.”
+      </blockquote>
+</div>
+
+    <h3 class="chapter-subheading">What does that mean for content strategy?</h3>
+    <p>It means content must serve as structured knowledge, not just stuffed pages. Think nodes, not narratives.</p>
+  </section>
+
+  <!-- Future chapters can repeat with chapter-section + unique ID -->
+
+</section>
+
+
+  </main>
+
+<script>
+  // Auto-generate TOC links
+  const tocList = document.querySelector('.toc-list');
+  const headings = document.querySelectorAll('h2[id]');
+
+  headings.forEach(h2 => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = `#${h2.id}`;
+    a.textContent = h2.textContent;
+    li.appendChild(a);
+    tocList.appendChild(li);
+  });
+
+  // Mobile toggle
+  const tocToggle = document.querySelector('.toc-toggle');
+  const tocContainer = document.querySelector('.toc-container');
+
+  tocToggle?.addEventListener('click', () => {
+    const expanded = tocToggle.getAttribute("aria-expanded") === "true";
+    tocToggle.setAttribute("aria-expanded", !expanded);
+    tocContainer.classList.toggle("open");
+  });
+</script>
+
+
+
+
+
