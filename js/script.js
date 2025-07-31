@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.getElementById('navLinks');
     const toggleBtnHeader = document.getElementById('toggleModeBtnHeader'); // Button in header-right-controls
     const toggleBtnNav = document.getElementById('toggleModeBtnNav');     // Button inside nav-links
+    const backToTopButton = document.getElementById('backToTop'); // <--- Moved here
 
     // Helper to check if it's a mobile view
     const isMobileView = () => window.innerWidth <= 768;
@@ -22,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Call on initial load
     setFullWidthForBodyAndHtml();
-
     // --- Workaround for Android/Redmi width issue (END) ---
 
     // Open Menu
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function closeMenu() {
         navLinks.classList.remove('open');
         if (hamburgerMenu) hamburgerMenu.style.display = 'block';
-        if (hamburgerClose) hamburgerClose.style.display = 'none';
+        if (hamburgerClose) hamburgerMenu.style.display = 'none';
         document.documentElement.style.overflow = ''; // Allow scrolling on the root
         document.querySelectorAll('.dropdown.open').forEach(d => {
             d.classList.remove('open');
@@ -48,6 +48,53 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         if (hamburgerMenu) hamburgerMenu.setAttribute('aria-expanded', 'false');
         if (hamburgerClose) hamburgerClose.setAttribute('aria-expanded', 'false');
+    }
+
+    // Update Images (Logo and Section Images) Based on Mode
+    function updateImages() {
+        const isDark = document.body.classList.contains('dark');
+
+        // Update main logo
+        const logo = document.getElementById('logo-img');
+        if (logo) {
+            logo.src = isDark ? '/images/logo-dark.webp' : '/images/logo-light.webp';
+            logo.alt = isDark ? 'Aeosignal.Space Logo Dark Mode' : 'Aeosignal.Space Logo Light Mode';
+        }
+
+        // Update regular section images
+        const sectionImages = [
+            { id: 'why-geo-img', light: '/images/why-geo-light.webp', dark: '/images/why-geo-dark.webp', altLight: 'Illustration showing AI concepts for GEO (Light Mode)', altDark: 'Illustration showing AI concepts for GEO (Dark Mode)' },
+            { id: 'what-img', light: '/images/what-we-do-light.webp', dark: '/images/what-we-do-dark.webp', altLight: 'Illustration of services offered for GEO (Light Mode)', altDark: 'Illustration of services offered for GEO (Dark Mode)' },
+            { id: 'how-img', light: '/images/how-it-works-light.webp', dark: '/images/how-it-works-dark.webp', altLight: 'Illustration depicting how GEO process works (Light Mode)', altDark: 'Illustration depicting how GEO process works (Dark Mode)' },
+            { id: 'why-img', light: '/images/why-aeosignal-light.webp', dark: '/images/why-aeosignal-dark.webp', altLight: 'Illustration of why choose Aeosignal for GEO (Light Mode)', altDark: 'Illustration of why choose Aeosignal for GEO (Dark Mode)' },
+        ];
+
+        sectionImages.forEach(imgData => {
+            const el = document.getElementById(imgData.id);
+            if (el) {
+                el.src = isDark ? imgData.dark : imgData.light;
+                el.alt = isDark ? imgData.altDark : imgData.altLight;
+            }
+        });
+
+        // Handle all elements with data-light-bg/data-dark-bg attributes
+        document.querySelectorAll('[data-light-bg][data-dark-bg]').forEach(element => {
+            const lightBg = element.getAttribute('data-light-bg');
+            const darkBg = element.getAttribute('data-dark-bg');
+            if (lightBg && darkBg) {
+                element.style.backgroundImage = `url('${isDark ? darkBg : lightBg}')`;
+            }
+        });
+
+        // Update theme-aware images (from the second DOMContentLoaded block)
+        const themeAwareImages = document.querySelectorAll('.theme-aware-image');
+        themeAwareImages.forEach(img => {
+            if (isDark) {
+                img.src = img.dataset.srcDark;
+            } else {
+                img.src = img.dataset.srcLight;
+            }
+        });
     }
 
     // Toggle Dark Mode
@@ -75,49 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        updateImages();
-    }
-
-    // Update Images (Logo and Section Images) Based on Mode
-    function updateImages() {
-        const isDark = document.body.classList.contains('dark');
-
-        // Update main logo
-        const logo = document.getElementById('logo-img');
-        if (logo) {
-            logo.src = isDark ? '/images/logo-dark.webp' : '/images/logo-light.webp';
-            logo.alt = isDark ? 'Aeosignal.Space Logo Dark Mode' : 'Aeosignal.Space Logo Light Mode';
-        }
-
-        // Update regular section images (KEEP THIS BLOCK as it handles other images)
-        const sectionImages = [
-            { id: 'why-geo-img', light: '/images/why-geo-light.webp', dark: '/images/why-geo-dark.webp', altLight: 'Illustration showing AI concepts for GEO (Light Mode)', altDark: 'Illustration showing AI concepts for GEO (Dark Mode)' },
-            { id: 'what-img', light: '/images/what-we-do-light.webp', dark: '/images/what-we-do-dark.webp', altLight: 'Illustration of services offered for GEO (Light Mode)', altDark: 'Illustration of services offered for GEO (Dark Mode)' },
-            { id: 'how-img', light: '/images/how-it-works-light.webp', dark: '/images/how-it-works-dark.webp', altLight: 'Illustration depicting how GEO process works (Light Mode)', altDark: 'Illustration depicting how GEO process works (Dark Mode)' },
-            { id: 'why-img', light: '/images/why-aeosignal-light.webp', dark: '/images/why-aeosignal-dark.webp', altLight: 'Illustration of why choose Aeosignal for GEO (Light Mode)', altDark: 'Illustration of why choose Aeosignal for GEO (Dark Mode)' },
-        ];
-
-        sectionImages.forEach(imgData => {
-            const el = document.getElementById(imgData.id);
-            if (el) {
-                el.src = isDark ? imgData.dark : imgData.light;
-                el.alt = isDark ? imgData.altDark : imgData.altLight;
-            }
-        });
-
-        // --- NEW/UPDATED LOGIC FOR BACKGROUND IMAGES ---
-
-        // Handle all elements with data-light-bg/data-dark-bg attributes
-        document.querySelectorAll('[data-light-bg][data-dark-bg]').forEach(element => {
-            const lightBg = element.getAttribute('data-light-bg');
-            const darkBg = element.getAttribute('data-dark-bg');
-            if (lightBg && darkBg) {
-                element.style.backgroundImage = `url('${isDark ? darkBg : lightBg}')`;
-            }
-        });
-        //
-
-        
+        updateImages(); // Call updateImages when theme changes
     }
 
     // Initialize Dark Mode Preference on Page Load
@@ -146,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateImages(); // Call updateImages on initial load to set correct images
     }
 
-    // Event Listeners
+    // --- EVENT LISTENERS ---
     if (hamburgerMenu) hamburgerMenu.addEventListener('click', openMenu);
     if (hamburgerClose) hamburgerClose.addEventListener('click', closeMenu);
 
@@ -222,39 +227,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Run initialization
     initializeMode();
-});
 
-// This is a separate DOMContentLoaded block for theme-aware images.
-// It's fine to keep it separate as it's self-contained and not directly impacting main layout.
-document.addEventListener('DOMContentLoaded', () => {
-    const body = document.body;
-    const themeAwareImages = document.querySelectorAll('.theme-aware-image');
 
-    // Function to update image sources based on current theme
-    function updateThemeImages() {
-        const isDarkMode = body.classList.contains('dark');
-        themeAwareImages.forEach(img => {
-            if (isDarkMode) {
-                img.src = img.dataset.srcDark;
-            } else {
-                img.src = img.dataset.srcLight;
-            }
-        });
-    }
-
-    // Initial update when the page loads
-    updateThemeImages();
-
-    // Observe changes to the body's class list
-    const observer = new MutationObserver((mutationsList) => {
-        for (const mutation of mutationsList) {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                updateThemeImages();
-            }
-        }
-    });
-// Fade-in on scroll for AEOSIGNAL.SPACE
-document.addEventListener("DOMContentLoaded", () => {
+    // --- Intersection Observer for Fade-in/Fade-lift Effects (AEOSIGNAL.SPACE) ---
     const faders = document.querySelectorAll('.fade-in, .fade-lift, .feature-card, .trust-section, .highlight-banner');
 
     if ('IntersectionObserver' in window) {
@@ -275,7 +250,9 @@ document.addEventListener("DOMContentLoaded", () => {
         faders.forEach(fader => {
             appearOnScroll.observe(fader);
         });
-  // ✅ Fix for above-the-fold elements on load
+
+        // ✅ Fix for above-the-fold elements on load
+        // This ensures elements already in view when the page loads are made visible
         faders.forEach(fader => {
             const rect = fader.getBoundingClientRect();
             if (rect.top < window.innerHeight && rect.bottom >= 0) {
@@ -287,31 +264,32 @@ document.addEventListener("DOMContentLoaded", () => {
         // Fallback: Show all if IntersectionObserver is unsupported
         faders.forEach(fader => fader.classList.add('visible'));
     }
-});// Accordion Toggle for glossary
-const accordionToggles = document.querySelectorAll('.accordion-toggle');
 
-accordionToggles.forEach(toggle => {
-    toggle.addEventListener('click', function () {
-        const content = this.nextElementSibling;
-        const icon = this.querySelector('.toggle-icon');
+    // --- Accordion Toggle for glossary ---
+    const accordionToggles = document.querySelectorAll('.accordion-toggle');
 
-        const isExpanded = this.getAttribute('aria-expanded') === 'true';
-        this.setAttribute('aria-expanded', !isExpanded);
+    accordionToggles.forEach(toggle => {
+        toggle.addEventListener('click', function () {
+            const content = this.nextElementSibling;
+            const icon = this.querySelector('.toggle-icon');
 
-        if (isExpanded) {
-            content.hidden = true;
-            if (icon) icon.classList.remove('rotate');
-        } else {
-            content.hidden = false;
-            if (icon) icon.classList.add('rotate');
-        }
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+
+            if (isExpanded) {
+                content.hidden = true;
+                if (icon) icon.classList.remove('rotate');
+            } else {
+                content.hidden = false;
+                if (icon) icon.classList.add('rotate');
+            }
+        });
     });
-});
-document.addEventListener('DOMContentLoaded', function() {
-    const backToTopButton = document.getElementById('backToTop');
 
-    // Only proceed if the button element exists
-    if (backToTopButton) {
+    // --- Back to Top Button Logic (Rewritten) ---
+    // backToTopButton is already defined at the top of the DOMContentLoaded scope
+
+    if (backToTopButton) { // Ensure the button exists in the HTML
         // Function to handle scroll visibility
         const toggleBackToTopButton = () => {
             if (window.scrollY > 300) { // Button appears after scrolling 300px down
@@ -333,7 +311,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 behavior: 'smooth' // Smooth scroll to the top
             });
         });
-      // Initial check in case the page loads already scrolled down (e.g., from a deep link)
+
+        // Initial check in case the page loads already scrolled down (e.g., from a deep link)
         toggleBackToTopButton();
     }
-});
+}); // <--- THIS IS THE CORRECT CLOSING FOR THE MAIN DOMContentLoaded LISTENER
