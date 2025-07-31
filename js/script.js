@@ -307,20 +307,33 @@ accordionToggles.forEach(toggle => {
         }
     });
 });
-const backToTop = document.getElementById('backToTop');
+document.addEventListener('DOMContentLoaded', function() {
+    const backToTopButton = document.getElementById('backToTop');
 
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        backToTop.style.display = 'block';
-    } else {
-        backToTop.style.display = 'none';
+    // Only proceed if the button element exists
+    if (backToTopButton) {
+        // Function to handle scroll visibility
+        const toggleBackToTopButton = () => {
+            if (window.scrollY > 300) { // Button appears after scrolling 300px down
+                backToTopButton.style.display = 'block'; // Make visible
+                backToTopButton.style.opacity = '1'; // Ensure full opacity for transition
+            } else {
+                backToTopButton.style.display = 'none'; // Hide
+                backToTopButton.style.opacity = '0'; // Ensure zero opacity for transition
+            }
+        };
+
+        // Add event listener for scrolling
+        window.addEventListener('scroll', toggleBackToTopButton);
+
+        // Add event listener for clicking the button
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // Smooth scroll to the top
+            });
+        });
+      // Initial check in case the page loads already scrolled down (e.g., from a deep link)
+        toggleBackToTopButton();
     }
-});
-
-backToTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-    // Start observing the body for attribute changes
-    observer.observe(body, { attributes: true });
 });
