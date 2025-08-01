@@ -54,7 +54,10 @@ html.light-mode .post1-hero {
   text-align: left;
   position: relative;
 }
-
+strong {
+  color: var(--accent);
+  font-weight: 600;
+}
 .post1-meta {
   display: flex;
   align-items: center;
@@ -329,7 +332,7 @@ font-style: italic;
 }
 
 .pull-quote {
-  background-color: var(--card-bg); /* already set: #d0eaff in light mode */
+  background-color: #ced8ed;
   padding: 1.5rem;
   border-radius: 1rem;
   box-shadow: 0 0 12px rgba(0, 255, 255, 0.35);
@@ -436,17 +439,222 @@ body.dark .summary-item {
 .spaced-list {
   list-style: none;
   padding-left: 0;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 .spaced-list li {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-size: 1.05rem;
-  line-height: 1.75;
+  line-height: 1;
 }
 
 .spaced-list strong {
   display: block;
   font-weight: 600;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.1rem;
+}
+.chapter-box {
+  background: var(--chapter-box-bg, #ffffff);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 2rem;
+  margin-bottom: 3rem;
+}
+
+.chapter-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode override */
+body.dark .chapter-box {
+  background: #1d1d1f;
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.05);
+}
+
+.chapter-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.chapter-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+@media (min-width: 768px) {
+  .chapter-flex {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .chapter-text {
+    flex: 1;
+    padding-right: 1.5rem;
+  }
+
+  .chapter-image {
+    flex: 1;
+    max-width: 480px;
+  }
+}
+/* ==========================
+   GEO Chapter Enhancements
+========================== */
+
+.hero-section {
+  text-align: center;
+  padding: 4rem 2rem 2rem;
+}
+
+.hero-section .mini-title {
+  color: var(--accent);
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.hero-section h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.fade-in {
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.geo-intro {
+  max-width: 700px;
+  margin: 2rem auto;
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+.flywheel-diagram {
+  text-align: center;
+  margin: 2.5rem 0;
+}
+
+.flywheel-diagram img {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+}
+
+.card-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.card-grid .card {
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease;
+}
+
+.card-grid .card:hover {
+  transform: translateY(-4px);
+}
+
+.card {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+.card h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: var(--accent);
+}
+
+.icon-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.icon-box li {
+  padding-left: 2rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.icon-box li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.data-visualization {
+  text-align: center;
+  margin: 3rem 0 2rem;
+}
+
+.data-visualization img {
+  max-width: 600px;
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+.data-visualization .caption {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin-top: 0.75rem;
+}
+
+.takeaway-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.takeaway-grid h4 {
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.takeaway-grid ul {
+  padding-left: 1.2rem;
+  line-height: 1.6;
+}
+
+.geo-button {
+  display: inline-block;
+  padding: 0.9rem 1.5rem;
+  background-color: var(--accent);
+  color: var(--cta-text);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.geo-button:hover {
+  background-color: var(--accent-hover);
+}
+
+.cta {
+  text-align: center;
+  margin-bottom: 4rem;
 }
