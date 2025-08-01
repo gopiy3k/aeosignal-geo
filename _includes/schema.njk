@@ -134,27 +134,49 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "{{ title | escape }}",
-  "description": "{{ description | escape }}",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ page.url | absoluteUrl(site.url) }}"
+  },
   "author": {
-    "@type": "Organization",
-    "name": "Aeosignal.Space"
+    {% if author and author.org %}
+      "@type": "Organization",
+      "name": "{{ author.name | default('Aeosignal.Space') }}"
+    {% else %}
+      "@type": "Person",
+      "name": "{{ author.name | default('Gopinath Sureshkumar') }}",
+      "url": "{{ author.url | default('https://aeosignal.space/author/gopinath/') }}"
+    {% endif %}
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Aeosignal.Space",
+    "name": "AEOsignal",
     "logo": {
       "@type": "ImageObject",
       "url": "https://aeosignal.space/images/logo-light.webp"
     }
   },
-  "url": "{{ page.url | absoluteUrl(site.url) }}",
   "datePublished": "{{ page.date | date('yyyy-MM-dd') }}",
-  "dateModified": "{{ page.date | date('yyyy-MM-dd') }}"
+  "dateModified": "{{ page.date | date('yyyy-MM-dd') }}",
+  "wordCount": {{ content | wordCount }},
+  {% if page.tags %}
+    "keywords": "{{ page.tags | join(', ') }}",
+  {% else %}
+    "keywords": "SEO, GEO, AEO, AI SEO, Generative Engine Optimization",
+  {% endif %}
+  "headline": "{{ title | escape }}",
+"description": "{{ description or excerpt | escape }}",
+  "image": "{{ image or '/images/blog/seo-broken.webp' | absoluteUrl(site.url) }}",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@type": "Blog",
+    "name": "AEOsignal Blog"
+  }
 }
 </script>
 {% endif %}
+
 
 {# ✅ Clean, de-duplicated BreadcrumbList for all pages except homepage #}
 {% if page.url and page.url != '/' %}

@@ -1,7 +1,55 @@
 {% extends "base.njk" %}
 
 {% block head %}
-  <link rel="stylesheet" href="/css/post.css">
+<title>{{ title }} | Aeosignal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+
+{# SEO Meta #}
+<meta name="description" content="{{ excerpt or description }}">
+<link rel="canonical" href="{{ canonical }}">
+
+{# Open Graph (OG) Tags for social sharing #}
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ excerpt or description }}">
+<meta property="og:image" content="{{ featuredImage | absoluteUrl(site.url) }}">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="og:site_name" content="Aeosignal.Space">
+
+{# Twitter Cards #}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ title }}">
+<meta name="twitter:description" content="{{ excerpt or description }}">
+<meta name="twitter:image" content="{{ featuredImage | absoluteUrl(site.url) }}">
+
+{# GEO-specific (optional, experimental) #}
+<meta name="llm-summary" content="{{ excerpt }}">
+<meta name="llm-intent" content="Guide readers on adapting to Generative Engine Optimization and future-proofing content strategy.">
+
+{# Stylesheet #}
+<link rel="stylesheet" href="/css/post.css">
+
+  {% if faqs %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {% for faq in faqs %}
+      {
+        "@type": "Question",
+        "name": "{{ faq.question | escape }}",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "{{ faq.answer | escape }}"
+        }
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+  </script>
+  {% endif %}
 {% endblock %}
 
 {% block content %}

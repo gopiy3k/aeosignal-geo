@@ -19,6 +19,13 @@ eleventyConfig.addNunjucksFilter("split", function(str, separator) {
     return str.split(separator);
     });
 
+  // 
+  eleventyConfig.addFilter("wordCount", (value) => {
+    if (!value) return 0;
+    return value.trim().split(/\s+/).length;
+  });
+
+
     // --- Custom Nunjucks Filters ---
     eleventyConfig.addNunjucksFilter("limit", function(array, limit) {
         return array.slice(0, limit);
