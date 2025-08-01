@@ -656,5 +656,91 @@ body.dark .chapter-box {
 
 .cta {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
+margin-top: 2rem;
+}
+/* ==========================
+   CTA SECTION
+========================== */
+.section-closing-cta {
+  padding: 80px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #d0eaff, #a0e7e5, #f0f0f0, #d0eaff);
+  background-size: 300% 300%;
+  animation: heroGradientShift 15s ease infinite;
+}
+
+body.dark .section-closing-cta {
+  background: linear-gradient(135deg, #4e049b, #300369, #8d05e1, #110534, #e834e0);
+  background-size: 400% 400%;
+}
+
+.section-closing-cta h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.section-closing-cta p {
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 30px auto;
+  color: var(--text);
+}
+
+body.dark .section-closing-cta p {
+  color: #ffffff;
+}
+
+.author-block {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  border-radius: 1rem;
+  background: var(--bg-secondary, #f9f9f9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border, #e0e0e0);
+}
+
+.dark .author-block {
+  background: #111827;
+  border: 1px solid #2c2c2c;
+  box-shadow: 0 0 12px rgba(0, 86, 255, 0.15);
+}
+
+.author-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.author-info {
+  flex: 1;
+}
+
+.author-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.author-bio {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.author-link {
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.author-link:hover {
+  text-decoration: underline;
 }
