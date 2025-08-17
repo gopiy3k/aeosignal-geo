@@ -10,6 +10,7 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("favicon.png");
     eleventyConfig.addPassthroughCopy("images/**/*");
     eleventyConfig.addPassthroughCopy("robots.txt");
+    eleventyConfig.addPassthroughCopy("33b9c5bc991a4c07aef3600da439cb17.txt");
             eleventyConfig.addFilter("date", function(dateObj, format = "DDD") {
         return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat(format);
 });// Split filter for Nunjucks (needed for schema breadcrumb)

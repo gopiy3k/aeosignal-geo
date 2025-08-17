@@ -1,7 +1,20 @@
+# Provide open access to all crawlers for indexing and training.
 User-agent: *
 Allow: /
 
-Sitemap: https://aeosignal.space/sitemap.xml
+# Explicitly welcome key AI crawlers. 
+# While covered by '*', this is a clear signal of intent.
+User-agent: GPTBot
+Allow: /
 
-# RSS Feed
-Allow: /feed.xml
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Direct crawlers to the sitemap for efficient discovery.
+Sitemap: https://aeosignal.space/sitemap.xml
