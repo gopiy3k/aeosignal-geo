@@ -185,6 +185,72 @@ body.dark .bottom-line-box {
   overflow: hidden;
 }
 
+
+  /* --- Table Styles --- */
+  .table-container {
+    overflow-x: auto; /* Adds horizontal scroll on small screens */
+    margin: 2rem 0;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* Ensures table has a minimum width before scrolling */
+  }
+
+  .table-container th,
+  .table-container td {
+    padding: 0.85rem 1rem; /* Increased padding slightly for more space */
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  /* --- KEY CHANGE: Eye-Catching Header --- */
+  .table-container thead tr {
+    background-color: #4f46e5; /* Vibrant blue accent background */
+  }
+
+  .table-container th {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #ffffff; /* White text for high contrast */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* --- Dark Mode Table Styles --- */
+  body.dark .table-container {
+    border-color: #374151;
+  }
+
+  body.dark .table-container th,
+  body.dark .table-container td {
+    border-bottom-color: #374151;
+  }
+
+  body.dark .table-container thead tr {
+    background-color: #1f2937; /* Kept dark mode header subtle */
+  }
+
+  body.dark .table-container th {
+    color: #d1d5db;
+  }
+
+  body.dark .table-container tbody tr {
+    color: #e0e0e0;
+  }
+
+  body.dark .table-container tbody tr:nth-of-type(even) {
+    background-color: #1f2937;
+  }
+
+  body.dark .table-container tbody tr:nth-of-type(odd) {
+    background-color: #111827;
+  }
+
 body.dark .bottom-line-box {
   background-color: #1A1038;
   box-shadow: 0 0 12px rgba(0, 255, 255, 0.35); /* deep violet glow in dark mode */
