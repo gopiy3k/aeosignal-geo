@@ -1,6 +1,6 @@
 ---
 layout: base.njk
-title: "Your D2C Playbook is a Relic. Time to Go Global with GEO."
+title: "How D2C Brands Win the Next Decade with Generative Engine Optimization (GEO)."
 excerpt: "Traditional D2C growth tactics are failing. This guide breaks down how to use Generative Engine Optimization (GEO) to scale your brand internationally in the AI era, featuring actionable strategies and insights."
 featuredImage: "/images/blog/d2c-global-map.webp"
 canonical: "https://aeosignal.space/blog/geo-d2c-growth/"
@@ -128,13 +128,19 @@ faqs:
 </section>
 
 <style>
+  /* --- Prevents padding from causing overflow --- */
+  * {
+    box-sizing: border-box;
+  }
+
   .geo-hero-container {
     width: 100%;
     padding: 4rem 1.5rem;
-    background-color: #f8f9fa; /* Light grey background */
-    color: #212529; /* Dark text */
+    background-color: #f8f9fa;
+    color: #212529;
     margin-top: 80px;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden; /* --- ADDED: Prevents horizontal overflow --- */
   }
 
   .geo-hero-content {
@@ -194,18 +200,23 @@ faqs:
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   }
 
+  /* --- RESPONSIVE: Stacks columns on smaller screens --- */
   @media (max-width: 768px) {
     .geo-hero-content {
       flex-direction: column;
       text-align: center;
     }
+    
     .geo-hero-text {
       text-align: center;
       order: 1;
+      width: 100%; /* --- ADDED: Ensures it takes full width --- */
+      min-width: auto; /* --- ADDED: Resets desktop min-width --- */
     }
     .geo-hero-visual {
-      order: 1;
-      margin-bottom: 2rem;
+      order: 2;
+      margin-top: 2rem;
+      width: 100%; /* --- ADDED: Ensures it takes full width --- */
     }
     .geo-hero-meta {
       justify-content: center;
@@ -214,24 +225,23 @@ faqs:
 
   /* --- DARK MODE STYLES --- */
   body.dark .geo-hero-container {
-    background-color: #1a1a1a; /* Dark background */
-    color: #e0e0e0; /* Light text */
+    background-color: #1a1a1a;
+    color: #e0e0e0;
   }
 
   body.dark .geo-hero-title {
-    color: #ffffff; /* White title */
+    color: #ffffff;
   }
 
   body.dark .geo-hero-subhead,
   body.dark .geo-hero-meta {
-    color: #adb5bd; /* Lighter grey for secondary text */
+    color: #adb5bd;
   }
 
   body.dark .geo-hero-visual img {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Deeper shadow for dark mode */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   }
 </style>
-
 <main class="blog-content">
 
 <nav aria-label="breadcrumb" class="breadcrumb-container">
