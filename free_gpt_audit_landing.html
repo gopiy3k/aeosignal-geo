@@ -24,23 +24,21 @@ ogUrl: "https://aeosignal.space/free_gpt_audit_landing"
 <section class="hero" id="audit">
   <h1>Is Your Website AI Accessible?</h1>
   <p>Get a free AI Accessibility Audit to see if your website is discoverable in ChatGPT, Gemini, Perplexity, and other AI engines.</p>
-  <form id="audit-form">
-    <input type="text" id="name" placeholder="Your Name" required>
-    <input type="email" id="email" placeholder="Your Email" required>
-    <input type="text" id="website" placeholder="Your Website URL" required>
+  
+  <form id="audit-form" name="gpt-audit" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="gpt-audit" />
+    <p style="display:none"><label>Don’t fill this out: <input name="bot-field"></label></p>
+    
+    <input type="text" id="name" name="name" placeholder="Your Name" required>
+    <input type="email" id="email" name="email" placeholder="Your Email" required>
+    <input type="text" id="website" name="website" placeholder="Your Website URL" required>
     <button type="submit">🔍 Get Your Free AI Visibility Audit</button>
   </form>
-  <p id="status-message"></p>
+  
+  <p id="status-message" style="margin-top: 1rem; font-weight: bold;"></p>
 </section>
 
-<script src="https://unpkg.com/@supabase/supabase-js"></script>
 <script>
-window.addEventListener('load', async () => {
-  const supabase = window.supabase.createClient(
-    'https://tbkqaqtetocdegskxyfz.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRia3FhcXRldG9jZGVnc2t4eWZ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA5MzUxMjMsImV4cCI6MjA2NjUxMTEyM30.jkuIEJ21n4iFuEaKxOQoss14wxZSwpituSfGtAc_vZE'
-  );
-
   const form = document.getElementById('audit-form');
   const statusMessage = document.getElementById('status-message');
 
@@ -51,107 +49,31 @@ window.addEventListener('load', async () => {
     statusMessage.textContent = 'Submitting...';
     statusMessage.style.color = '#333';
 
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const website = document.getElementById('website').value.trim();
+    // Collect form data
+    const formData = new FormData(form);
 
-    // 1️⃣ Save the lead
-    const { error: insertError } = await supabase.from('leads').insert([
-      { name, email, website, source: 'gpt_audit' }
-    ]);
-
-    if (insertError) {
-      console.error('Supabase Insert Error:', insertError);
-      statusMessage.textContent = '❌ Submission failed. Please try again.';
-      statusMessage.style.color = '#ff4d4d';
-      button.disabled = false;
-      return;
-    }
-// Prepare notification email for yourself
-const notifySubject = "🚨 New Audit Lead - Aeosignal";
-const notifyHtml = `
-  <p>You have received a new contact lead on Aeosignal:</p>
-  <ul>
-    <li><strong>Name:</strong> ${name}</li>
-    <li><strong>Email:</strong> ${email}</li>
-    <li><strong>Message:</strong> ${website}</li>
-    </ul>
-  <p>View in Supabase dashboard for full details.</p>
-`;
-
-try {
-  const { data, error: notifyError } = await supabase.functions.invoke('resend-email', {
-    body: {
-      to: 'contact@aeosignal.space',
-      subject: notifySubject,
-      html: notifyHtml
-    }
-  });
-
-  if (notifyError) {
-    console.error('Notification email send failed:', notifyError);
-  } else {
-    console.log('Notification email sent successfully:', data);
-  }
-} catch (err) {
-  console.error('Error sending notification email:', err);
-}
-
-
-
-    // 2️⃣ Prepare the email
-    const subject = "Your Free GPT Accessibility Audit is Underway!";
-    const emailHtml = `
-    <!DOCTYPE html>
-    <html>
-      <body style="font-family: sans-serif; color: #333; line-height: 1.5; margin: 0; padding: 0;">
-        <table width="100%" cellpadding="0" cellspacing="0" border="0">
-          <tr><td align="center"><table width="600" cellpadding="20" cellspacing="0" border="0"><tr><td>
-            <h2 style="color: #000; font-size: 22px; margin-top: 0;">Your Free Audit is Underway!</h2>
-            <p>Hi ${name || 'there'},</p>
-            <p>Thank you for requesting your <strong>Free GPT Accessibility Audit</strong>!</p>
-            <p>We’re reviewing your website for hidden bottlenecks, GPT readiness gaps, and instant quick wins.</p>
-            <p><strong>What happens next:</strong></p>
-            <ul>
-              <li>✅ Audit ready in <strong>2 business days</strong>.</li>
-              <li>✅ You will receive an actionable report.</li>
-              <li>✅ You can reply anytime for guidance.</li>
-            </ul>
-            <p>Talk soon,<br>Zeno<br>Customer Success Team | <a href="https://aeosignal.space/" style="color: #1a73e8;">AEOsignal</a></p>
-          </td></tr></table></td></tr>
-        </table>
-      </body>
-    </html>`;
-
-    // 3️⃣ Invoke Supabase Edge Function to send email
     try {
-      const { data, error: functionError } = await supabase.functions.invoke('resend-email', {
-        body: {
-          to: email,
-          subject: subject,
-          html: emailHtml
-        }
+      // Submit to Netlify's built-in handler
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString(),
       });
 
-      if (functionError) {
-        console.error('Email Function Error:', functionError);
-        statusMessage.textContent = '✅ Submitted, but the confirmation email failed to send.';
-        statusMessage.style.color = '#ffaa00';
-      } else {
-        console.log('Email Function Success:', data);
-        statusMessage.textContent = '✅ Thank you! Your audit request has been submitted.';
+      if (response.ok) {
+        statusMessage.textContent = '✅ Thank you! Your audit request has been submitted. We will contact you within 2 business days.';
         statusMessage.style.color = '#007bff';
         form.reset();
+      } else {
+        throw new Error('Form submission failed');
       }
     } catch (err) {
-      console.error('Unexpected Email Send Error:', err);
-      statusMessage.textContent = '✅ Submitted, but the confirmation email failed to send.';
-      statusMessage.style.color = '#ffaa00';
+      console.error('Submission Error:', err);
+      statusMessage.textContent = '❌ Submission failed. Please try again or email us directly.';
+      statusMessage.style.color = '#ff4d4d';
     } finally {
       button.disabled = false;
     }
-
   });
-});
 </script>
 </main>
