@@ -21,39 +21,55 @@ ogDescription: Check if your website is GPT accessible and ready for AI discover
   <section class="hero" id="audit">
     <h1>Is Your Website GPT Accessible?</h1>
     <p>Get a free GPT Accessibility Audit to see if your website is discoverable in ChatGPT, Gemini, Perplexity, and other AI engines.</p>
-    <form id="audit-form">
-      <input type="text" id="name" placeholder="Your Name" required>
-      <input type="email" id="email" placeholder="Your Email" required>
-      <input type="text" id="website" placeholder="Your Website URL" required>
+    
+    <form id="audit-form" name="gpt-audit" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="gpt-audit" />
+      <p style="display:none"><label>Don’t fill this out: <input name="bot-field"></label></p>
+
+      <input type="text" id="name" name="name" placeholder="Your Name" required>
+      <input type="email" id="email" name="email" placeholder="Your Email" required>
+      <input type="text" id="website" name="website" placeholder="Your Website URL" required>
       <button type="submit">🔍 Claim Your Free GPT Audit</button>
     </form>
-    <p id="status-message"></p>
+    
+    <p id="status-message" style="margin-top: 1rem; font-weight: bold;"></p>
   </section>
 
-  <script src="https://unpkg.com/@supabase/supabase-js"></script>
   <script>
-  window.addEventListener('load', async () => {
-    // Using the exact Supabase credentials from your uploaded file
-    const supabase = window.supabase.createClient(
-      'https://tbkqaqtetocdegskxyfz.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRia3FhcXRldG9jZGVnc2t4eWZ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA5MzUxMjMsImV4cCI6MjA2NjUxMTEyM30.jkuIEJ21n4iFuEaKxOQoss14wxZSwpituSfGtAc_vZE'
-    );
+  document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('audit-form');
     const statusMessage = document.getElementById('status-message');
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const website = document.getElementById('website').value.trim();
-      const { error } = await supabase.from('leads').insert([{ name, email, website, source: 'gpt_audit' }]);
-      if (error) {
-        console.error(error);
+      const button = form.querySelector('button');
+      button.disabled = true;
+      
+      statusMessage.textContent = 'Submitting...';
+      statusMessage.style.color = '#333';
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(formData).toString(),
+        });
+
+        if (response.ok) {
+          statusMessage.textContent = '✅ Thank you! Your audit request has been submitted.';
+          statusMessage.style.color = '#00cc99';
+          form.reset();
+        } else {
+          throw new Error('Form submission failed');
+        }
+      } catch (error) {
+        console.error('Submission Error:', error);
         statusMessage.textContent = '❌ Submission failed. Please try again.';
         statusMessage.style.color = '#ff4d4d';
-      } else {
-        statusMessage.textContent = '✅ Thank you! Your audit request has been submitted.';
-        statusMessage.style.color = '#00cc99';
-        form.reset();
+      } finally {
+        button.disabled = false;
       }
     });
   });
