@@ -13,82 +13,57 @@ permalink: "/contact/"
         <h1><i class="fas fa-envelope"></i> Contact Aeosignal.Space</h1>
         <p>Have questions about GEO or want to make your site AI discoverable? We’re here to help.</p>
 
-        <form id="contact-form">
-            <input type="text" id="name" placeholder="Your Name" required>
-            <input type="email" id="email" placeholder="Your Email" required>
-            <input type="text" id="website" placeholder="Your Website (Optional)">
-            <textarea id="message" placeholder="Your Message" rows="4" required></textarea>
+        <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="contact" />
+            <p style="display:none"><label>Don’t fill this out: <input name="bot-field"></label></p>
+
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+            <input type="text" id="website" name="website" placeholder="Your Website (Optional)">
+            <textarea id="message" name="message" placeholder="Your Message" rows="4" required></textarea>
+            
             <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
-            <div id="status-message"></div>
+            <div id="status-message" style="margin-top: 1rem; font-weight: bold;"></div>
         </form>
     </div>
 </section>
 
-<script src="https://unpkg.com/@supabase/supabase-js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    const supabase = window.supabase.createClient(
-        'https://tbkqaqtetocdegskxyfz.supabase.co',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRia3FhcXRldG9jZGVnc2t4eWZ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA5MzUxMjMsImV4cCI6MjA2NjUxMTEyM30.jkuIEJ21n4iFuEaKxOQoss14wxZSwpituSfGtAc_vZE'
-    );
-
     const form = document.getElementById('contact-form');
     const status = document.getElementById('status-message');
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
+        const button = form.querySelector('button');
+        button.disabled = true;
+        
         status.textContent = "Sending...";
-        status.style.color = "var(--paragraph)";
+        status.style.color = "var(--paragraph, #333)";
 
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const website = document.getElementById('website').value.trim();
-        const message = document.getElementById('message').value.trim();
+        const formData = new FormData(form);
 
-        const { error } = await supabase.from('leads').insert([
-            { name, email, website, message, source: 'contact' }
-        ]);
+        try {
+            const response = await fetch("/", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString(),
+            });
 
-        if (error) {
-            console.error(error);
+            if (response.ok) {
+                status.textContent = "✅ Thank you, we will get back shortly!";
+                status.style.color = "#1F4287";
+                form.reset();
+            } else {
+                throw new Error('Submission failed');
+            }
+        } catch (error) {
+            console.error('Error:', error);
             status.textContent = "❌ Submission failed. Please try again.";
             status.style.color = "#ff4d4d";
-        } else {
-            status.textContent = "✅ Thank you, we will get back shortly!";
-            status.style.color = "#1F4287";
-            form.reset();
+        } finally {
+            button.disabled = false;
         }
-// Prepare notification email for yourself
-const notifySubject = "🚨 New Contact Lead - Aeosignal";
-const notifyHtml = `
-  <p>You have received a new contact lead on Aeosignal:</p>
-  <ul>
-    <li><strong>Name:</strong> ${name}</li>
-    <li><strong>Email:</strong> ${email}</li>
-    <li><strong>Message:</strong> ${message}</li>
-    <li><strong>Website:</strong> ${website || 'N/A'}</li>
-  </ul>
-  <p>View in Supabase dashboard for full details.</p>
-`;
-
-try {
-  const { data, error: notifyError } = await supabase.functions.invoke('resend-email', {
-    body: {
-      to: 'contact@aeosignal.space',
-      subject: notifySubject,
-      html: notifyHtml
-    }
-  });
-
-  if (notifyError) {
-    console.error('Notification email send failed:', notifyError);
-  } else {
-    console.log('Notification email sent successfully:', data);
-  }
-} catch (err) {
-  console.error('Error sending notification email:', err);
-}
-
     });
 });
 </script>
